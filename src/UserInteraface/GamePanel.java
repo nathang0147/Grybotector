@@ -9,16 +9,17 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.Buffer;
+import java.awt.Graphics2D;
 
 public class GamePanel extends JPanel implements Runnable, KeyListener {
-    public final static int BOARD_WIDTH=650;
-    public final static int BOARD_HEIGHT=612;
+    public final static int BOARD_WIDTH=320;
+    public final static int BOARD_HEIGHT=240;
     public static final int SCALE = 2;
 
     private Thread thread;
     private boolean running;
     private int FPS = 60;
-    private long targetTinme = 1000/60;
+    private long targetTinme = 1000 / FPS;
 
     private BufferedImage image;
     private Graphics2D g;
@@ -39,19 +40,29 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
             thread.start();
         }
     }
-    // hàm để chia frame bên trái là khu vực chơi còn bên phaải là hình tĩnh
-    public void paint(Graphics g){
-        super.paint(g);
-        g.setColor(Color.black);
-        // giới hạn của màn hình chơi
-        g.drawRect(0,0,BOARD_WIDTH,BOARD_HEIGHT);
-        // giới hạn cuủa hình nền
-        g.drawRect(650,0,350,612);
+
+    private void init() {
+
+            image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+            g = (Graphics2D) g;
+
+        running = true;
 
     }
 
-    public void init() {
 
+    private void update() {
+
+    }
+
+    private void draw() {
+
+    }
+
+    private void drawtoScreen() {
+        Graphics g2 = getGraphics();
+        g2.drawImage(image, 0, 0, null);
+        g2.dispose();
     }
 
     @Override
@@ -71,6 +82,31 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     // hàm để chạy thread Long chưa đụng đến nhưng mà insert sẵn
     @Override
     public void run() {
+        init();
+
+        long start;
+        long elapsed;
+        long wait;
+
+        while(running) {
+
+            start = System.nanoTime();
+            update();
+            draw();
+            drawtoScreen();
+
+            elapsed = System.nanoTime() - start;
+
+            wait = targetTinme - elapsed - 1000000;
+
+            try {
+                Thread.sleep(wait);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 }
 

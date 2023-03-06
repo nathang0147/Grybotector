@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public class GameMain {
     public static void main(String[] args) throws IOException {
-        new  GameFrame();
+        //new  GameFrame();
         new  GamePanel();
     }
 }
