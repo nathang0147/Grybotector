@@ -17,7 +17,7 @@ public class GameFrame extends JFrame {
 
     public GameFrame() throws IOException {
         // lấy cái icon trên cái thanh nhó
-        img = ImageIO.read(getClass().getResourceAsStream("/Icon/army (1).png"));
+        img = ImageIO.read(getClass().getResourceAsStream("/icons/army1.png"));
         GamePanel gp = new GamePanel();
         setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
         add(gp);
@@ -34,7 +34,7 @@ public class GameFrame extends JFrame {
     }
     // hàm này để load cái image để vẽ cái nền bên phải
     public void loadImage() throws IOException {
-        File f= new File("Resources/Icon/th1.png");
+        File f= new File("Resources/icons/th1.png");
         image=ImageIO.read(f);
     }
     // hàm này để vẽ hình nền bên trái
