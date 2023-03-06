@@ -11,6 +11,7 @@ public class GameFrame extends JFrame {
     public final static int WIDTH = 500;
     public final static int HEIGHT = 306;
     public static int SCALE = 2;
+
     BufferedImage img;
     Image image;
     Graphics g;
