@@ -2,6 +2,7 @@ package UserInterface;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
@@ -13,15 +14,14 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     //Dimension
     public static final int WIDTH = 320;
     public static final int HEIGHT = 240;
-    public static final int SCALE = 2;
-
+    public static final int SCALE = 3;
 
     //game thread
     private Thread thread;
     private boolean running;
     private int FPS = 60;
     private long targetTime = 1000 / FPS;
-
+    private Timer timer;
     //image
     private BufferedImage image;
     private Graphics2D g;
@@ -33,6 +33,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
         setFocusable(true);
         requestFocus();
+//        timer=new Timer(100, (ActionListener) this);
+//        timer.start();
+
     }
 
     public void addNotify() {
@@ -75,11 +78,14 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
             catch (Exception e) {
                 e.printStackTrace();
             }
+
         }
+
     }
 
     private void update() {
         gsm.update();
+//        repaint();
     }
     private void draw() {
         gsm.draw(g);
