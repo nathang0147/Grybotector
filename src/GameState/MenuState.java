@@ -23,11 +23,11 @@ public class MenuState extends GameState {
         this.gsm = gsm;
 
         try {
-            bg = new Background("/Icon/th.png", 1);
-            bg.setVector(-0.1, 0);
+            bg = new Background("/Icon/backgroundMenu.jpg", 1);
+            bg.setVector(-1, 0);
 
-            titleColor = new Color(128, 0, 0);
-            titleFont = new Font("Arial", Font.PLAIN, 28);
+            titleColor = new Color(200, 0, 0);
+            titleFont = new Font("Showcard Gothic", Font.CENTER_BASELINE,25 );
 
             font = new Font("Arial", Font.PLAIN, 12);
         } catch (Exception e) {
@@ -48,15 +48,16 @@ public class MenuState extends GameState {
 
         //draw title
         g.setColor(titleColor);
+        g.setFont(titleFont);
         g.drawString("Grybotector", 80, 70);
         g.setFont(font);
         for (int i = 0; i < options.length; i++) {
             if (i == currentChoice) {
-                g.setColor(Color.BLACK);
+                g.setColor(Color.YELLOW);
             } else {
                 g.setColor(Color.RED);
             }
-            g.drawString(options[i], 145, 140 + i * 15);
+            g.drawString(options[i], 145, 140 + i * 30);
         }
     }
 
@@ -91,3 +92,4 @@ public class MenuState extends GameState {
     }
     public void keyReleased( int k){}
 }
+
