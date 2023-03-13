@@ -38,6 +38,9 @@ public class Background {
     public void update() {
         x += dx;
         y += dy;
+        if(x< -image.getWidth()){
+            x+=image.getWidth();
+        }
     }
 
     public void draw(Graphics2D g) {
