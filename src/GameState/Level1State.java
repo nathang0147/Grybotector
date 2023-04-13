@@ -1,6 +1,5 @@
 package GameState;
 
-import Entity.Player;
 import TileMap.TileMap;
 import UserInterface.GamePanel;
 
@@ -8,7 +7,6 @@ import java.awt.*;
 
 public class Level1State extends GameState{
     private TileMap tileMap;
-    private Player player;
     public Level1State(GameStateManager gsm) {
         this.gsm = gsm;
         init();
@@ -18,10 +16,7 @@ public class Level1State extends GameState{
         tileMap = new TileMap(32);
         tileMap.loadTiles("/TileSet/Tilesheet.png");
         tileMap.loadMap("/Map/TileMap1.txt");
-        tileMap.setPosition(0.0,0.0);
 
-        player = new Player(tileMap);
-        player.setPosition(100,100);
     }
 
 

@@ -1,5 +1,6 @@
 package GameState;
 
+import Sound.ThemeSong;
 import TileMap.Background;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -18,6 +19,7 @@ public class MenuState extends GameState {
     public Font titleFont;
 
     private Font font;
+    private ThemeSong audioInput;
 
     public MenuState(GameStateManager gsm) {
         this.gsm = gsm;
@@ -33,6 +35,10 @@ public class MenuState extends GameState {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        String filePath = "/Sound/ThemeSong.wav";
+        new ThemeSong(filePath);
+
     }
 
     public void init() {
@@ -90,5 +96,7 @@ public class MenuState extends GameState {
             }
         }
     }
-    public void keyReleased( int k){}
+    public void keyReleased(int k){}
+
+
 }
