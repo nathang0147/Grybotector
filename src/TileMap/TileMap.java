@@ -51,12 +51,15 @@ public class TileMap {
             NumtileinCOL = tileset.getWidth() / tilesize;
             tiles = new Tile[12][NumtileinCOL];
             BufferedImage subimage;
+
             for (int i = 0; i < 12; i++) {
                 for (int col = 0; col < NumtileinCOL; col++) {
                     subimage = tileset.getSubimage(col * tilesize, i * tilesize, tilesize, tilesize);
                     tiles[i][col] = new Tile(subimage, Tile.BLOCK);
                 }
             }
+            subimage = tileset.getSubimage(0,0,tilesize, tilesize);
+            tiles[0][0] = new Tile(subimage, Tile.NORMAL);
         }catch (Exception e){
             e.printStackTrace();
         }
