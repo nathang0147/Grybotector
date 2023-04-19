@@ -131,6 +131,7 @@ public abstract class MapObject {
             calculateConner(x,ynext+1);
             if(!(botLeft || botRight)){
                 ynext = (currentRow + 1) * tileSize +cheight/2;
+                falling=true;
             }
         }
     }

@@ -66,8 +66,6 @@ public class TileMap {
     }
     public void loadMap(String s) {
         try {
-
-
             InputStream ip = getClass().getResourceAsStream(s);
             BufferedReader br = new BufferedReader(new InputStreamReader(ip));
             numCols = Integer.parseInt(br.readLine());
@@ -76,7 +74,6 @@ public class TileMap {
             width = numCols * tilesize;
             height = numRows * tilesize;
             for (int row = 0; row < numRows; row++) {
-
                 String line = br.readLine();
                 String[] data = line.split(",");
                 for (int col = 0; col < numCols; col++) {
