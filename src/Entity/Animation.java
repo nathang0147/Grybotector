@@ -34,14 +34,13 @@ public class Animation {
         if(elapsed>delay){
             currentFrame++;
             startTime=System.nanoTime();
-            // cập nhật  lại startTime để bắt đầu update lại ( tạo tính liên tục khi animation vẽ)
+            // cập nhật lại startTime để bắt đầu update lại ( tạo tính liên tục khi animation vẽ)
 
         }
         if(currentFrame==frames.length){
             currentFrame=0;
             // trả lại currentframe về 0 để sau đó thực hiện animation khác
             playedOnce=true;
-
         }
     }
     public  int getCurrentFrame(){
