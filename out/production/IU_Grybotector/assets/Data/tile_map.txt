@@ -1,0 +1,419 @@
+tile_1
+image assets/Tiles/Tile_01.png
+x 0
+y 0
+w 32
+h 32
+
+tile_2
+image assets/Tiles/Tile_02.png
+x 0
+y 0
+w 32
+h 32
+
+tile_3
+image assets/Tiles/Tile_03.png
+x 0
+y 0
+w 32
+h 32
+
+tile_4
+image assets/Tiles/Tile_04.png
+x 0
+y 0
+w 32
+h 32
+
+tile_5
+image assets/Tiles/Tile_05.png
+x 0
+y 0
+w 32
+h 32
+
+tile_6
+image assets/Tiles/Tile_06.png
+x 0
+y 0
+w 32
+h 32
+
+tile_7
+image assets/Tiles/Tile_07.png
+x 0
+y 0
+w 32
+h 32
+
+tile_8
+image assets/Tiles/Tile_08.png
+x 0
+y 0
+w 32
+h 32
+
+tile_9
+image assets/Tiles/Tile_09.png
+x 0
+y 0
+w 32
+h 32
+
+tile_10
+image assets/Tiles/Tile_10.png
+x 0
+y 0
+w 32
+h 32
+
+tile_11
+image assets/Tiles/Tile_11.png
+x 0
+y 0
+w 32
+h 32
+
+tile_12
+image assets/Tiles/Tile_12.png
+x 0
+y 0
+w 32
+h 32
+
+tile_13
+image assets/Tiles/Tile_13.png
+x 0
+y 0
+w 32
+h 32
+
+tile_14
+image assets/Tiles/Tile_14.png
+x 0
+y 0
+w 32
+h 32
+
+tile_15
+image assets/Tiles/Tile_15.png
+x 0
+y 0
+w 32
+h 32
+
+tile_16
+image assets/Tiles/Tile_16.png
+x 0
+y 0
+w 32
+h 32
+
+tile_17
+image assets/Tiles/Tile_17.png
+x 0
+y 0
+w 32
+h 32
+
+tile_18
+image assets/Tiles/Tile_18.png
+x 0
+y 0
+w 32
+h 32
+
+tile_19
+image assets/Tiles/Tile_19.png
+x 0
+y 0
+w 32
+h 32
+
+tile_20
+image assets/Tiles/Tile_20.png
+x 0
+y 0
+w 32
+h 32
+
+tile_21
+image assets/Tiles/Tile_21.png
+x 0
+y 0
+w 32
+h 32
+
+tile_22
+image assets/Tiles/Tile_22.png
+x 0
+y 0
+w 32
+h 32
+
+tile_23
+image assets/Tiles/Tile_23.png
+x 0
+y 0
+w 32
+h 32
+
+tile_24
+image assets/Tiles/Tile_24.png
+x 0
+y 0
+w 32
+h 32
+
+tile_25
+image assets/Tiles/Tile_25.png
+x 0
+y 0
+w 32
+h 32
+
+tile_26
+image assets/Tiles/Tile_26.png
+x 0
+y 0
+w 32
+h 32
+
+tile_27
+image assets/Tiles/Tile_27.png
+x 0
+y 0
+w 32
+h 32
+
+tile_28
+image assets/Tiles/Tile_28.png
+x 0
+y 0
+w 32
+h 32
+
+tile_29
+image assets/Tiles/Tile_29.png
+x 0
+y 0
+w 32
+h 32
+
+tile_30
+image assets/Tiles/Tile_30.png
+x 0
+y 0
+w 32
+h 32
+
+tile_31
+image assets/Tiles/Tile_31.png
+x 0
+y 0
+w 32
+h 32
+
+tile_32
+image assets/Tiles/Tile_32.png
+x 0
+y 0
+w 32
+h 32
+
+tile_33
+image assets/Tiles/Tile_33.png
+x 0
+y 0
+w 32
+h 32
+
+tile_34
+image assets/Tiles/Tile_34.png
+x 0
+y 0
+w 32
+h 32
+
+tile_35
+image assets/Tiles/Tile_35.png
+x 0
+y 0
+w 32
+h 32
+
+tile_36
+image assets/Tiles/Tile_36.png
+x 0
+y 0
+w 32
+h 32
+
+tile_37
+image assets/Tiles/Tile_37.png
+x 0
+y 0
+w 32
+h 32
+
+tile_38
+image assets/Tiles/Tile_38.png
+x 0
+y 0
+w 32
+h 32
+
+tile_39
+image assets/Tiles/Tile_39.png
+x 0
+y 0
+w 32
+h 32
+
+tile_40
+image assets/Tiles/Tile_40.png
+x 0
+y 0
+w 32
+h 32
+
+tile_41
+image assets/Tiles/Tile_41.png
+x 0
+y 0
+w 32
+h 32
+
+tile_42
+image assets/Tiles/Tile_42.png
+x 0
+y 0
+w 32
+h 32
+
+tile_43
+image assets/Tiles/Tile_43.png
+x 0
+y 0
+w 32
+h 32
+
+tile_44
+image assets/Tiles/Tile_44.png
+x 0
+y 0
+w 32
+h 32
+
+tile_45
+image assets/Tiles/Tile_45.png
+x 0
+y 0
+w 32
+h 32
+
+tile_46
+image assets/Tiles/Tile_46.png
+x 0
+y 0
+w 32
+h 32
+
+tile_47
+image assets/Tiles/Tile_47.png
+x 0
+y 0
+w 32
+h 32
+
+tile_48
+image assets/Tiles/Tile_48.png
+x 0
+y 0
+w 32
+h 32
+
+tile_49
+image assets/Tiles/Tile_49.png
+x 0
+y 0
+w 32
+h 32
+
+tile_50
+image assets/Tiles/Tile_50.png
+x 0
+y 0
+w 32
+h 32
+
+tile_51
+image assets/Tiles/Tile_51.png
+x 0
+y 0
+w 32
+h 32
+
+tile_52
+image assets/Tiles/Tile_52.png
+x 0
+y 0
+w 32
+h 32
+
+tile_53
+image assets/Tiles/Tile_53.png
+x 0
+y 0
+w 32
+h 32
+
+tile_54
+image assets/Tiles/Tile_54.png
+x 0
+y 0
+w 32
+h 32
+
+tile_55
+image assets/Tiles/Tile_55.png
+x 0
+y 0
+w 32
+h 32
+
+tile_56
+image assets/Tiles/Tile_56.png
+x 0
+y 0
+w 32
+h 32
+
+tile_57
+image assets/Tiles/Tile_57.png
+x 0
+y 0
+w 32
+h 32
+
+tile_58
+image assets/Tiles/Tile_58.png
+x 0
+y 0
+w 32
+h 32
+
+tile_59
+image assets/Tiles/Tile_59.png
+x 0
+y 0
+w 32
+h 32
+
+tile_60
+image assets/Tiles/Tile_60.png
+x 0
+y 0
+w 32
+h 32

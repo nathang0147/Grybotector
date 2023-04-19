@@ -2,15 +2,13 @@ package UserInterface;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.awt.Graphics2D;
 
 import GameState.GameStateManager;
 
-public class GamePanel extends JPanel implements Runnable, KeyListener {
+public class GamePanel extends JPanel implements Runnable, KeyListener, MouseListener {
     //Dimension
     public static final int WIDTH = 320;
     public static final int HEIGHT = 240;
@@ -43,6 +41,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         if (thread == null) {
             thread = new Thread(this);
             addKeyListener(this);
+            addMouseListener(this);
             thread.start();
         }
     }
@@ -101,6 +100,21 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     };
     public void keyReleased(KeyEvent key) {
         gsm.keyReleased(key.getKeyCode());
+    }
+
+    public void mouseClicked(MouseEvent e) {
+
+    }
+    public void mousePressed(MouseEvent e) {
+
+    }
+    public void mouseReleased(MouseEvent e) {
+
+    }
+    public void mouseEntered(MouseEvent e) {
+
+    }
+    public void mouseExited(MouseEvent e) {
     }
 }
 
