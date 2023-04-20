@@ -91,13 +91,12 @@ import java.util.ArrayList;
           animation.setDelay(400);
        }
 
-<<<<<<< HEAD
 
 
 
        public int getHealth() {
           return health;
-=======
+       }
        public void draw(Graphics2D g) {
 
           setMapPosition();
@@ -127,8 +126,7 @@ import java.util.ArrayList;
        }
 
 
->>>>>>> 2ce5c325ba4092c2cfce4a22d475979d90b63e67
-       }
+
 
        public int getMaxHealth() {
           return maxHealth;
