@@ -65,14 +65,12 @@ import java.util.ArrayList;
              BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/Animation/spritesheet.png"));
 
              sprites = new ArrayList<BufferedImage[]>();
-             for(int i = 0; i < 7; i++) {
+             for(int i = 0; i < 6; i++) {
 
                 BufferedImage[] bi =
                         new BufferedImage[numFrames[i]];
 
                 for(int j = 0; j < numFrames[i]; j++) {
-
-                   if(i != 6) {
                       bi[j] = spritesheet.getSubimage(
                               j * width,
                               i * height,
@@ -80,21 +78,8 @@ import java.util.ArrayList;
                               height
                       );
                    }
-                   else {
-                      bi[j] = spritesheet.getSubimage(
-                              j * width * 2,
-                              i * height,
-                              width,
-                              height
-                      );
-                   }
-
-                }
-
                 sprites.add(bi);
-
              }
-
           }
           catch(Exception e) {
              e.printStackTrace();
@@ -107,121 +92,49 @@ import java.util.ArrayList;
 
        }
 
-       public int getHealth() { return health; }
-       public int getMaxHealth() { return maxHealth; }
-       public int getFire() { return fire; }
-       public int getMaxFire() { return maxFire; }
-
-       public void setFiring() {
-          firing = true;
-       }
-       public void setScratching() {
-          scratching = true;
-       }
-       public void setGliding(boolean b) {
-          gliding = b;
        }
 
-       private void getNextPosition() {
 
-          // movement
-          if(left) {
-             dx -= moveSpeed;
-             if(dx < -maxSpeed) {
-                dx = -maxSpeed;
-             }
-          }
-          else if(right) {
-             dx += moveSpeed;
-             if(dx > maxSpeed) {
-                dx = maxSpeed;
-             }
-          }
-          else {
-             if(dx > 0) {
-                dx -= stopSpeed;
-                if(dx < 0) {
-                   dx = 0;
-                }
-             }
-             else if(dx < 0) {
-                dx += stopSpeed;
-                if(dx > 0) {
-                   dx = 0;
-                }
-             }
-          }
-
-          // cannot move while attacking, except in air
-          if(
-                  (currentAction == SCRATCHING || currentAction == FIREBALL) &&
-                          !(jumping || falling)) {
-             dx = 0;
-          }
-
-          // jumping
-          if(jumping && !falling) {
-             dy = jumpStart;
-             falling = true;
-          }
-
-          // falling
-          if(falling) {
-
-             if(dy > 0 && gliding) dy += fallSpeed * 0.1;
-             else dy += fallSpeed;
-
-             if(dy > 0) jumping = false;
-             if(dy < 0 && !jumping) dy += stopJumpSpeed;
-
-             if(dy > maxFallSpeed) dy = maxFallSpeed;
-
-          }
-
-       }
-
-       }
-
-       public int getHealth() {
-          return health;
-       }
-
-       public int getMaxHealth() {
-          return maxHealth;
-       }
-
-       public boolean isShooting() {
-          return shooting;
-       }
-
-       public boolean isMelee() {
-          return melee;
-       }
-
-       public void setNextPosition() {
-          int doublejump = 0;
-
-          //move normal
-          if (left) {
-             dx -= moveSpeed;
-             if (dx < -maxSpeed) dx = maxSpeed;
-          } else if (right) {
-             dx += moveSpeed;
-             if (dx > maxSpeed) dx = maxSpeed;
-          } else {
-             if (dx > 0) {
-                dx -= stopSpeed;
-                if (dx < stopSpeed) dx = 0;
-             } else if (dx < 0) {
-                dx += stopSpeed;
-                if (dx > -stopSpeed) dx = 0;
-             }
-          }
-
-          // can move when act
-          if (currentAct == SHOOTING || currentAct == MELEE && !(jumping || falling)) {
-             dx = 0;
-          }
-
-       }
+//       public int getHealth() {
+//          return health;
+//       }
+//
+//       public int getMaxHealth() {
+//          return maxHealth;
+//       }
+//
+//       public boolean isShooting() {
+//          return shooting;
+//       }
+//
+//       public boolean isMelee() {
+//          return melee;
+//       }
+//
+//       public void setNextPosition() {
+//          int doublejump = 0;
+//
+//          //move normal
+//          if (left) {
+//             dx -= moveSpeed;
+//             if (dx < -maxSpeed) dx = maxSpeed;
+//          } else if (right) {
+//             dx += moveSpeed;
+//             if (dx > maxSpeed) dx = maxSpeed;
+//          } else {
+//             if (dx > 0) {
+//                dx -= stopSpeed;
+//                if (dx < stopSpeed) dx = 0;
+//             } else if (dx < 0) {
+//                dx += stopSpeed;
+//                if (dx > -stopSpeed) dx = 0;
+//             }
+//          }
+//
+//          // can move when act
+//          if (currentAct == SHOOTING || currentAct == MELEE && !(jumping || falling)) {
+//             dx = 0;
+//          }
+//
+//       }
     }
