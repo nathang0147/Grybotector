@@ -38,8 +38,8 @@ import java.util.ArrayList;
           super(tm);
 
           // size
-          width = 32;
-          height = 32;
+          width = 48;
+          height = 48;
           cwidth = 20;
           cheight = 20;
 
@@ -91,11 +91,43 @@ import java.util.ArrayList;
           animation.setDelay(400);
        }
 
+<<<<<<< HEAD
 
 
 
        public int getHealth() {
           return health;
+=======
+       public void draw(Graphics2D g) {
+
+          setMapPosition();
+
+          // draw player
+
+          if(facingRight) {
+             g.drawImage(
+                     animation.getImage(),
+                     (int)(x + xmap - width / 2),
+                     (int)(y + ymap - height / 2),
+                     null
+             );
+          }
+          else {
+             g.drawImage(
+                     animation.getImage(),
+                     (int)(x + xmap - width / 2 + width),
+                     (int)(y + ymap - height / 2),
+                     -width,
+                     height,
+                     null
+             );
+
+          }
+
+       }
+
+
+>>>>>>> 2ce5c325ba4092c2cfce4a22d475979d90b63e67
        }
 
        public int getMaxHealth() {
