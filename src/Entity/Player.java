@@ -36,8 +36,8 @@ import java.util.ArrayList;
           super(tm);
 
           // size
-          width = 32;
-          height = 32;
+          width = 48;
+          height = 48;
           cwidth = 20;
           cheight = 20;
 
@@ -88,6 +88,35 @@ import java.util.ArrayList;
           animation.setFrames(sprites.get(IDLE));
           animation.setDelay(400);
        }
+
+       public void draw(Graphics2D g) {
+
+          setMapPosition();
+
+          // draw player
+
+          if(facingRight) {
+             g.drawImage(
+                     animation.getImage(),
+                     (int)(x + xmap - width / 2),
+                     (int)(y + ymap - height / 2),
+                     null
+             );
+          }
+          else {
+             g.drawImage(
+                     animation.getImage(),
+                     (int)(x + xmap - width / 2 + width),
+                     (int)(y + ymap - height / 2),
+                     -width,
+                     height,
+                     null
+             );
+
+          }
+
+       }
+
 
        }
 
