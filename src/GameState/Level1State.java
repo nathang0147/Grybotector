@@ -32,7 +32,10 @@ public class Level1State extends GameState{
 
     public void update() {
         player.update();
-
+        tileMap.setPosition(
+                GamePanel.WIDTH - player.getX(),
+                GamePanel.HEIGHT - player.getY()
+        );
     }
 
 

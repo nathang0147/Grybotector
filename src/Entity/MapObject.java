@@ -75,9 +75,9 @@ public abstract class MapObject {
 
     public void calculateConner(double x, double y){
         int leftSide = (int) (x - cwidth / 2)/tileSize;
-        int rightSide = (int) (x + cwidth/ 2) / tileSize;
+        int rightSide = (int) (x + cwidth/ 2 - 1) / tileSize;
         int topSide  = (int) (y - cheight/ 2) /tileSize;
-        int botSide = (int) (y + cheight /2 ) /tileSize;
+        int botSide = (int) (y + cheight /2 - 1) /tileSize;
 
         topLeft = tile.BLOCK ==  tileMap.getTileType(topSide,leftSide);
         topRight =tile.BLOCK ==  tileMap.getTileType(topSide,rightSide);
@@ -100,16 +100,17 @@ public abstract class MapObject {
             if (botLeft || botRight) {
                 dy = 0;
                 falling = false;
-                ynext = (currentRow+1) * tileSize - cheight / 2;
-            } else {
-                ynext += dy;
+                ytemp = (currentRow+1) * tileSize - cheight / 2;
             }
         }
 
         if(dy < 0){
             if (topLeft || topRight) {
                 dy = 0;
-                ynext = (currentRow) * tileSize + cheight/2;
+                ytemp = (currentRow) * tileSize + cheight/2;
+            }
+            else {
+                ytemp += dy;
             }
 
         }
@@ -118,15 +119,17 @@ public abstract class MapObject {
         if(dx > 0){
             if(botRight|| topRight){
                 dx = 0;
-                xnext=  (currentCol+1) * tileSize - cwidth/2;
-            }else {
-                xnext += dx;
+                xtemp=  (currentCol+1) * tileSize - cwidth/2;
+            }else{
+                xtemp  += dx;
             }
         }
         if(dx < 0){
-            if(botRight|| topRight){
+            if(botLeft|| topLeft){
                 dx = 0;
-                xnext=  currentCol * tileSize + cwidth/2;
+                xtemp=  currentCol * tileSize + cwidth/2;
+            }else {
+                xtemp += dx;
             }
         }
         if (!falling){
