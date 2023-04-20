@@ -48,6 +48,7 @@ public abstract class MapObject {
     protected double jumpStart;
     protected boolean falling;
     //animation
+    protected Animation animation;
     protected boolean facingRight;
     protected boolean jumping;
     protected boolean up, down, right, left;

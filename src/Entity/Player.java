@@ -1,6 +1,6 @@
 package Entity;
 
-import TileMap.TileMap;
+import TileMap.*;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -9,7 +9,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
     public class Player extends MapObject {
-       //default
+
+       // player stuff
        private int health;
        private int maxHealth;
        private int bullet;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 
 
        // animations
-       ArrayList<BufferedImage[]> sprites;
+       private ArrayList<BufferedImage[]> sprites;
        private final int[] numFrames = {3, 8, 5, 2, 6};
 
        //act
@@ -55,8 +56,6 @@ import java.util.ArrayList;
           bullet = 3;
 
           bulletDamage = 1;
-          meleeDamage = 3;
-          meleeRange = 55;
 
           //load sprites
           try {
@@ -83,6 +82,11 @@ import java.util.ArrayList;
           catch(Exception e) {
              e.printStackTrace();
           }
+
+          animation = new Animation();
+          currentAct = IDLE;
+          animation.setFrames(sprites.get(IDLE));
+          animation.setDelay(400);
        }
 
        }
