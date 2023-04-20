@@ -14,23 +14,22 @@ import java.util.ArrayList;
        private int maxHealth;
        private int bullet;
        private int bulletDamage;
-       private int meleeDamage;
-       private int meleeRange;
 
-       ArrayList<BufferedImage[]> animation;
+
+       // animations
+       ArrayList<BufferedImage[]> sprites;
+       private final int[] numFrames = {3, 8, 5, 2, 6};
+
        //act
        private boolean shooting;
-       private boolean melee;
 
-       //animation
+       // animation actions
        private int currentAct;
-       private int STAY = 0;
-       private int MOVE = 1;
-       private int JUMPING = 2;
-       private int FALLING = 3;
-       private int CROUCH = 4;
-       private int SHOOTING = 5;
-       private int MELEE = 6;
+       private int IDLE= 0;
+       private int RUN = 1;
+       private int JUMP = 2;
+       private int CROUCH = 3;
+       private int DEATH = 4;
 
        public Player(TileMap tm) {
           super(tm);
@@ -65,7 +64,7 @@ import java.util.ArrayList;
              BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/Animation/spritesheet.png"));
 
              sprites = new ArrayList<BufferedImage[]>();
-             for(int i = 0; i < 6; i++) {
+             for(int i = 0; i < 5; i++) {
 
                 BufferedImage[] bi =
                         new BufferedImage[numFrames[i]];
@@ -84,12 +83,6 @@ import java.util.ArrayList;
           catch(Exception e) {
              e.printStackTrace();
           }
-
-          animation = new Animation();
-          currentAction = IDLE;
-          animation.setFrames(sprites.get(IDLE));
-          animation.setDelay(400);
-
        }
 
        }
@@ -137,4 +130,3 @@ import java.util.ArrayList;
 //          }
 //
 //       }
-    }
