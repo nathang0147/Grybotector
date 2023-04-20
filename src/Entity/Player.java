@@ -8,129 +8,137 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 
-    public class Player extends MapObject {
+public class Player extends MapObject {
 
-       // player stuff
-       private int health;
-       private int maxHealth;
-       private int bullet;
-       private int bulletDamage;
-       private boolean dead;
-
-
-
-       // animations
-       private ArrayList<BufferedImage[]> sprites;
-       private final int[] numFrames = {3, 8, 5, 2, 6};
-
-       //act
-
-
-       // animation actions
-       private int currentAct;
-       private int IDLE= 0;
-       private int RUN = 1;
-       private int JUMP = 2;
-       private int CROUCH = 3;
-       private int DEATH = 4;
-
-       public Player(TileMap tm) {
-          super(tm);
-
-          // size
-          width = 48;
-          height = 48;
-          cwidth = 20;
-          cheight = 20;
-
-          //Move
-          moveSpeed = 4;
-          sneakySpeed = 2;
-          maxSpeed = 10;
-          maxFall = 4;
-          jumpStart = -8.0;
-          fallSpeed = 3;
-          slowFall = 0.0001;
-          stopSpeed = 0.0111;
-
-
-          health = maxHealth = 5;
-          bullet = 3;
-
-          bulletDamage = 1;
-
-          //load sprites
-          try {
-
-             BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/Animation/spritesheet.png"));
-
-             sprites = new ArrayList<BufferedImage[]>();
-             for(int i = 0; i < 5; i++) {
-
-                BufferedImage[] bi =
-                        new BufferedImage[numFrames[i]];
-
-                for(int j = 0; j < numFrames[i]; j++) {
-                      bi[j] = spritesheet.getSubimage(
-                              j * width,
-                              i * height,
-                              width,
-                              height
-                      );
-                   }
-                sprites.add(bi);
-             }
-          }
-          catch(Exception e) {
-             e.printStackTrace();
-          }
-
-          animation = new Animation();
-          currentAct = IDLE;
-          animation.setFrames(sprites.get(IDLE));
-          animation.setDelay(400);
-       }
+   // player stuff
+   private int health;
+   private int maxHealth;
+   private int bullet;
+   private int bulletDamage;
+   private boolean dead;
+   private boolean gliding;
 
 
 
+   // animations
+   private ArrayList<BufferedImage[]> sprites;
+   private final int[] numFrames = {3, 8, 2, 5, 2, 6 };
 
-       public int getHealth() {
-          return health;
-       }
-       public void draw(Graphics2D g) {
+   //act
 
-          setMapPosition();
 
-          // draw player
+   // animation actions
+   private int currentAct;
+   private int IDLE= 0;
+   private int RUN = 5;
+   private int JUMP = 4;
+   private int CROUCH = 1;
+   private int GLIDING= 3;
+   private int DEAD=2;
 
-          if(facingRight) {
-             g.drawImage(
-                     animation.getImage(),
-                     (int)(x + xmap - width / 2),
-                     (int)(y + ymap - height / 2),
-                     null
-             );
-          }
-          else {
-             g.drawImage(
-                     animation.getImage(),
-                     (int)(x + xmap - width / 2 + width),
-                     (int)(y + ymap - height / 2),
-                     -width,
-                     height,
-                     null
-             );
 
-          }
+   public Player(TileMap tm) {
+      super(tm);
 
-       }
+      // size
+      width = 27;
+      height = 27;
+      cwidth = 20;
+      cheight = 20;
+
+      //Move
+      moveSpeed = 0.3;
+      sneakySpeed = 4 ;
+      maxSpeed = 1.6;
+      maxFall = 4;
+      jumpStart = -3.0;
+      fallSpeed = 0.2;
+      slowFall = 0.0001;
+      stopSpeed = 0.0111;
+      stopJumpSpeed=0.01;
+
+      facingRight=true;
+      health = maxHealth = 5;
+      bullet = 3;
+
+      bulletDamage = 1;
+
+      //load sprites
+      try {
+
+         BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/Animation/spritesheet_small.png"));
+
+         sprites = new ArrayList<BufferedImage[]>();
+         for(int i = 0; i < 6; i++) {
+
+            BufferedImage[] bi =
+                    new BufferedImage[numFrames[i]];
+
+            for(int j = 0; j < numFrames[i]; j++) {
+               bi[j] = spritesheet.getSubimage(
+                       j * width,
+                       i * height,
+                       width,
+                       height
+               );
+            }
+            sprites.add(bi);
+         }
+      }
+      catch(Exception e) {
+         e.printStackTrace();
+      }
+
+      animation = new Animation();
+      currentAct = IDLE;
+      animation.setFrames(sprites.get(IDLE));
+      animation.setDelay(400);
+   }
 
 
 
 
-       public int getMaxHealth() {
-          return maxHealth;
-       }
+   public int getHealth() {
+      return health;
+   }
+   public void draw(Graphics2D g) {
+
+      setMapPosition();
+
+      // draw player
+
+      if(facingRight) {
+         g.drawImage(
+                 animation.getImage(),
+                 (int)(x + xmap - width / 2),
+                 (int)(y + ymap - height / 2),
+                 null
+         );
+      }
+      else {
+         g.drawImage(
+                 animation.getImage(),
+                 (int)(x + xmap - width / 2 + width),
+                 (int)(y + ymap - height / 2),
+                 -width,
+                 height,
+                 null
+         );
+
+      }
+
+   }
+
+
+
+
+   public int getMaxHealth() {
+      return maxHealth;
+   }
+
+   public void setGliding(boolean b){
+      gliding=b;
+   }
 //
 //       public boolean isShooting() {
 //          return shooting;
@@ -140,71 +148,97 @@ import java.util.ArrayList;
 //          return melee;
 //       }
 //
+public void getNextPosition() {
+//          int doublejump = 0;
 
-       public void update(){
-          //update position
-          setNextPosition();
-          checkCollision();
-          setPosition(xtemp,ytemp);
+   //move normal
+   if (left) {
+      dx -= moveSpeed;
+      if (dx < -maxSpeed) dx = maxSpeed;
+   } else if (right) {
+      dx += moveSpeed;
+      if (dx > maxSpeed) dx = maxSpeed;
+   } else {
+      if (dx > 0) {
+         dx -= stopSpeed;
+         if (dx < 0) dx = 0;
+      } else if (dx < 0) {
+         dx += stopSpeed;
+         if (dx > 0) dx = 0;
+      }
+   }
 
-          //set animation
+   // can move when act
+   if ( !(jumping || falling)) {
+      dx = 0;
+   }
 
-           if(dy<0){
-              if(currentAct!=JUMP){
-                 currentAct=JUMP;
-                 animation.setFrames(sprites.get(JUMP));
-                 animation.setDelay(-1);
-                 width=32;
-              }
-           }
+   if(jumping&&!falling){
+      dy=jumpStart;
+      falling=true;
+   }
 
-           else if(left||right){
-              if(currentAct!=RUN){
-                 currentAct=RUN;
-                 animation.setFrames(sprites.get(RUN));
-                 animation.setDelay(40);
-                 width=32;
-              }
-           }
-           else{
-              if(currentAct!=IDLE){
-                 currentAct=IDLE;
-                 animation.setFrames(sprites.get(IDLE));
-                 animation.setDelay(400);
-                 width=32;
-              }
-           }
-           animation.update();
-           if(currentAct==RUN){
-              if(right) facingRight=true;
-              if(left) facingRight=false;
-           }
-       }
+   //falling
+   if(falling){
+      if(dy>0&&gliding) dy+=fallSpeed*0.01;
+      else dy+=fallSpeed;
 
-       public void setNextPosition() {
-          int doublejump = 0;
+      if(dy>0) jumping=false;
+      if(dy<0&&!jumping) dy+= stopJumpSpeed;
 
-          //move normal
-          if (left) {
-             dx -= moveSpeed;
-             if (dx < -maxSpeed) dx = maxSpeed;
-          } else if (right) {
-             dx += moveSpeed;
-             if (dx > maxSpeed) dx = maxSpeed;
-          } else {
-             if (dx > 0) {
-                dx -= stopSpeed;
-                if (dx < stopSpeed) dx = 0;
-             } else if (dx < 0) {
-                dx += stopSpeed;
-                if (dx > -stopSpeed) dx = 0;
-             }
-          }
+      if(dy>maxFall) dy=maxFall;
+   }
 
-          // can move when act
-          if ( !(jumping || falling)) {
-             dx = 0;
-          }
+}
 
-       }
-    }
+   public void update(){
+      //update position
+      getNextPosition();
+      checkCollision();
+      setPosition(xtemp,ytemp);
+
+      //set animation
+
+      if(dy<0){
+         if(currentAct!=JUMP){
+            currentAct=JUMP;
+            animation.setFrames(sprites.get(JUMP));
+            animation.setDelay(-1);
+            width=32;
+         }
+      }
+      else if(dy > 0) {
+         if(gliding) {
+            if(currentAct != GLIDING) {
+               currentAct = GLIDING;
+               animation.setFrames(sprites.get(IDLE));
+               animation.setDelay(100);
+               width = 25;
+            }
+         }
+         else if(left||right){
+            if(currentAct!=RUN){
+               currentAct=RUN;
+               animation.setFrames(sprites.get(RUN));
+               animation.setDelay(40);
+               width=27;
+            }
+         }
+         else{
+            if(currentAct!=IDLE){
+               currentAct=IDLE;
+               animation.setFrames(sprites.get(IDLE));
+               animation.setDelay(400);
+               width=27;
+            }
+         }
+         animation.update();
+         if(currentAct==RUN){
+            if(right) facingRight=true;
+            if(left) facingRight=false;
+         }
+      }
+   }
+
+
+}
