@@ -1,5 +1,4 @@
-
-    package Entity;
+package Entity;
 
 import TileMap.TileMap;
 
