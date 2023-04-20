@@ -44,13 +44,14 @@ public abstract class MapObject {
     protected double stopSpeed;
     protected double slowFall;
     protected double maxFall;
-    protected int fallSpeed;
+    protected double fallSpeed;
     protected double jumpStart;
     protected boolean falling;
     //animation
     protected Animation animation;
     protected boolean facingRight;
     protected boolean jumping;
+    protected double stopJumpSpeed;
     protected boolean up, down, right, left;
 
 
