@@ -15,6 +15,8 @@ import java.util.ArrayList;
        private int maxHealth;
        private int bullet;
        private int bulletDamage;
+       private boolean dead;
+
 
 
        // animations
@@ -22,7 +24,7 @@ import java.util.ArrayList;
        private final int[] numFrames = {3, 8, 5, 2, 6};
 
        //act
-       private boolean shooting;
+
 
        // animation actions
        private int currentAct;
@@ -89,16 +91,16 @@ import java.util.ArrayList;
           animation.setDelay(400);
        }
 
+
+
+
+       public int getHealth() {
+          return health;
        }
 
-
-//       public int getHealth() {
-//          return health;
-//       }
-//
-//       public int getMaxHealth() {
-//          return maxHealth;
-//       }
+       public int getMaxHealth() {
+          return maxHealth;
+       }
 //
 //       public boolean isShooting() {
 //          return shooting;
@@ -108,29 +110,71 @@ import java.util.ArrayList;
 //          return melee;
 //       }
 //
-//       public void setNextPosition() {
-//          int doublejump = 0;
-//
-//          //move normal
-//          if (left) {
-//             dx -= moveSpeed;
-//             if (dx < -maxSpeed) dx = maxSpeed;
-//          } else if (right) {
-//             dx += moveSpeed;
-//             if (dx > maxSpeed) dx = maxSpeed;
-//          } else {
-//             if (dx > 0) {
-//                dx -= stopSpeed;
-//                if (dx < stopSpeed) dx = 0;
-//             } else if (dx < 0) {
-//                dx += stopSpeed;
-//                if (dx > -stopSpeed) dx = 0;
-//             }
-//          }
-//
-//          // can move when act
-//          if (currentAct == SHOOTING || currentAct == MELEE && !(jumping || falling)) {
-//             dx = 0;
-//          }
-//
-//       }
+
+       public void update(){
+          //update position
+          setNextPosition();
+          checkCollision();
+          setPosition(xtemp,ytemp);
+
+          //set animation
+
+           if(dy<0){
+              if(currentAct!=JUMP){
+                 currentAct=JUMP;
+                 animation.setFrames(sprites.get(JUMP));
+                 animation.setDelay(-1);
+                 width=32;
+              }
+           }
+
+           else if(left||right){
+              if(currentAct!=RUN){
+                 currentAct=RUN;
+                 animation.setFrames(sprites.get(RUN));
+                 animation.setDelay(40);
+                 width=32;
+              }
+           }
+           else{
+              if(currentAct!=IDLE){
+                 currentAct=IDLE;
+                 animation.setFrames(sprites.get(IDLE));
+                 animation.setDelay(400);
+                 width=32;
+              }
+           }
+           animation.update();
+           if(currentAct==RUN){
+              if(right) facingRight=true;
+              if(left) facingRight=false;
+           }
+       }
+
+       public void setNextPosition() {
+          int doublejump = 0;
+
+          //move normal
+          if (left) {
+             dx -= moveSpeed;
+             if (dx < -maxSpeed) dx = maxSpeed;
+          } else if (right) {
+             dx += moveSpeed;
+             if (dx > maxSpeed) dx = maxSpeed;
+          } else {
+             if (dx > 0) {
+                dx -= stopSpeed;
+                if (dx < stopSpeed) dx = 0;
+             } else if (dx < 0) {
+                dx += stopSpeed;
+                if (dx > -stopSpeed) dx = 0;
+             }
+          }
+
+          // can move when act
+          if ( !(jumping || falling)) {
+             dx = 0;
+          }
+
+       }
+    }
