@@ -18,7 +18,7 @@ Overall, IU Grybotector is an exciting and challenging shooting game that showca
 
 ![GitHub Repo stars](https://img.shields.io/github/stars/nathang0147/IU_Grybotector?style=for-the-badge)
 
-![Logo](https://hcmiu.edu.vn/wp-content/uploads/2017/08/logo-vector-IU-01.png)
+![Logo]([https://hcmiu.edu.vn/wp-content/uploads/2017/08/logo-vector-IU-01.png](https://hcmiu.edu.vn/wp-content/uploads/2017/08/logo-vector-IU-01.png))
 
 
 ## Tech Stack
