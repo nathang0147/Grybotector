@@ -113,7 +113,7 @@ public abstract class MapObject {
             if (botLeft || botRight) {
                 dy = 0;
                 falling = false;
-                ytemp = (currentRow+1) * tileSize - cheight / 2;
+                ynext = (currentRow+1) * tileSize - cheight / 2;
             }
             else {
                 ytemp+=dy;
@@ -123,7 +123,7 @@ public abstract class MapObject {
         if(dy < 0){
             if (topLeft || topRight) {
                 dy = 0;
-                ytemp = currentRow * tileSize + cheight/2;
+                ynext = currentRow * tileSize + cheight/2;
             }
             else {
                 ytemp += dy;
@@ -135,7 +135,7 @@ public abstract class MapObject {
         if(dx > 0){
             if(botRight|| topRight){
                 dx = 0;
-                xtemp=  (currentCol+1) * tileSize - cwidth/2;
+                xnext=  (currentCol+1) * tileSize - cwidth/2;
             }else{
                 xtemp  += dx;
             }
@@ -143,7 +143,7 @@ public abstract class MapObject {
         if(dx < 0){
             if(botLeft|| topLeft){
                 dx = 0;
-                xtemp=  currentCol * tileSize + cwidth/2;
+                xnext=  currentCol * tileSize + cwidth/2;
             }else {
                 xtemp += dx;
             }

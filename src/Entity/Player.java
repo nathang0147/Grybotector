@@ -28,12 +28,12 @@ public class Player extends MapObject {
 
    // animation actions
    private int currentAct;
-   private int IDLE= 0;
+   private int IDLE= 3;
    private int RUN = 5;
    private int JUMP = 4;
-   private int CROUCH = 1;
-   private int FALLING = 3;
-   private int DEAD=2;
+   private int CROUCH = 0;
+   private int FALLING = 2;
+   private int DEAD=1;
 
 
    public Player(TileMap tm) {
@@ -154,7 +154,6 @@ public void getNextPosition() {
       dx -= moveSpeed;
       if (dx < -maxSpeed) dx = -maxSpeed;
    } else if (right) {
-      System.out.println("right");
       dx += moveSpeed;
       if (dx > maxSpeed) dx = maxSpeed;
    } else{
@@ -185,9 +184,15 @@ public void getNextPosition() {
       else dy+=fallSpeed;
 
       if(dy>0) jumping=false;
-      if(dy<0&&!jumping) dy+= stopJumpSpeed;
+      if(dy<0&&!jumping) {
+         dy+= stopJumpSpeed;
+      }
 
-      if(dy>maxFall) dy=maxFall;
+      if(dy>maxFall) {
+         dy=maxFall;
+         falling=false;
+      }
+
    }
 
 }
@@ -237,7 +242,9 @@ public void getNextPosition() {
          if(right) facingRight=true;
          if(left) facingRight=false;
       }
+      System.out.println(currentAct);
       }
+
    }
 
 
