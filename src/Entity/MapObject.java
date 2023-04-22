@@ -7,6 +7,7 @@ import UserInterface.GamePanel;
 import java.awt.*;
 
 public abstract class MapObject {
+
     //position and move
     protected double x;
     protected double y;
@@ -18,19 +19,21 @@ public abstract class MapObject {
     protected int height;
     protected int width;
 
-    //collision
-    protected boolean topLeft;
-    protected boolean topRight;
-    protected boolean botLeft;
-    protected boolean botRight;
+
+    //collision box
     protected int cheight;
     protected int cwidth;
+    //collision
     protected double ynext;
     protected double xnext;
     protected double xtemp;
     protected double ytemp;
     protected int currentCol;
     protected int currentRow;
+    protected boolean topLeft;
+    protected boolean topRight;
+    protected boolean botLeft;
+    protected boolean botRight;
 
     // tiles
     protected TileMap tileMap;
@@ -46,11 +49,16 @@ public abstract class MapObject {
     protected double maxFall;
     protected double fallSpeed;
     protected double jumpStart;
-    protected boolean falling;
+    protected double stopJump;
+
     //animation
+    protected int currentAct;
+    protected int previousAct;
     protected Animation animation;
     protected boolean facingRight;
+    //movement
     protected boolean jumping;
+    protected boolean falling;
     protected double stopJumpSpeed;
     protected boolean up, down, right, left;
 
@@ -63,7 +71,7 @@ public abstract class MapObject {
     public boolean intersect(MapObject o){
         Rectangle r1 = newRec();
         Rectangle r2 = o.newRec();
-        return r2.intersects(r1);
+        return r1.intersects(r2);
     }
 
     public Rectangle newRec(){
@@ -75,14 +83,19 @@ public abstract class MapObject {
 
     public void calculateConner(double x, double y){
         int leftSide = (int) (x - cwidth / 2)/tileSize;
-        int rightSide = (int) (x + cwidth/ 2 - 1) / tileSize;
+        int rightSide = (int) (x + cwidth/ 2 - 2) / tileSize;
         int topSide  = (int) (y - cheight/ 2) /tileSize;
-        int botSide = (int) (y + cheight /2 - 1) /tileSize;
+        int botSide = (int) (y + cheight /2 - 2) /tileSize;
 
-        topLeft = tile.BLOCK ==  tileMap.getTileType(topSide,leftSide);
-        topRight =tile.BLOCK ==  tileMap.getTileType(topSide,rightSide);
-        botLeft = tile.BLOCK == tileMap.getTileType(botSide, leftSide);
-        botRight =tile.BLOCK ==  tileMap.getTileType(botSide, rightSide);
+        int tl = tileMap.getTileType(topSide,leftSide);
+        int tr = tileMap.getTileType(topSide,rightSide);
+        int bl = tileMap.getTileType(botSide, leftSide);
+        int br = tileMap.getTileType(botSide, rightSide);
+
+        topLeft=tl==Tile.BLOCK;
+        topRight=tr==Tile.BLOCK;
+        botLeft=bl==Tile.BLOCK;
+        botRight=br==Tile.BLOCK;
     }
 
     public void checkCollision(){
@@ -102,12 +115,15 @@ public abstract class MapObject {
                 falling = false;
                 ytemp = (currentRow+1) * tileSize - cheight / 2;
             }
+            else {
+                ytemp+=dy;
+            }
         }
 
         if(dy < 0){
             if (topLeft || topRight) {
                 dy = 0;
-                ytemp = (currentRow) * tileSize + cheight/2;
+                ytemp = currentRow * tileSize + cheight/2;
             }
             else {
                 ytemp += dy;
@@ -135,7 +151,7 @@ public abstract class MapObject {
         if (!falling){
             calculateConner(x,ynext+1);
             if(!(botLeft || botRight)){
-                ynext = (currentRow + 1) * tileSize +cheight/2;
+                ynext = (currentRow + 1) * tileSize - cheight/2;
                 falling=true;
             }
         }
@@ -183,6 +199,10 @@ public abstract class MapObject {
 
     public void setJumping(boolean jumping) {
         this.jumping = jumping;
+    }
+
+    public void setUp(boolean up) {
+        this.up = up;
     }
 
     public void setDown(boolean down) {

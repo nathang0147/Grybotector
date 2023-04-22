@@ -55,7 +55,7 @@ public class Level1State extends GameState{
         if(k == KeyEvent.VK_RIGHT) player.setRight(true);
         if(k == KeyEvent.VK_UP) player.setJumping(true);
         if(k == KeyEvent.VK_DOWN) player.setDown(true);
-        if(k == KeyEvent.VK_W) player.setJumping(true);
+//        if(k == KeyEvent.VK_W) player.setJumping(true);
     }
 //
     public void keyReleased(int k) {
@@ -63,7 +63,7 @@ public class Level1State extends GameState{
         if(k == KeyEvent.VK_RIGHT) player.setRight(false);
         if(k == KeyEvent.VK_UP) player.setJumping(false);
         if(k == KeyEvent.VK_DOWN) player.setDown(false);
-        if(k == KeyEvent.VK_SPACE) player.setJumping(false);
+//        if(k == KeyEvent.VK_SPACE) player.setJumping(false);
     }
 
 }
