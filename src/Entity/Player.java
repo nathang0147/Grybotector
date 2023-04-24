@@ -38,19 +38,19 @@ public class Player extends MapObject {
 
    public Player(TileMap tm) {
       super(tm);
-
+      System.out.println("Loading");
       // size
       width = 48;
       height = 48;
-      cwidth = 20;
+      cwidth = 30;
       cheight = 30;
 
       //Move
       moveSpeed = 0.3;
       sneakySpeed = 4 ;
       maxSpeed = 1.6;
-      maxFall = 4;
-      jumpStart = -10.0;
+      maxFall = 1;
+      jumpStart = -5.0;
       fallSpeed = 0.3;
       slowFall = 0.0001;
       stopSpeed = 0.0001;
@@ -152,6 +152,11 @@ public void getNextPosition() {
    //move normal
    if (left) {
       dx -= moveSpeed;
+      System.out.println("***Falling in Player: "+falling);
+      System.out.println("***Dy= "+dy);
+      if(dy==0&&!botRight&&!botLeft){
+         falling=true;
+      }
       if (dx < -maxSpeed) dx = -maxSpeed;
    } else if (right) {
       dx += moveSpeed;
@@ -165,21 +170,22 @@ public void getNextPosition() {
          if (dx > 0) dx = 0;
       }
    }
-
+   System.out.println("dx= "+dx);
 
    // can move when act
 //   if ( !(jumping || falling)) {
 //      dx = 0;
 //   }
-
+   // jumping
    if(jumping && !falling){
       dy=jumpStart;
       falling=true;
    }
-
-   //falling
+   System.out.println("Falling in Player: "+falling);
+   System.out.println("dy="+dy);//falling
    if(falling){
-      if(dy>0 && falling){
+//      System.out.println("dy="+dy);
+      if(dy>0){
          dy+=fallSpeed*1;}
       else dy+=fallSpeed;
 
@@ -188,19 +194,23 @@ public void getNextPosition() {
          dy+= stopJumpSpeed;
       }
 
-      if(dy>maxFall) {
+      if(dy>=maxFall||dy==0.0) {
          dy=maxFall;
          falling=false;
+         jumping=false;
       }
 
    }
+//   if(dy==0&!botLeft&!botRight){
+//      falling=true;
+//   }
 
 }
 
    public void update(){
       //update position
-      getNextPosition();
       checkCollision();
+      getNextPosition();
       setPosition(xtemp,ytemp);
 
       //set animation
@@ -242,7 +252,6 @@ public void getNextPosition() {
          if(right) facingRight=true;
          if(left) facingRight=false;
       }
-      System.out.println(currentAct);
       }
 
    }

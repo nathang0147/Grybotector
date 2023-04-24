@@ -18,7 +18,7 @@ public class TileMap {
     private  int xmax;
     private  int ymin;
     private int ymax;
-    private double tween = 0.02;
+    private double tween ;
     // map
     private int[][] map;
     private  int tilesize;
@@ -41,7 +41,7 @@ public class TileMap {
         this.tilesize = tilesize;
         numRowtodraw= GamePanel.WIDTH/tilesize+2;
         numColtodraw= GamePanel.HEIGHT/tilesize+2;
-
+        tween=0.02;
     }
     public void loadTiles(String s) {
         try {

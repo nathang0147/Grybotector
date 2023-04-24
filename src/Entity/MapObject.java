@@ -75,7 +75,8 @@ public abstract class MapObject {
     }
 
     public Rectangle newRec(){
-        return new Rectangle((int)x - cwidth,
+        return new Rectangle(
+                (int)x - cwidth,
                 (int) y - cheight,
                 cwidth,
                 cheight);
@@ -83,14 +84,21 @@ public abstract class MapObject {
 
     public void calculateConner(double x, double y){
         int leftSide = (int) (x - cwidth / 2)/tileSize;
-        int rightSide = (int) (x + cwidth/ 2 - 2) / tileSize;
+        int rightSide = (int) (x + cwidth/ 2 - 1) / tileSize;
         int topSide  = (int) (y - cheight/ 2) /tileSize;
-        int botSide = (int) (y + cheight /2 - 2) /tileSize;
+        int botSide = (int) (y + cheight /2 - 1) /tileSize;
 
         int tl = tileMap.getTileType(topSide,leftSide);
         int tr = tileMap.getTileType(topSide,rightSide);
         int bl = tileMap.getTileType(botSide, leftSide);
         int br = tileMap.getTileType(botSide, rightSide);
+
+        System.out.println("tl: "+tl);
+        System.out.println("tr: "+tr);
+        System.out.println("bl: "+bl);
+        System.out.println("br: "+br);
+        System.out.println();
+
 
         topLeft=tl==Tile.BLOCK;
         topRight=tr==Tile.BLOCK;
@@ -110,10 +118,13 @@ public abstract class MapObject {
 
         calculateConner(x, ynext);
         if(dy > 0) {
+
             if (botLeft || botRight) {
                 dy = 0;
+                ytemp = (currentRow+1) * tileSize - cheight / 2;
                 falling = false;
-                ynext = (currentRow+1) * tileSize - cheight / 2;
+
+
             }
             else {
                 ytemp+=dy;
@@ -123,7 +134,7 @@ public abstract class MapObject {
         if(dy < 0){
             if (topLeft || topRight) {
                 dy = 0;
-                ynext = currentRow * tileSize + cheight/2;
+                ytemp = currentRow * tileSize + cheight/2;
             }
             else {
                 ytemp += dy;
@@ -135,7 +146,7 @@ public abstract class MapObject {
         if(dx > 0){
             if(botRight|| topRight){
                 dx = 0;
-                xnext=  (currentCol+1) * tileSize - cwidth/2;
+                xtemp=  (currentCol+1) * tileSize - cwidth/2;
             }else{
                 xtemp  += dx;
             }
@@ -143,18 +154,20 @@ public abstract class MapObject {
         if(dx < 0){
             if(botLeft|| topLeft){
                 dx = 0;
-                xnext=  currentCol * tileSize + cwidth/2;
+                xtemp=  currentCol * tileSize + cwidth/2;
             }else {
                 xtemp += dx;
             }
         }
+        System.out.println("Falling in map object: "+falling);
         if (!falling){
             calculateConner(x,ynext+1);
-            if(!(botLeft || botRight)){
-                ynext = (currentRow + 1) * tileSize - cheight/2;
+            if(!botLeft && !botRight){
+//                ynext = (currentRow + 1) * tileSize - cheight/2;
                 falling=true;
             }
         }
+//        System.out.println("Falling in Map Object:"+falling);
     }
 
     public int getCheight() {
