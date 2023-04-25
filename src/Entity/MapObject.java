@@ -93,13 +93,6 @@ public abstract class MapObject {
         int bl = tileMap.getTileType(botSide, leftSide);
         int br = tileMap.getTileType(botSide, rightSide);
 
-        System.out.println("tl: "+tl);
-        System.out.println("tr: "+tr);
-        System.out.println("bl: "+bl);
-        System.out.println("br: "+br);
-        System.out.println();
-
-
         topLeft=tl==Tile.BLOCK;
         topRight=tr==Tile.BLOCK;
         botLeft=bl==Tile.BLOCK;
@@ -159,7 +152,7 @@ public abstract class MapObject {
                 xtemp += dx;
             }
         }
-        System.out.println("Falling in map object: "+falling);
+//        System.out.println("Falling in map object: "+falling);
         if (!falling){
             calculateConner(x,ynext+1);
             if(!botLeft && !botRight){

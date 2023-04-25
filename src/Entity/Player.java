@@ -53,7 +53,7 @@ public class Player extends MapObject {
       jumpStart = -5.0;
       fallSpeed = 0.3;
       slowFall = 0.0001;
-      stopSpeed = 0.0001;
+      stopSpeed = 0.5;
       stopJumpSpeed=0.0001;
 
       facingRight=true;
@@ -150,23 +150,24 @@ public class Player extends MapObject {
 public void getNextPosition() {
 //          int doublejump = 0;
    //move normal
+
+   if((dx>0&!botRight)||(dx<0&!botLeft)){
+      falling=true;
+//      jumping=false;
+   }
    if (left) {
       dx -= moveSpeed;
-      System.out.println("***Falling in Player: "+falling);
-      System.out.println("***Dy= "+dy);
-      if(dy==0&&!botRight&&!botLeft){
-         falling=true;
-      }
+      //Update movement
       if (dx < -maxSpeed) dx = -maxSpeed;
    } else if (right) {
       dx += moveSpeed;
       if (dx > maxSpeed) dx = maxSpeed;
    } else{
       if (dx > 0) {
-         dx -= stopSpeed;
+         dx -= stopSpeed*1.5;
          if (dx < 0) dx = 0;
    } else if (dx < 0) {
-         dx += stopSpeed;
+         dx += stopSpeed*1.5;
          if (dx > 0) dx = 0;
       }
    }
@@ -185,15 +186,15 @@ public void getNextPosition() {
    System.out.println("dy="+dy);//falling
    if(falling){
 //      System.out.println("dy="+dy);
-      if(dy>0){
-         dy+=fallSpeed*1;}
+      if(dy>0||dy==0){
+         dy+=fallSpeed*1.2;}
       else dy+=fallSpeed;
 
       if(dy>0) jumping=false;
       if(dy<0&&!jumping) {
          dy+= stopJumpSpeed;
       }
-
+      //Update movement
       if(dy>=maxFall||dy==0.0) {
          dy=maxFall;
          falling=false;
@@ -201,9 +202,6 @@ public void getNextPosition() {
       }
 
    }
-//   if(dy==0&!botLeft&!botRight){
-//      falling=true;
-//   }
 
 }
 
@@ -212,6 +210,13 @@ public void getNextPosition() {
       checkCollision();
       getNextPosition();
       setPosition(xtemp,ytemp);
+      System.out.println("tl: "+topLeft);
+      System.out.println("tr: "+topRight);
+      System.out.println("bl: "+botLeft);
+      System.out.println("br: "+botRight);
+      System.out.println("Right: " +right);
+      System.out.println("Left: "+left);
+      System.out.println();
 
       //set animation
 
@@ -252,8 +257,9 @@ public void getNextPosition() {
          if(right) facingRight=true;
          if(left) facingRight=false;
       }
+      System.out.println("Current Act: " + currentAct);
+      System.out.println();
       }
-
    }
 
 
