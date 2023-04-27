@@ -71,7 +71,7 @@ public abstract class MapObject {
     public boolean intersect(MapObject o){
         Rectangle r1 = newRec();
         Rectangle r2 = o.newRec();
-        return r1.intersects(r2);
+        return r2.intersects(r1);
     }
 
     public Rectangle newRec(){
@@ -116,8 +116,6 @@ public abstract class MapObject {
                 dy = 0;
                 ytemp = (currentRow+1) * tileSize - cheight / 2;
                 falling = false;
-
-
             }
             else {
                 ytemp+=dy;
@@ -147,7 +145,7 @@ public abstract class MapObject {
         if(dx < 0){
             if(botLeft|| topLeft){
                 dx = 0;
-                xtemp=  currentCol * tileSize + cwidth/2;
+                xtemp=  currentCol * tileSize +cwidth/2;
             }else {
                 xtemp += dx;
             }
@@ -156,11 +154,9 @@ public abstract class MapObject {
         if (!falling){
             calculateConner(x,ynext+1);
             if(!botLeft && !botRight){
-//                ynext = (currentRow + 1) * tileSize - cheight/2;
                 falling=true;
             }
         }
-//        System.out.println("Falling in Map Object:"+falling);
     }
 
     public int getCheight() {

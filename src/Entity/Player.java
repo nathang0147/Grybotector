@@ -38,7 +38,6 @@ public class Player extends MapObject {
 
    public Player(TileMap tm) {
       super(tm);
-      System.out.println("Loading");
       // size
       width = 48;
       height = 48;
@@ -49,10 +48,10 @@ public class Player extends MapObject {
       moveSpeed = 0.3;
       sneakySpeed = 4 ;
       maxSpeed = 1.6;
-      maxFall = 1;
+      maxFall = 2;
       jumpStart = -5.0;
       fallSpeed = 0.3;
-      slowFall = 0.0001;
+      slowFall = 0.9;
       stopSpeed = 0.5;
       stopJumpSpeed=0.0001;
 
@@ -150,11 +149,6 @@ public class Player extends MapObject {
 public void getNextPosition() {
 //          int doublejump = 0;
    //move normal
-
-   if((dx>0&!botRight)||(dx<0&!botLeft)){
-      falling=true;
-//      jumping=false;
-   }
    if (left) {
       dx -= moveSpeed;
       //Update movement
@@ -171,6 +165,9 @@ public void getNextPosition() {
          if (dx > 0) dx = 0;
       }
    }
+   if((dx>0&&!botRight)||(dx<0&&!botLeft)){
+      falling=true;
+   }
    System.out.println("dx= "+dx);
 
    // can move when act
@@ -186,8 +183,8 @@ public void getNextPosition() {
    System.out.println("dy="+dy);//falling
    if(falling){
 //      System.out.println("dy="+dy);
-      if(dy>0||dy==0){
-         dy+=fallSpeed*1.2;}
+      if(dy>0){
+         dy+=fallSpeed*1.9;}
       else dy+=fallSpeed;
 
       if(dy>0) jumping=false;
@@ -195,21 +192,20 @@ public void getNextPosition() {
          dy+= stopJumpSpeed;
       }
       //Update movement
-      if(dy>=maxFall||dy==0.0) {
+      if(dy>=maxFall) {
          dy=maxFall;
          falling=false;
          jumping=false;
       }
-
    }
 
 }
 
    public void update(){
       //update position
-      checkCollision();
-      getNextPosition();
       setPosition(xtemp,ytemp);
+      getNextPosition();
+      checkCollision();
       System.out.println("tl: "+topLeft);
       System.out.println("tr: "+topRight);
       System.out.println("bl: "+botLeft);
