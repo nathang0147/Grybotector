@@ -145,7 +145,7 @@ public abstract class MapObject {
         if(dx < 0){
             if(botLeft|| topLeft){
                 dx = 0;
-                xtemp=  currentCol * tileSize +cwidth/2;
+                xtemp=  currentCol * tileSize +(cwidth-8)/2;
             }else {
                 xtemp += dx;
             }

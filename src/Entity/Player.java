@@ -215,12 +215,11 @@ public void getNextPosition() {
       System.out.println();
 
       //set animation
-
       if(dy<0){
          if(currentAct!=JUMP){
             currentAct=JUMP;
             animation.setFrames(sprites.get(JUMP));
-            animation.setDelay(-1);
+            animation.setDelay(1);
             width=32;
          }
       }
@@ -239,20 +238,24 @@ public void getNextPosition() {
             currentAct=RUN;
             animation.setFrames(sprites.get(RUN));
             animation.setDelay(40);
-            width=27;
+            if(right)
+            width=45;
+            else
+            width=50;
          }
       }
       else if(currentAct!=IDLE){
          currentAct=IDLE;
          animation.setFrames(sprites.get(IDLE));
          animation.setDelay(400);
-         width=27;
+         width=47;
       }
          animation.update();
          if(currentAct==RUN){
          if(right) facingRight=true;
          if(left) facingRight=false;
       }
+
       System.out.println("Current Act: " + currentAct);
       System.out.println();
       }
