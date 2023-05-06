@@ -38,22 +38,21 @@ public class Player extends MapObject {
 
    public Player(TileMap tm) {
       super(tm);
-
       // size
       width = 48;
       height = 48;
-      cwidth = 20;
+      cwidth = 30;
       cheight = 30;
 
       //Move
       moveSpeed = 0.3;
       sneakySpeed = 4 ;
       maxSpeed = 1.6;
-      maxFall = 4;
-      jumpStart = -10.0;
+      maxFall = 2;
+      jumpStart = -5.0;
       fallSpeed = 0.3;
-      slowFall = 0.0001;
-      stopSpeed = 0.0001;
+      slowFall = 0.9;
+      stopSpeed = 0.5;
       stopJumpSpeed=0.0001;
 
       facingRight=true;
@@ -152,56 +151,68 @@ public void getNextPosition() {
    //move normal
    if (left) {
       dx -= moveSpeed;
+      //Update movement
       if (dx < -maxSpeed) dx = -maxSpeed;
    } else if (right) {
       dx += moveSpeed;
       if (dx > maxSpeed) dx = maxSpeed;
    } else{
       if (dx > 0) {
-         dx -= stopSpeed;
+         dx -= stopSpeed*1.5;
          if (dx < 0) dx = 0;
    } else if (dx < 0) {
-         dx += stopSpeed;
+         dx += stopSpeed*1.5;
          if (dx > 0) dx = 0;
       }
    }
-
+   if((dx>0&&!botRight)||(dx<0&&!botLeft)){
+      falling=true;
+   }
+   System.out.println("dx= "+dx);
 
    // can move when act
 //   if ( !(jumping || falling)) {
 //      dx = 0;
 //   }
-
+   // jumping
    if(jumping && !falling){
       dy=jumpStart;
       falling=true;
    }
-
-   //falling
+   System.out.println("Falling in Player: "+falling);
+   System.out.println("dy="+dy);//falling
    if(falling){
-      if(dy>0 && falling){
-         dy+=fallSpeed*1;}
+//      System.out.println("dy="+dy);
+      if(dy>0){
+         dy+=fallSpeed*1.9;}
       else dy+=fallSpeed;
 
       if(dy>0) jumping=false;
       if(dy<0&&!jumping) {
          dy+= stopJumpSpeed;
       }
-
-      if(dy>maxFall) {
+      //Update movement
+      if(dy>=maxFall) {
          dy=maxFall;
          falling=false;
+         jumping=false;
       }
-
    }
 
 }
 
    public void update(){
       //update position
+      setPosition(xtemp,ytemp);
       getNextPosition();
       checkCollision();
-      setPosition(xtemp,ytemp);
+      System.out.println("tl: "+topLeft);
+      System.out.println("tr: "+topRight);
+      System.out.println("bl: "+botLeft);
+      System.out.println("br: "+botRight);
+      System.out.println("Right: " +right);
+      System.out.println("Left: "+left);
+      System.out.println();
 
       //set animation
 
@@ -242,9 +253,9 @@ public void getNextPosition() {
          if(right) facingRight=true;
          if(left) facingRight=false;
       }
-      System.out.println(currentAct);
+      System.out.println("Current Act: " + currentAct);
+      System.out.println();
       }
-
    }
 
 
