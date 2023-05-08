@@ -18,7 +18,7 @@ public class TileMap {
     private  int xmax;
     private  int ymin;
     private int ymax;
-    private double tween ;
+    private double tween = 0.02;
     // map
     private int[][] map;
     private  int tilesize;
@@ -41,12 +41,10 @@ public class TileMap {
         this.tilesize = tilesize;
         numRowtodraw= GamePanel.WIDTH/tilesize+2;
         numColtodraw= GamePanel.HEIGHT/tilesize+2;
-        tween=0.02;
+
     }
     public void loadTiles(String s) {
         try {
-
-
             tileset = ImageIO.read(getClass().getResourceAsStream(s));
             NumtileinCOL = tileset.getWidth() / tilesize;
             tiles = new Tile[12][NumtileinCOL];
@@ -71,12 +69,15 @@ public class TileMap {
             numCols = Integer.parseInt(br.readLine());
             numRows = Integer.parseInt(br.readLine());
             map = new int[numRows][numCols];
+
             width = numCols * tilesize;
             height = numRows * tilesize;
+
             xmin=GamePanel.WIDTH-width;
             xmax=0;
             ymin=GamePanel.HEIGHT-height;
             ymax=0;
+
             for (int row = 0; row < numRows; row++) {
                 String line = br.readLine();
                 String[] data = line.split(",");
