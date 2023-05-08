@@ -73,6 +73,10 @@ public class TileMap {
             map = new int[numRows][numCols];
             width = numCols * tilesize;
             height = numRows * tilesize;
+            xmin=GamePanel.WIDTH-width;
+            xmax=0;
+            ymin=GamePanel.HEIGHT-height;
+            ymax=0;
             for (int row = 0; row < numRows; row++) {
                 String line = br.readLine();
                 String[] data = line.split(",");
