@@ -203,16 +203,16 @@ public void getNextPosition() {
 
    public void update(){
       //update position
-      setPosition(xtemp,ytemp);
       getNextPosition();
       checkCollision();
-      System.out.println("tl: "+topLeft);
-      System.out.println("tr: "+topRight);
-      System.out.println("bl: "+botLeft);
-      System.out.println("br: "+botRight);
-      System.out.println("Right: " +right);
-      System.out.println("Left: "+left);
-      System.out.println();
+      setPosition(xtemp,ytemp);
+//      System.out.println("tl: "+topLeft);
+//      System.out.println("tr: "+topRight);
+//      System.out.println("bl: "+botLeft);
+//      System.out.println("br: "+botRight);
+//      System.out.println("Right: " +right);
+//      System.out.println("Left: "+left);
+//      System.out.println();
 
       //set animation
       if(dy<0){

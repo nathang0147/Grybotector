@@ -1,5 +1,6 @@
 package GameState;
 
+import java.awt.*;
 import java.util.ArrayList;
 public class GameStateManager {
     private ArrayList<GameState> gameStates;
@@ -24,7 +25,7 @@ public class GameStateManager {
     public void update() {
         gameStates.get(currentState).update();
     }
-    public void draw(java.awt.Graphics2D g) {
+    public void draw(Graphics2D g) {
         gameStates.get(currentState).draw(g);
     }
 
