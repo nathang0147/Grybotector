@@ -83,10 +83,10 @@ public abstract class MapObject {
     }
 
     public void calculateConner(double x, double y){
-        int leftSide = (int) (x - cwidth / 2)/tileSize;
-        int rightSide = (int) (x + cwidth/ 2 - 1) / tileSize;
-        int topSide  = (int) (y - cheight/ 2) /tileSize;
-        int botSide = (int) (y + cheight /2 - 1) /tileSize;
+        int leftSide = (int) (x - cwidth / 2.2)/tileSize;
+        int rightSide = (int) (x + cwidth/ 2.2 - 1 )/ tileSize;
+        int topSide  = (int) (y - cheight/ 2.75) /tileSize;
+        int botSide = (int) (y + cheight /2 - 1 ) /tileSize;
 
         int tl = tileMap.getTileType(topSide,leftSide);
         int tr = tileMap.getTileType(topSide,rightSide);

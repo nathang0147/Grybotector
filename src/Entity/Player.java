@@ -16,6 +16,7 @@ public class Player extends MapObject {
    private int bulletDamage;
    private boolean dead;
    private boolean falling;
+   private boolean crouch;
 
 
 
@@ -41,15 +42,15 @@ public class Player extends MapObject {
       // size
       width = 48;
       height = 48;
-      cwidth = 30;
+      cwidth = 20;
       cheight = 30;
 
       //Move
-      moveSpeed = 0.3;
-      sneakySpeed = 4 ;
+      moveSpeed = 0.2;
+      sneakySpeed = 0.4 ;
       maxSpeed = 1.6;
       maxFall = 2;
-      jumpStart = -5.0;
+      jumpStart = -4.9;
       fallSpeed = 0.3;
       slowFall = 0.9;
       stopSpeed = 0.5;
@@ -73,12 +74,21 @@ public class Player extends MapObject {
                     new BufferedImage[numFrames[i]];
 
             for(int j = 0; j < numFrames[i]; j++) {
+               if(i==0){
+                  bi[j] = spritesheet.getSubimage(
+                          2 * width,
+                          i * height,
+                          width,
+                          height
+                  );
+               }
+               else {
                bi[j] = spritesheet.getSubimage(
                        j * width,
                        i * height,
                        width,
                        height
-               );
+               );}
             }
             sprites.add(bi);
          }
@@ -118,7 +128,7 @@ public class Player extends MapObject {
                  animation.getImage(),
                  (int)(x + xmap - width / 2 + width),
                  (int)(y + ymap - height / 2),
-                 -width,
+                 -width-25,
                  height,
                  null
          );
@@ -137,7 +147,7 @@ public class Player extends MapObject {
    public void setGliding(boolean b){
       falling =b;
    }
-//
+   //
 //       public boolean isShooting() {
 //          return shooting;
 //       }
@@ -146,81 +156,115 @@ public class Player extends MapObject {
 //          return melee;
 //       }
 //
-public void getNextPosition() {
+   public void getNextPosition() {
 //          int doublejump = 0;
-   //move normal
-   if (left) {
-      dx -= moveSpeed;
-      //Update movement
-      if (dx < -maxSpeed) dx = -maxSpeed;
-   } else if (right) {
-      dx += moveSpeed;
-      if (dx > maxSpeed) dx = maxSpeed;
-   } else{
-      if (dx > 0) {
-         dx -= stopSpeed*1.5;
-         if (dx < 0) dx = 0;
-   } else if (dx < 0) {
-         dx += stopSpeed*1.5;
-         if (dx > 0) dx = 0;
+      //move normal
+      if(down){
+         if(right){
+            dx+= (moveSpeed/10);
+            if(dx>sneakySpeed) dx=sneakySpeed;
+         }
+         else if(left){
+            dx-=(moveSpeed/10);
+            if(dx<sneakySpeed) dx=-sneakySpeed;
+         }
+         else{
+            if (dx > 0) {
+               dx -= stopSpeed*100;
+               if (dx < 0) dx = 0;
+            } else if (dx < 0) {
+               dx += stopSpeed*100;
+               if (dx > 0) dx = 0;
+            }
+         }
       }
-   }
-   if((dx>0&&!botRight)||(dx<0&&!botLeft)){
-      falling=true;
-   }
-   System.out.println("dx= "+dx);
+      else if (left) {
+         dx -= moveSpeed;
+         //Update movement
+         if (dx < -maxSpeed) dx = -maxSpeed;
+      } else if (right) {
+         dx += moveSpeed;
+         if (dx > maxSpeed) dx = maxSpeed;
+      }
+      else{
+         if (dx > 0) {
+            dx -= stopSpeed*3;
+            if (dx < 0) dx = 0;
+         } else if (dx < 0) {
+            dx += stopSpeed*3;
+            if (dx > 0) dx = 0;
+         }
+      }
+      if((dx>0&&!botRight)||(dx<0&&!botLeft)){
+         falling=true;
+      }
+//   System.out.println("dx= "+dx);
 
-   // can move when act
+      //can move when act
 //   if ( !(jumping || falling)) {
 //      dx = 0;
 //   }
-   // jumping
-   if(jumping && !falling){
-      dy=jumpStart;
-      falling=true;
-   }
-   System.out.println("Falling in Player: "+falling);
-   System.out.println("dy="+dy);//falling
-   if(falling){
+//    jumping
+      if(jumping && !falling){
+         dy=jumpStart;
+         falling=true;
+      }
+      System.out.println("Falling in Player: "+falling);
+//   System.out.println("dy="+dy);
+      //falling
+      if(falling){
 //      System.out.println("dy="+dy);
-      if(dy>0){
-         dy+=fallSpeed*1.9;}
-      else dy+=fallSpeed;
+         if(dy>0){
+            dy+=fallSpeed*2;}
+         else dy+=fallSpeed;
 
-      if(dy>0) jumping=false;
-      if(dy<0&&!jumping) {
-         dy+= stopJumpSpeed;
-      }
-      //Update movement
-      if(dy>=maxFall) {
-         dy=maxFall;
-         falling=false;
-         jumping=false;
+         if(dy>0) jumping=false;
+         if(dy<0&&!jumping) {
+            dy+= stopJumpSpeed;
+         }
+         //Update movement
+         if(dy>=maxFall) {
+            dy=maxFall;
+            falling=false;
+//         jumping=false;
+         }
+         if(botRight&&botRight){
+            falling=false;
+         }
       }
    }
-
-}
 
    public void update(){
       //update position
+      setPosition(xtemp,ytemp);
       getNextPosition();
       checkCollision();
-      setPosition(xtemp,ytemp);
-//      System.out.println("tl: "+topLeft);
-//      System.out.println("tr: "+topRight);
-//      System.out.println("bl: "+botLeft);
-//      System.out.println("br: "+botRight);
-//      System.out.println("Right: " +right);
-//      System.out.println("Left: "+left);
-//      System.out.println();
+      System.out.println("tl: "+topLeft);
+      System.out.println("tr: "+topRight);
+      System.out.println("bl: "+botLeft);
+      System.out.println("br: "+botRight);
+      System.out.println("Right: " +right);
+      System.out.println("Left: "+left);
+      System.out.println("Dx= "+dx);
+      System.out.println("Dy= "+dy);
+      System.out.println();
 
       //set animation
-      if(dy<0){
+      if(down){
+         if(currentAct!=CROUCH){
+            System.out.println("Crouch is working**************************************************");
+            currentAct=CROUCH;
+            animation.setFrames(sprites.get(CROUCH));
+            animation.setDelay(400);
+            width=20;
+         }
+      }
+      else if(dy<0){
          if(currentAct!=JUMP){
             currentAct=JUMP;
             animation.setFrames(sprites.get(JUMP));
             animation.setDelay(1);
-            width=32;
+            width=20;
          }
       }
       else if(dy > 0) {
@@ -229,36 +273,31 @@ public void getNextPosition() {
                currentAct = FALLING;
                animation.setFrames(sprites.get(FALLING));
                animation.setDelay(100);
-               width = 25;
+               width = 20;
             }
          }
-         }
+      }
       else if(left||right){
          if(currentAct!=RUN){
             currentAct=RUN;
             animation.setFrames(sprites.get(RUN));
             animation.setDelay(40);
-            if(right)
-            width=45;
-            else
-            width=50;
+            width=20;
          }
       }
       else if(currentAct!=IDLE){
          currentAct=IDLE;
          animation.setFrames(sprites.get(IDLE));
          animation.setDelay(400);
-         width=47;
+         width=20;
       }
-         animation.update();
-         if(currentAct==RUN){
+      animation.update();
+      if(currentAct==RUN){
          if(right) facingRight=true;
          if(left) facingRight=false;
       }
 
       System.out.println("Current Act: " + currentAct);
       System.out.println();
-      }
    }
-
-
+}
