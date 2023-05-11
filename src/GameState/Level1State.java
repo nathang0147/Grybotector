@@ -40,7 +40,7 @@ public class Level1State extends GameState{
     }
 
 
-    public void draw(Graphics2D g) {
+     public void draw(Graphics2D g) {
         //bg ( not real bg)
         bg.draw(g);
         //Draw

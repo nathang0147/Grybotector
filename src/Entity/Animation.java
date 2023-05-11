@@ -38,10 +38,16 @@ public class Animation {
 
         }
         if(currentFrame==frames.length){
-            currentFrame=0;
+            if(frames.length == 3){
+                currentFrame = 2;
+            }else {
+            currentFrame=0;}
             // trả lại currentframe về 0 để sau đó thực hiện animation khác
             playedOnce=true;
         }
+    }
+    public void notUpdate(){
+        
     }
     public  int getCurrentFrame(){
         return  currentFrame;
