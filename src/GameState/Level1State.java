@@ -20,7 +20,7 @@ public class Level1State extends GameState{
     public void init() {
         tileMap = new TileMap(32);
         tileMap.loadTiles("/TileSet/Tilesheet.png");
-        tileMap.loadMap("/Map/TileMap1.txt");
+        tileMap.loadMap("/Map/Map_edited.txt");
         tileMap.setPosition(0,0);
 
 
