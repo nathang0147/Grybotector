@@ -1,5 +1,6 @@
 package GameState;
 
+import Enemies.Enemy1;
 import TileMap.TileMap;
 import UserInterface.GamePanel;
 import Entity.*;
@@ -7,11 +8,13 @@ import TileMap.*;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 public class Level1State extends GameState{
     private TileMap tileMap;
     private Player player;
     private Background bg;
+    private ArrayList<Enemy> enemies;
     public Level1State(GameStateManager gsm) {
         this.gsm = gsm;
         init();
@@ -28,6 +31,11 @@ public class Level1State extends GameState{
 
         player=new Player(tileMap);
         player.setPosition(20,210);
+        enemies= new ArrayList<Enemy>();
+        Enemy1 e1= new Enemy1(tileMap);
+        e1.setPosition(400,500);
+        enemies.add(e1);
+
     }
 
 
@@ -37,6 +45,9 @@ public class Level1State extends GameState{
                 GamePanel.WIDTH/2 - player.getX(),
                 GamePanel.HEIGHT/2 - player.getY()
         );
+        for (int i = 0; i < enemies.size(); i++) {
+            enemies.get(i).update();
+        }
     }
 
 
@@ -46,7 +57,11 @@ public class Level1State extends GameState{
         //Draw
         tileMap.draw(g);
         //Draw player
+         System.out.println(enemies.size());
         player.draw(g);
+        for (int i = 0; i < enemies.size(); i++) {
+             enemies.get(i).draw(g);
+         }
     }
 
 //
