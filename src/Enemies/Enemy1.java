@@ -29,7 +29,7 @@ public class Enemy1  extends Enemy {
 
         try {
             // load sprites
-            BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/Boss/Boss_run.png"));
+            BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/Boss/Boss_test.png"));
             if(spritesheet==null) System.out.println("Sprite null");
             System.out.println(spritesheet.getWidth());
             int numFrames= spritesheet.getWidth()/width;
@@ -90,7 +90,7 @@ public class Enemy1  extends Enemy {
         animation.update();
     }
     public void draw(Graphics2D g){
-        if(notOnScreen()) return;
+//        if(notOnScreen()) return;
         setMapPosition();
         super.draw(g);
 
