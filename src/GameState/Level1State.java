@@ -1,6 +1,7 @@
 package GameState;
 
 import Enemies.Enemy1;
+import Enemies.Enemy2;
 import TileMap.TileMap;
 import UserInterface.GamePanel;
 import Entity.*;
@@ -33,9 +34,10 @@ public class Level1State extends GameState{
         player.setPosition(20,210);
         enemies= new ArrayList<Enemy>();
         Enemy1 e1= new Enemy1(tileMap);
-        e1.setPosition(400,500);
-        enemies.add(e1);
-
+        Enemy2 e2= new Enemy2(tileMap);
+        enemies.add(e2);
+        e1.setPosition(150,100);
+        e2.setPosition(200,100);
     }
 
 
