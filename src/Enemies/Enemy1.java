@@ -19,8 +19,8 @@ public class Enemy1  extends Enemy {
         fallSpeed=0.2;
         maxFall=10.0;
 
-        width=100;
-        height=100;
+        width=50;
+        height=50;
         cheight=20;
         cwidth=20;
 
@@ -31,7 +31,9 @@ public class Enemy1  extends Enemy {
             // load sprites
             BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/Boss/Boss_run.png"));
             if(spritesheet==null) System.out.println("Sprite null");
+            System.out.println(spritesheet.getWidth());
             int numFrames= spritesheet.getWidth()/width;
+            System.out.println(numFrames);
             sprites=  new  BufferedImage[numFrames];
             for (int i = 0; i < sprites.length; i++) {
                 sprites[i]=spritesheet.getSubimage(i*width,0,width,height);
