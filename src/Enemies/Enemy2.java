@@ -17,13 +17,13 @@ public class Enemy2 extends Enemy {
     public Enemy2(TileMap tm) {
         super(tm);
 
-        width = (int) 49.25;
+        width = (int) 49;
         height =(int) 40;
-        cheight = 10;
-        cwidth = 10;
+        cheight = 30;
+        cwidth = 30;
 
         health = maxHealth = 5;
-        damage = 2;
+        damage = 3;
         try {
             //load sprites
             BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/Boss/Boss2.png"));
@@ -36,7 +36,7 @@ public class Enemy2 extends Enemy {
                 for(int j = 0; j < numFrames[i]; j++) {
                     if(i==0){
                         bi[j] = spritesheet.getSubimage(
-                                2 * width,
+                                j * width,
                                 i * height,
                                 width,
                                 height

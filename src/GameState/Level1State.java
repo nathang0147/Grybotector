@@ -37,8 +37,8 @@ public class Level1State extends GameState{
         Enemy2 e2= new Enemy2(tileMap);
          enemies.add(e1);
          enemies.add(e2);
-        e1.setPosition(150,100);
-        e2.setPosition(200,100);
+        e1.setPosition(300,100);
+        e2.setPosition(200,110);
     }
 
 

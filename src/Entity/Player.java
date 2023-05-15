@@ -239,15 +239,6 @@ public class Player extends MapObject {
       setPosition(xtemp,ytemp);
       getNextPosition();
       checkCollision();
-      System.out.println("tl: "+topLeft);
-      System.out.println("tr: "+topRight);
-      System.out.println("bl: "+botLeft);
-      System.out.println("br: "+botRight);
-      System.out.println("Right: " +right);
-      System.out.println("Left: "+left);
-      System.out.println("Dx= "+dx);
-      System.out.println("Dy= "+dy);
-      System.out.println();
 
       //set animation
       if(down){
