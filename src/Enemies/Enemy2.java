@@ -24,6 +24,14 @@ public class Enemy2 extends Enemy {
 
         health = maxHealth = 5;
         damage = 3;
+
+        height =(int) 40;
+        cheight = 10;
+        cwidth = 10;
+
+        health = maxHealth = 5;
+        damage = 2;
+
         try {
             //load sprites
             BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/Boss/Boss2.png"));
@@ -37,7 +45,7 @@ public class Enemy2 extends Enemy {
                     if(i==0){
                         bi[j] = spritesheet.getSubimage(
                                 j * width,
-                                i * height,
+                                i * width,
                                 width,
                                 height
                         );
@@ -56,7 +64,8 @@ public class Enemy2 extends Enemy {
             e.printStackTrace();
         }
         animation= new Animation();
-        animation.setFrames(sprites.get(0));
+        animation.setFrames(sprites.get(1));
+
         animation.setDelay(300);
 
     }
