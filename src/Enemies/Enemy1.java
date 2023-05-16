@@ -7,9 +7,15 @@ import TileMap.TileMap;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class Enemy1  extends Enemy {
-    protected BufferedImage[] sprites;
+    private ArrayList<BufferedImage[]> sprites;
+    private  int[] numFrames= {10,10};
+    private int currentAction;
+    private int RUN = 0;
+    private int ATK = 1;
 
     public Enemy1(TileMap tm) {
         super(tm);
@@ -19,35 +25,53 @@ public class Enemy1  extends Enemy {
         fallSpeed=0.2;
         maxFall=10.0;
 
-        width=50;
-        height=50;
+        width=62;
+        height=84;
         cheight=20;
         cwidth=20;
 
-        health= maxHealth=4;
+        health = maxHealth = 4;
         damage=2;
 
         try {
-            // load sprites
-            BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/Boss/Boss_test.png"));
-            if(spritesheet==null) System.out.println("Sprite null");
-            System.out.println(spritesheet.getWidth());
-            int numFrames= spritesheet.getWidth()/width;
-            System.out.println(numFrames);
-            sprites=  new  BufferedImage[numFrames];
-            for (int i = 0; i < sprites.length; i++) {
-                sprites[i]=spritesheet.getSubimage(i*width,0,width,height);
+            //load sprites
+            BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/Boss/Boss_1.png"));
+            sprites = new ArrayList<BufferedImage[]>();
+            for(int i = 0; i < 2; i++) {
+
+                BufferedImage[] bi =
+                        new BufferedImage[numFrames[i]];
+
+                for(int j = 0; j < numFrames[i]; j++) {
+                    if(i==0){
+                        bi[j] = spritesheet.getSubimage(
+                                j * width,
+                                i * height,
+                                width,
+                                height
+                        );
+                    }
+                    else {
+                        bi[j] = spritesheet.getSubimage(
+                                j * width,
+                                i * height,
+                                width,
+                                height
+                        );}
+                }
+                sprites.add(bi);
             }
-        } catch (Exception e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
-        animation= new Animation();
-        animation.setFrames(sprites);
+        currentAction = RUN;
+        animation = new Animation();
+        animation.setFrames(sprites.get(currentAction));
         animation.setDelay(300);
 
         right= true;
-        facingRight=true;
+        facingRight =true;
 
     }
 
@@ -67,7 +91,7 @@ public class Enemy1  extends Enemy {
     public void update(){
         getNextPosition();
         checkCollision();
-        setPosition(xtemp,ytemp);
+        setPosition(xtemp, ytemp);
 
         if(flinching) {
             long elapse = (System.nanoTime()-flinchedTime) / 1000000;
@@ -76,17 +100,39 @@ public class Enemy1  extends Enemy {
             }
         }
 
-        if(right && dx==0){
-            right=false;
-            left=true;
-            facingRight=false;
-        }
-        else if(left && dx==0){
-            left=false;
-            right=true;
-            facingRight=true;
-        }
+        if (!notOnScreen()){
+            if (currentAction!=ATK){
+                currentAction = ATK;
+                animation.setFrames(sprites.get(currentAction));
+                animation.setDelay(400);
+            }
 
+        }
+        else if (notOnScreen()) {
+                right = true;
+                facingRight = true;
+                currentAction = RUN;
+                animation.setFrames(sprites.get(currentAction));
+                animation.setDelay(300);
+
+        }
+        if (flinching) {
+            long elapse = (System.nanoTime() - flinchedTime) / 1000000;
+            if (elapse > 400) {
+                flinching = false;
+            }
+        }
+        if (right && dx == 0) {
+            right = false;
+            left = true;
+            facingRight = false;
+            System.out.println("left");
+        } else if (left && dx == 0) {
+            right = true;
+            left = false;
+            facingRight = true;
+            System.out.println("right");
+        }
         animation.update();
     }
     public void draw(Graphics2D g){

@@ -209,7 +209,7 @@ public class Player extends MapObject {
          dy=jumpStart;
          falling=true;
       }
-      System.out.println("Falling in Player: "+falling);
+      //System.out.println("Falling in Player: "+falling);
 //   System.out.println("dy="+dy);
       //falling
       if(falling){
@@ -243,7 +243,7 @@ public class Player extends MapObject {
       //set animation
       if(down){
          if(currentAct!=CROUCH){
-            System.out.println("Crouch is working**************************************************");
+            //System.out.println("Crouch is " +"working**************************************************");
             currentAct=CROUCH;
             animation.setFrames(sprites.get(CROUCH));
             animation.setDelay(400);
@@ -288,7 +288,7 @@ public class Player extends MapObject {
          if(left) facingRight=false;
       }
 
-      System.out.println("Current Act: " + currentAct);
-      System.out.println();
+      //System.out.println("Current Act: " + currentAct);
+      //System.out.println();
    }
 }

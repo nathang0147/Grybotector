@@ -12,6 +12,11 @@ import java.util.ArrayList;
 
 public class Enemy2 extends Enemy {
 
+    private int currentAction;
+    private int IDLE = 0;
+    private int ATK = 1;
+
+
     private ArrayList<BufferedImage[]> sprites;
     private  int[] numFrames= {4,8};
     public Enemy2(TileMap tm) {
@@ -45,7 +50,7 @@ public class Enemy2 extends Enemy {
                     if(i==0){
                         bi[j] = spritesheet.getSubimage(
                                 j * width,
-                                i * width,
+                                i * height,
                                 width,
                                 height
                         );
@@ -63,15 +68,27 @@ public class Enemy2 extends Enemy {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        currentAction = IDLE;
         animation= new Animation();
-        animation.setFrames(sprites.get(1));
-
+        animation.setFrames(sprites.get(IDLE));
         animation.setDelay(300);
 
     }
     public void update(){
         checkCollision();
         setPosition(xtemp,ytemp);
+        if (notOnScreen()&& currentAction!=IDLE){
+            currentAction = IDLE;
+            animation.setFrames(sprites.get(currentAction));
+            animation.setDelay(400);
+            //System.out.println("IDLEEEEEEE" + currentAction);
+        }
+        else if (!notOnScreen()&& currentAction!=ATK){
+            currentAction = ATK;
+            animation.setFrames(sprites.get(currentAction));
+            animation.setDelay(400);
+            //System.out.println("ATKKKKKK" + currentAction);
+        }
         if(flinching){
             long elapse=(System.nanoTime()-flinchedTime)/1000000;
             if(elapse>400){
