@@ -1,6 +1,5 @@
 package Entity;
 
-import Attack.Bullet;
 import TileMap.*;
 
 import javax.imageio.ImageIO;
@@ -13,6 +12,8 @@ public class Player extends MapObject {
    // player stuff
    private int health;
    private int maxHealth;
+   private int bullet;
+   private int bulletDamage;
    private boolean dead;
    private boolean falling;
    private boolean crouch;
@@ -36,15 +37,6 @@ public class Player extends MapObject {
    private int DEAD=1;
 
 
-   //Attack
-   private ArrayList<Bullet> bullets;
-   private int bulletNum;
-   private int bulletCost;
-   private int bulletMaxCost;
-   private int bulletDamage;
-   private boolean shooting;
-
-
    public Player(TileMap tm) {
       super(tm);
       // size
@@ -66,12 +58,9 @@ public class Player extends MapObject {
 
       facingRight=true;
       health = maxHealth = 5;
+      bullet = 3;
 
-      //bullet
       bulletDamage = 1;
-      bulletNum = bulletMaxCost = 1000000;
-      bulletCost = 200;
-      bullets = new ArrayList<Bullet>();
 
       //load sprites
       try {
@@ -247,9 +236,9 @@ public class Player extends MapObject {
 
    public void update(){
       //update position
-      checkCollision();
       setPosition(xtemp,ytemp);
       getNextPosition();
+      checkCollision();
       System.out.println("tl: "+topLeft);
       System.out.println("tr: "+topRight);
       System.out.println("bl: "+botLeft);
@@ -259,12 +248,6 @@ public class Player extends MapObject {
       System.out.println("Dx= "+dx);
       System.out.println("Dy= "+dy);
       System.out.println();
-
-      //Attack
-      bulletNum += 1;
-      if(bulletNum > 10) bulletNum = 10;
-
-
 
       //set animation
       if(down){
