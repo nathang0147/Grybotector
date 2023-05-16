@@ -17,8 +17,8 @@ public class Enemy2 extends Enemy {
     public Enemy2(TileMap tm) {
         super(tm);
 
-        width = (int) 49;
-        height =(int) 40;
+        width = (int) 49.25;
+        height =(int) 44.5;
         cheight = 30;
         cwidth = 30;
 
@@ -56,7 +56,7 @@ public class Enemy2 extends Enemy {
             e.printStackTrace();
         }
         animation= new Animation();
-        animation.setFrames(sprites.get(1));
+        animation.setFrames(sprites.get(0));
         animation.setDelay(300);
 
     }
