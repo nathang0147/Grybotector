@@ -13,12 +13,17 @@ public class Player extends MapObject {
    private int health;
    private int maxHealth;
    private int bullet;
-   private int bulletDamage;
+
    private boolean dead;
    private boolean falling;
    private boolean crouch;
 
-
+// bullet
+   private boolean shooting;
+   private int bulletCost;
+   private int bulletDamage;
+   private int maxBullet;
+   private ArrayList<Bullet> bullets;
 
    // animations
    private ArrayList<BufferedImage[]> sprites;
@@ -61,6 +66,11 @@ public class Player extends MapObject {
       bullet = 3;
 
       bulletDamage = 1;
+      bullet = maxBullet = 2500;
+
+      bulletCost = 10;
+      bulletDamage = 5;
+      bullets = new ArrayList<Bullet>();
 
       //load sprites
       try {
@@ -113,6 +123,10 @@ public class Player extends MapObject {
 
       setMapPosition();
 
+      //      draw bullet
+      for (int i = 0; i < bullets.size(); i++) {
+         bullets.get(i).draw(g);
+      }
       // draw player
 
       if(facingRight) {
@@ -146,6 +160,34 @@ public class Player extends MapObject {
 
    public void setGliding(boolean b){
       falling =b;
+   }
+   public void setShooting() {
+      shooting = true;
+   }
+
+   public void checkAttack(ArrayList<Enemy> enemies) {
+      for (int i = 0; i < enemies.size(); i++) {
+         Enemy e = enemies.get(i);
+
+//         shoot enemies
+         for (int j = 0; j < bullets.size(); j++) {
+            if (bullets.get(j).intersect(e)) {
+               e.hitDame(bulletDamage);
+               bullets.get(j).setHit();
+               break;
+            }
+         }
+//         enemy collision
+         if (intersect(e)) {
+            hitDame(e.getDamage());
+         }
+      }
+   }
+   public void hitDame(int damage) {
+      health -= damage;
+      if(health < 0) health = 0;
+      if(health == 0) dead = true;
+
    }
    //
 //       public boolean isShooting() {
@@ -240,8 +282,41 @@ public class Player extends MapObject {
       getNextPosition();
       checkCollision();
 
+      //      check attack has stopped
+      if (currentAct == RUN) {
+         if (animation.hasPlayedOnece()) shooting = false;
+      }
+
+//      shooting
+      bullet += 1;
+      if (bullet > maxBullet) bullet = maxBullet;
+      if (shooting && currentAct != RUN) {
+         if (bullet > bulletCost) {
+            bullet -= bulletCost;
+            Bullet bl = new Bullet(tileMap, facingRight);
+            bl.setPosition(x + 10, y - 5);
+            bullets.add(bl);
+         }
+      }
+      // update bullet
+      for(int i = 0; i < bullets.size(); i++) {
+         bullets.get(i).update();
+         if(bullets.get(i).shouldRemove()) {
+            bullets.remove(i);
+            i--;
+         }
+      }
       //set animation
-      if(down){
+
+      if (shooting) {
+         if (currentAct != RUN) {
+            currentAct = RUN;
+            animation.setFrames(sprites.get(RUN));
+            animation.setDelay(100);
+            width = 20;
+         }
+      }
+      else if(down){
          if(currentAct!=CROUCH){
             //System.out.println("Crouch is " +"working**************************************************");
             currentAct=CROUCH;
