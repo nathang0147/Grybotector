@@ -60,38 +60,22 @@ public class Bullet extends MapObject {
     }
 
     public void update() {
-        checkCollision();
-        setPosition(xtemp, ytemp);
+        if (!notOnScreen()) {
+            checkCollision();
+            setPosition(xtemp, ytemp);
 
-        if(dx == 0 && !hit) {
-            setHit();
-        }
-        animation.update();
-        if (hit && animation.hasPlayedOnece()) {
-            remove = true;
+
+            if (dx == 0 && !hit) {
+                setHit();
+            }
+            animation.update();
+            if (hit && animation.hasPlayedOnece()) {
+                remove = true;
+            }
         }
     }
     public void draw (Graphics2D g) {
         setMapPosition();
         super.draw(g);
-//        if(facingRight) {
-//            g.drawImage(
-//                    animation.getImage(),
-//                    (int)(x + xmap - width / 2),
-//                    (int)(y + ymap - height / 2),
-//                    null
-//            );
-//        }
-//        else {
-//            g.drawImage(
-//                    animation.getImage(),
-//                    (int)(x + xmap - width / 2 + width),
-//                    (int)(y + ymap - height / 2),
-//                    -width-25,
-//                    height,
-//                    null
-//            );
-//
-//        }
     }
 }
