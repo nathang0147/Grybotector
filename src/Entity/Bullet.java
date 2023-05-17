@@ -21,18 +21,18 @@ public class Bullet extends MapObject {
         if (right) dx = moveSpeed;
         else dx = -moveSpeed;
 
-        width = 8;
-        height = 8;
-        cwidth = 30;
-        cheight = 30;
+        width = 6;
+        height = 6;
+        cwidth = 10;
+        cheight = 10;
 
 //        load spirtes
         try {
 
-            BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/Bullet/bullet.png"));
-            sprites = new BufferedImage[8];
+            BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/Bullet/bullet3.png"));
+            sprites = new BufferedImage[6];
             for (int i = 0; i < sprites.length; i++) {
-                sprites[i] = spritesheet.getSubimage(i * width, 0, width, height);
+                sprites[i] = spritesheet.getSubimage(i * width, 0, width, height * 2);
             }
             hitSprites = new BufferedImage[3];
             for (int i = 0; i < hitSprites.length; i++) {
