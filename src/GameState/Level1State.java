@@ -9,6 +9,7 @@ import TileMap.*;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class Level1State extends GameState{
@@ -94,12 +95,32 @@ public class Level1State extends GameState{
         if(k == KeyEvent.VK_RIGHT) player.setRight(true);
         if(k == KeyEvent.VK_UP) player.setJumping(true);
         if(k == KeyEvent.VK_DOWN) player.setDown(true);
-        if (k == KeyEvent.VK_K) player.setShooting();
+//        if (k == KeyEvent.VK_K) player.setShooting();
     }
     public void keyReleased(int k) {
         if(k == KeyEvent.VK_LEFT) player.setLeft(false);
         if(k == KeyEvent.VK_RIGHT) player.setRight(false);
         if(k == KeyEvent.VK_UP) player.setJumping(false);
         if(k == KeyEvent.VK_DOWN) player.setDown(false);
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+
     }
 }

@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 
 public class MenuButton {
     private int xPos, yPos, index;
-    private int xOffsetCenter = GamePanel.WIDTH / 2;
+    private int xOffsetCenter = 50 / 2;
 
     private boolean mouseOver, mousePressed;
     private Rectangle bounds;
@@ -17,7 +17,7 @@ public class MenuButton {
         initBounds();
     }
     private void initBounds() {
-        bounds = new Rectangle(xPos - xOffsetCenter, yPos, 50,30);
+        bounds = new Rectangle(xPos , yPos, 50,30);
 
     }
 

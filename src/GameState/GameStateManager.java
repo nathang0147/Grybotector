@@ -32,6 +32,7 @@ public class GameStateManager {
 
     //Check coi chuột vào ô chưa(hoạt hoạ)
     public boolean isIn(MouseEvent e, MenuButton mb) {
+
         return mb.getBounds().contains(e.getX(), e.getY());
     }
 
@@ -41,4 +42,18 @@ public class GameStateManager {
     public void keyReleased(int k) {
         gameStates.get(currentState).keyReleased(k);
     }
+
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    public  void mousePressed(MouseEvent e){
+        gameStates.get(currentState).mouseReleased(e);
+    };
+
+    public  void mouseReleased(MouseEvent e){
+        gameStates.get(currentState).mouseReleased(e);
+    };
+
+    public  void mouseMoved(MouseEvent e){};
 }

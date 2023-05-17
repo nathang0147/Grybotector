@@ -2,11 +2,14 @@ package GameState;
 
 import Sound.ThemeSong;
 import TileMap.Background;
+import UserInterface.GamePanel;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 
 public class MenuState extends GameState {
-
+    private MenuButton[] buttons = new MenuButton[3];
     private Background bg;
     private int currentChoice = 0;
     private final String[] options = {
@@ -38,7 +41,7 @@ public class MenuState extends GameState {
 
         String filePath = "/Sound/ThemeSong.wav";
         new ThemeSong(filePath);
-
+        loadButton();
     }
 
     public void init() {
@@ -47,6 +50,13 @@ public class MenuState extends GameState {
     public void update() {
         //draw bg
         bg.update();
+        for (MenuButton mb : buttons)
+            mb.update();
+    }
+    private void loadButton(){
+        buttons[0] = new MenuButton(GamePanel.WIDTH / 2, (int) (140 + 0 * 30), 0);
+        buttons[1] = new MenuButton(GamePanel.WIDTH / 2, (int) (140 + 1 * 30), 1);
+        buttons[2] = new MenuButton(GamePanel.WIDTH / 2, (int) (140 + 2 * 30), 2);
     }
 
     public void draw(Graphics2D g) {
@@ -98,5 +108,54 @@ public class MenuState extends GameState {
     }
     public void keyReleased(int k){}
 
+    @Override
+    public void mouseClicked(MouseEvent e) {
 
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        for (MenuButton mb : buttons) {
+            if (gsm.isIn(e, mb)) {
+                System.out.println("Mouse pressed");
+                mb.setMousePressed(true);
+            }
+        }
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        for (MenuButton mb : buttons) {
+            if (gsm.isIn(e, mb)) {
+                System.out.println("Mouse Release");
+                if (mb.isMousePressed())
+                    if(mb == buttons[0]){
+                        gsm.setState(1);}
+                    else if (mb == buttons[2]) {
+                        //
+                    } else if (mb == buttons[3]) {
+                        System.exit(0);
+                    }
+                break;
+            }
+        }
+
+        resetButtons();
+    }
+
+    private void resetButtons() {
+        for (MenuButton mb : buttons)
+            mb.resetBools();
+
+    }
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        for (MenuButton mb : buttons)
+            if(gsm.isIn(e,mb))
+                System.out.println("Moved");
+    }
+
+    public String[] getOptions() {
+        return options;
+    }
 }
