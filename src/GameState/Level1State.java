@@ -27,7 +27,7 @@ public class Level1State extends GameState{
         tileMap.loadMap("/Map/Map_level1.txt");
         tileMap.setPosition(0,0);
 
-        bg=new Background("/assets/background.png",0.1);
+        bg=new Background("/assets/background_level1.png",0.1);
 
         player = new Player(tileMap);
         player.setPosition(20,210);
