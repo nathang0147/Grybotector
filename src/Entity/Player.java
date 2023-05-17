@@ -172,18 +172,18 @@ public class Player extends MapObject {
 //         shoot enemies
          for (int j = 0; j < bullets.size(); j++) {
             if (bullets.get(j).intersect(e)) {
-               e.hitDame(bulletDamage);
+               e.hitDamage(bulletDamage);
                bullets.get(j).setHit();
                break;
             }
          }
 //         enemy collision
          if (intersect(e)) {
-            hitDame(e.getDamage());
+            hitDamage(e.getDamage());
          }
       }
    }
-   public void hitDame(int damage) {
+   public void hitDamage(int damage) {
       health -= damage;
       if(health < 0) health = 0;
       if(health == 0) dead = true;
