@@ -1,6 +1,7 @@
 package GameState;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 public class GameStateManager {
     private ArrayList<GameState> gameStates;
@@ -27,6 +28,11 @@ public class GameStateManager {
     }
     public void draw(Graphics2D g) {
         gameStates.get(currentState).draw(g);
+    }
+
+    //Check coi chuột vào ô chưa(hoạt hoạ)
+    public boolean isIn(MouseEvent e, MenuButton mb) {
+        return mb.getBounds().contains(e.getX(), e.getY());
     }
 
     public void keyPressed(int k) {
