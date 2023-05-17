@@ -16,6 +16,7 @@ public class Level1State extends GameState{
     private Player player;
     private Background bg;
     private ArrayList<Enemy> enemies;
+    private HUD hud;
     public Level1State(GameStateManager gsm) {
         this.gsm = gsm;
         init();
@@ -64,6 +65,8 @@ public class Level1State extends GameState{
         e6_Ene2.setPosition(3264,210);
 
 
+        hud = new HUD(player);
+
     }
     public void update() {
         player.update();
@@ -81,11 +84,14 @@ public class Level1State extends GameState{
         //Draw
         tileMap.draw(g);
         //Draw player
-         System.out.println(enemies.size());
+         //System.out.println(enemies.size());
         player.draw(g);
         for (int i = 0; i < enemies.size(); i++) {
              enemies.get(i).draw(g);
          }
+
+        //Draw HUD
+        hud.draw(g);
     }
 
 //
