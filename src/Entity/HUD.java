@@ -46,7 +46,7 @@ public class HUD {
    public void draw(Graphics2D g) {
       font = new Font("EightBit", Font.BOLD, 10);
       g.drawImage(holder, 0, 10, null);
-      g.drawImage(sprites[0], 0, 12, null);
+      g.drawImage(sprites[3], 0, 12, null);
       g.setFont(font);
       //set color = 0-255-51
       g.setColor(new Color(46, 149, 68));
@@ -55,5 +55,8 @@ public class HUD {
          45,
          25
       );
+   }
+   public void update(){
+
    }
 }
