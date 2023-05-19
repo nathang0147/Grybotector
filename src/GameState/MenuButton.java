@@ -11,8 +11,8 @@ public class MenuButton {
     private int xPos, yPos, index,rowIndex;
     private int xOffsetCenter = 50 / 2;
     private BufferedImage[] imgs;
-    private int B_WIDTH = 420/3;
-    private int B_HEIGHT = 168/3;
+    private int B_WIDTH = 210/3;
+    private int B_HEIGHT = 84/3;
     private boolean keyOver, keyPressed;
     private Rectangle bounds;
     public MenuButton(int xPos, int yPos, int rowIndex) {
