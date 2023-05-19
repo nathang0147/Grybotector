@@ -7,6 +7,7 @@ import UserInterface.GamePanel;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.sql.Struct;
 
 public class MenuState extends GameState {
     private MenuButton[] buttons = new MenuButton[3];
@@ -27,11 +28,12 @@ public class MenuState extends GameState {
     public MenuState(GameStateManager gsm) {
         this.gsm = gsm;
 
+        //Background and title
         try {
             bg = new Background("/Icon/IU.jpg", 0.5);
             bg.setVector(-1, 0);
 
-            titleColor = new Color(200, 0, 0);
+            titleColor = new Color(208, 0, 0);
             titleFont = new Font("Showcard Gothic", Font.CENTER_BASELINE,25 );
 
             font = new Font("Arial", Font.PLAIN, 12);
@@ -41,6 +43,8 @@ public class MenuState extends GameState {
 
         String filePath = "/Sound/ThemeSong.wav";
         new ThemeSong(filePath);
+
+        //Load image of button
         loadButton();
     }
 
@@ -51,7 +55,7 @@ public class MenuState extends GameState {
         //draw bg
         bg.update();
         for (MenuButton mb : buttons)
-            mb.update();
+            mb.update(currentChoice);
     }
     private void loadButton(){
         buttons[0] = new MenuButton(GamePanel.WIDTH / 2, (int) (140 + 0 * 30), 0);
@@ -67,14 +71,20 @@ public class MenuState extends GameState {
         g.setFont(titleFont);
         g.drawString("Grybotector", 80, 70);
         g.setFont(font);
-        for (int i = 0; i < options.length; i++) {
-            if (i == currentChoice) {
-                g.setColor(Color.YELLOW);
-            } else {
-                g.setColor(Color.RED);
-            }
-            g.drawString(options[i], 145, 140 + i * 30);
+//        for (int i = 0; i < options.length; i++) {
+//            if (i == currentChoice) {
+//                g.setColor(Color.YELLOW);
+//            } else {
+//                g.setColor(Color.RED);
+//            }
+//            g.drawString(options[i], 145, 140 + i * 30);
+//        }
+
+        for (MenuButton mb :
+                buttons) {
+            mb.draw(g);
         }
+
     }
 
     private void select() {
@@ -105,54 +115,39 @@ public class MenuState extends GameState {
                 currentChoice = 0;
             }
         }
+//        for (MenuButton mb :
+//                buttons) {
+//            if (k == KeyEvent.VK_ENTER) {
+//                mb.setKeyPressed(true);
+//                break;
+//            }
+//            if(k == KeyEvent.VK_DOWN){
+//                mb.setKeyOver(true);
+//                currentChoice++;
+//
+//            }
+//            if(k == KeyEvent.VK_UP){
+//                mb.setKeyOver(true);
+//                currentChoice--;
+//
+//            }
+//        }
+        for (MenuButton mb : buttons)
+            mb.setKeyOver(false);
     }
-    public void keyReleased(int k){}
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        for (MenuButton mb : buttons) {
-            if (gsm.isIn(e, mb)) {
-                System.out.println("Mouse pressed");
-                mb.setMousePressed(true);
+    public void keyReleased(int k){
+        for (MenuButton mb :
+                buttons) {
+            if (mb.isKeyPressed()) {
+                select();
             }
         }
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        for (MenuButton mb : buttons) {
-            if (gsm.isIn(e, mb)) {
-                System.out.println("Mouse Release");
-                if (mb.isMousePressed())
-                    if(mb == buttons[0]){
-                        gsm.setState(1);}
-                    else if (mb == buttons[2]) {
-                        //
-                    } else if (mb == buttons[3]) {
-                        System.exit(0);
-                    }
-                break;
-            }
-        }
-
-        resetButtons();
     }
 
     private void resetButtons() {
         for (MenuButton mb : buttons)
             mb.resetBools();
 
-    }
-    @Override
-    public void mouseMoved(MouseEvent e) {
-        for (MenuButton mb : buttons)
-            if(gsm.isIn(e,mb))
-                System.out.println("Moved");
     }
 
     public String[] getOptions() {

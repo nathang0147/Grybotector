@@ -25,10 +25,10 @@ public class Level1State extends GameState{
     public void init() {
         tileMap = new TileMap(32);
         tileMap.loadTiles("/TileSet/Tilesheet.png");
-        tileMap.loadMap("/Map/Map_level1.txt");
+        tileMap.loadMap("/Map/Map_level2.txt");
         tileMap.setPosition(0,0);
 
-        bg=new Background("/assets/background_level1.png",0.1);
+        bg=new Background("/assets/background_level2.png",0.1);
 
         player = new Player(tileMap);
         player.setPosition(20,210);
@@ -95,7 +95,7 @@ public class Level1State extends GameState{
         if(k == KeyEvent.VK_RIGHT) player.setRight(true);
         if(k == KeyEvent.VK_UP) player.setJumping(true);
         if(k == KeyEvent.VK_DOWN) player.setDown(true);
-//        if (k == KeyEvent.VK_K) player.setShooting();
+        if (k == KeyEvent.VK_K) player.setShooting();
     }
     public void keyReleased(int k) {
         if(k == KeyEvent.VK_LEFT) player.setLeft(false);
@@ -104,23 +104,4 @@ public class Level1State extends GameState{
         if(k == KeyEvent.VK_DOWN) player.setDown(false);
     }
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-
-    }
 }
