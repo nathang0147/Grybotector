@@ -58,9 +58,9 @@ public class MenuState extends GameState {
             mb.update(currentChoice);
     }
     private void loadButton(){
-        buttons[0] = new MenuButton(GamePanel.WIDTH / 2, (int) (140 + 0 * 30), 0);
-        buttons[1] = new MenuButton(GamePanel.WIDTH / 2, (int) (140 + 1 * 30), 1);
-        buttons[2] = new MenuButton(GamePanel.WIDTH / 2, (int) (140 + 2 * 30), 2);
+        buttons[0] = new MenuButton(GamePanel.WIDTH / 2, (int) (130 + 0 * 30), 0);
+        buttons[1] = new MenuButton(GamePanel.WIDTH / 2, (int) (130 + 1 * 30), 1);
+        buttons[2] = new MenuButton(GamePanel.WIDTH / 2, (int) (130 + 2 * 30), 2);
     }
 
     public void draw(Graphics2D g) {
