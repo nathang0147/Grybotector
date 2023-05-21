@@ -189,15 +189,7 @@ public class Player extends MapObject {
       if(health == 0) dead = true;
 
    }
-   //
-//       public boolean isShooting() {
-//          return shooting;
-//       }
-//
-//       public boolean isMelee() {
-//          return melee;
-//       }
-//
+
    public void getNextPosition() {
 //          int doublejump = 0;
       //move normal
