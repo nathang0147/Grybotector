@@ -2,22 +2,24 @@ package GameState;
 
 import Enemies.Enemy1;
 import Enemies.Enemy2;
+import Entity.Enemy;
+import Entity.HUD;
+import Entity.Player;
+import TileMap.Background;
 import TileMap.TileMap;
 import UserInterface.GamePanel;
-import Entity.*;
-import TileMap.*;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-public class Level1State extends GameState{
+public class Level2State extends GameState{
     private TileMap tileMap;
     private Player player;
     private Background bg;
     private ArrayList<Enemy> enemies;
     private HUD hud;
-    public Level1State(GameStateManager gsm) {
+    public Level2State(GameStateManager gsm) {
         this.gsm = gsm;
         init();
     }
@@ -25,18 +27,18 @@ public class Level1State extends GameState{
     public void init() {
         tileMap = new TileMap(32);
         tileMap.loadTiles("/TileSet/Tilesheet.png");
-        tileMap.loadMap("/Map/Map_level1.txt");
+        tileMap.loadMap("/Map/Map_level2.txt");
         tileMap.setPosition(0,0);
 
-        bg=new Background("/assets/background_level1.png",0.1);
+        bg=new Background("/assets/background_level2.png",0.1);
 
         player = new Player(tileMap);
         player.setPosition(20,210);
         enemies = new ArrayList<Enemy>();
 
         Enemy1 e1_Ene1 = new Enemy1(tileMap);
-        Enemy1 e3_Ene1 = new Enemy1(tileMap);
-        Enemy1 e4_Ene1 = new Enemy1(tileMap);
+        //Enemy1 e3_Ene1 = new Enemy1(tileMap);
+        //Enemy1 e4_Ene1 = new Enemy1(tileMap);
 
         Enemy2 e2_Ene2 = new Enemy2(tileMap);
         Enemy2 e5_Ene2 = new Enemy2(tileMap);
@@ -45,8 +47,8 @@ public class Level1State extends GameState{
 
 
         enemies.add(e1_Ene1);
-        enemies.add(e3_Ene1);
-        enemies.add(e4_Ene1);
+//        enemies.add(e3_Ene1);
+//        enemies.add(e4_Ene1);
 
         enemies.add(e2_Ene2);
         enemies.add(e5_Ene2);
@@ -54,16 +56,16 @@ public class Level1State extends GameState{
 
 
 
-        e1_Ene1.setPosition(352,210);
+        //e1_Ene1.setPosition(2080,210);
 
-        e2_Ene2.setPosition(192,110);
+        //updated for map level 2
+        e2_Ene2.setPosition(160,205);
 
-        e3_Ene1.setPosition(1216,210);
-        e4_Ene1.setPosition(1568,210);
+//        e3_Ene1.setPosition(1216,210);
+//        e4_Ene1.setPosition(1568,210);
 
         e5_Ene2.setPosition(2272,142);
         e6_Ene2.setPosition(3264,210);
-
 
         hud = new HUD(player);
 

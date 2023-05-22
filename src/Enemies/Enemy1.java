@@ -126,12 +126,12 @@ public class Enemy1  extends Enemy {
             right = false;
             left = true;
             facingRight = false;
-            System.out.println("left");
+            //System.out.println("left");
         } else if (left && dx == 0) {
             right = true;
             left = false;
             facingRight = true;
-            System.out.println("right");
+            //System.out.println("right");
         }
         animation.update();
     }
