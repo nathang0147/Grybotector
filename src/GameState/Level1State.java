@@ -103,19 +103,19 @@ public class Level1State extends GameState{
         //Draw HUD
         hud.draw(g);
          if(isPaused==true) {
-             System.out.println("draw");
              pauseOverlay.draw(g);
          }
     }
     private void select() {
         if (currentChoice == 0) {
-            System.out.println("2");
+            isPaused=false;
         }
         if (currentChoice == 1) {
-            //help
+            System.exit(0);
         }
         if (currentChoice == 2) {
-            System.exit(0);
+            gsm.setState(0);
+            isPaused=false;
         }
     }
 
@@ -131,22 +131,22 @@ public class Level1State extends GameState{
         }else {
             if (k == KeyEvent.VK_ENTER) {
                 select();
-                if (k == KeyEvent.VK_RIGHT) {
+            }
+            if (k == KeyEvent.VK_RIGHT) {
                     currentChoice--;
                     if (currentChoice == -1) {
                         currentChoice = 3 - 1;
                     }
                     System.out.println("On the right");
-                }
-                if (k == KeyEvent.VK_LEFT) {
+            }
+            if (k == KeyEvent.VK_LEFT) {
                     currentChoice++;
                     if (currentChoice == 3) {
                         currentChoice = 0;
                     }
                     System.out.println("on the left");
-                }
             }
-            if(k==KeyEvent.VK_ENTER) isPaused=false;
+
         }
     }
     public void keyReleased(int k) {
