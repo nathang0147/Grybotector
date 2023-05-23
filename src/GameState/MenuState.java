@@ -2,6 +2,8 @@ package GameState;
 
 import Sound.ThemeSong;
 import TileMap.Background;
+import UserInterface.GamePanel;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
@@ -9,6 +11,7 @@ public class MenuState extends GameState {
 
     private Background bg;
     private int currentChoice = 0;
+    private MenuButton[] buttons = new MenuButton[3];
     private final String[] options = {
             "Start",
             "Option",
@@ -38,15 +41,23 @@ public class MenuState extends GameState {
 
         String filePath = "/Sound/ThemeSong.wav";
         new ThemeSong(filePath);
-
+        loadButtons();
     }
 
     public void init() {
     }
 
+    private void loadButtons() {
+        buttons[0] = new MenuButton(GamePanel.WIDTH/2, 130 + 0 * 30, 0);
+        buttons[1] = new MenuButton(GamePanel.WIDTH/2, 130 + 1 * 30, 1);
+        buttons[2] = new MenuButton(GamePanel.WIDTH/2, 130 + 2 * 30, 2);
+    }
+
     public void update() {
         //draw bg
         bg.update();
+        for (MenuButton mb : buttons)
+            mb.update(currentChoice);
     }
 
     public void draw(Graphics2D g) {
@@ -56,20 +67,23 @@ public class MenuState extends GameState {
         g.setColor(titleColor);
         g.setFont(titleFont);
         g.drawString("GRYBOTECTOR", 80, 70);
-        g.setFont(font);
-        for (int i = 0; i < options.length; i++) {
-            if (i == currentChoice) {
-                g.setColor(Color.YELLOW);
-            } else {
-                g.setColor(Color.RED);
-            }
-            g.drawString(options[i], 145, 140 + i * 30);
-        }
+//        g.setFont(font);
+//        for (int i = 0; i < options.length; i++) {
+//            if (i == currentChoice) {
+//                g.setColor(Color.YELLOW);
+//            } else {
+//                g.setColor(Color.RED);
+//            }
+//            g.drawString(options[i], 145, 140 + i * 30);
+//        }
+
+        for (MenuButton mb : buttons)
+            mb.draw(g);
     }
 
     private void select() {
         if (currentChoice == 0) {
-            gsm.setState(2);
+            gsm.setState(1);
         }
         if (currentChoice == 1) {
             //help
@@ -96,7 +110,14 @@ public class MenuState extends GameState {
             }
         }
     }
-    public void keyReleased(int k){}
+    public void keyReleased(int k){
 
+    }
+
+    private void resetButtons() {
+        for (MenuButton mb : buttons)
+            mb.resetBools();
+
+    }
 
 }

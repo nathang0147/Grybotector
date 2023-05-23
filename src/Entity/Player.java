@@ -286,7 +286,10 @@ public class Player extends MapObject {
          if (bullet > bulletCost) {
             bullet -= bulletCost;
             Bullet bl = new Bullet(tileMap, facingRight);
+
             bl.setPosition(x + 4, y - 4);
+
+            bl.setPosition(x + 10, y - 5);
             bullets.add(bl);
          }
       }
