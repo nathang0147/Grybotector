@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class LoadSave {
-    public static final String MENU_BUTTONS = "GameUI/src/ui_res/rsz_button_atlas.png";
-    public static final String MENU_BACKGROUND = "GameUI/src/ui_res/menu_background.png";
+    public static final String MENU_BUTTONS = "ui_res/rsz_button_atlas.png";
+    public static final String MENU_BACKGROUND = "ui_res/menu_background.png";
 
     public static BufferedImage GetSpriteAtlas(String fileName) {
         BufferedImage img = null;

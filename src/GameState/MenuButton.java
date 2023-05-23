@@ -35,7 +35,7 @@ public class MenuButton {
             }
     }
 
-    //Lúc đưa chuột vào xong nhấn thì sẽ có hoạt hoạ
+    //Lúc đưa key vào xong nhấn thì sẽ có hoạt hoạ
     public void update(int currentChoice) {
         if(currentChoice == rowIndex){
             if(keyPressed){
