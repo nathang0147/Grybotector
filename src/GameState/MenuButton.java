@@ -11,6 +11,8 @@ public class MenuButton {
     private int xPos, yPos, index,rowIndex;
     private int xOffsetCenter = 50 / 2;
     private BufferedImage[] imgs;
+    private BufferedImage holder;
+
     private int B_WIDTH = 210/3;
     private int B_HEIGHT = 84/3;
     private boolean keyOver, keyPressed;
@@ -47,7 +49,9 @@ public class MenuButton {
     }
 
 
-    public void draw(Graphics2D g){g.drawImage(imgs[index], xPos - xOffsetCenter, yPos, B_WIDTH, B_HEIGHT, null);}
+    public void draw(Graphics2D g){
+        g.drawImage(imgs[index], xPos - xOffsetCenter, yPos, B_WIDTH, B_HEIGHT, null);
+    }
 
     public boolean isKeyOver() {
         return keyOver;

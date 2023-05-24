@@ -1,16 +1,21 @@
 package GameState;
 
+import Image.LoadSave.*;
 import Sound.ThemeSong;
 import TileMap.Background;
 import UserInterface.GamePanel;
 
 import java.awt.*;
+import javax.imageio.ImageIO;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 
 public class MenuState extends GameState {
 
     private Background bg;
     private int currentChoice = 0;
+    private BufferedImage holder, title;
+
     private MenuButton[] buttons = new MenuButton[3];
     private final String[] options = {
             "Start",
@@ -29,13 +34,10 @@ public class MenuState extends GameState {
         this.gsm = gsm;
 
         try {
-            bg = new Background("/Icon/IU.jpg", 0.5);
-            bg.setVector(-1, 0);
-
-            titleColor = new Color(200, 0, 0);
-            titleFont = new Font("EightBit", Font.CENTER_BASELINE,25 );
-
-            font = new Font("EightBit", Font.PLAIN, 12);
+            title = ImageIO.read(getClass().getResourceAsStream("/GameUI/Grybotector.png"));
+            holder = ImageIO.read(getClass().getResourceAsStream("/GameUI/holder.png"));
+            bg = new Background("/Icon/Background.png", 0.5);
+            //bg.setVector(-1, 0);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -49,9 +51,9 @@ public class MenuState extends GameState {
     }
 
     private void loadButtons() {
-        buttons[0] = new MenuButton(GamePanel.WIDTH/2, 130 + 0 * 30, 0);
-        buttons[1] = new MenuButton(GamePanel.WIDTH/2, 130 + 1 * 30, 1);
-        buttons[2] = new MenuButton(GamePanel.WIDTH/2, 130 + 2 * 30, 2);
+        buttons[0] = new MenuButton(GamePanel.WIDTH/2-9, 130 + 0 * 30, 0);
+        buttons[1] = new MenuButton(GamePanel.WIDTH/2-9, 130 + 1 * 30, 1);
+        buttons[2] = new MenuButton(GamePanel.WIDTH/2-9, 130 + 2 * 30, 2);
     }
 
     public void update() {
@@ -63,11 +65,12 @@ public class MenuState extends GameState {
 
     public void draw(Graphics2D g) {
         bg.draw(g);
+        g.drawImage(title, 50, 20, 225, 56, null);
+        g.drawImage(holder, 116, 125, 90 , 100 , null);
 
         //draw title
-        g.setColor(titleColor);
-        g.setFont(titleFont);
-        g.drawString("GRYBOTECTOR", 80, 70);
+
+        //g.drawString("GRYBOTECTOR", 80, 70);
 //        g.setFont(font);
 //        for (int i = 0; i < options.length; i++) {
 //            if (i == currentChoice) {
@@ -95,6 +98,7 @@ public class MenuState extends GameState {
             if (currentChoice == 2) {
                 System.exit(0);
             }
+
     }
 
     public void keyPressed(int k) {
