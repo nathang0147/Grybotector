@@ -21,7 +21,7 @@ public class Enemy extends MapObject {
         return damage;
     }
 
-    public void hitDame(int damage){
+    public void hitDamage(int damage){
         if(dead || flinching) return;
         health-=damage;
         if(health<0) health=0;

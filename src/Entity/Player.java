@@ -18,7 +18,7 @@ public class Player extends MapObject {
    private boolean falling;
    private boolean crouch;
 
-// bullet
+   // bullet
    private boolean shooting;
    private int bulletCost;
    private int bulletDamage;
@@ -93,12 +93,12 @@ public class Player extends MapObject {
                   );
                }
                else {
-               bi[j] = spritesheet.getSubimage(
-                       j * width,
-                       i * height,
-                       width,
-                       height
-               );}
+                  bi[j] = spritesheet.getSubimage(
+                          j * width,
+                          i * height,
+                          width,
+                          height
+                  );}
             }
             sprites.add(bi);
          }
@@ -172,18 +172,18 @@ public class Player extends MapObject {
 //         shoot enemies
          for (int j = 0; j < bullets.size(); j++) {
             if (bullets.get(j).intersect(e)) {
-               e.hitDame(bulletDamage);
+               e.hitDamage(bulletDamage);
                bullets.get(j).setHit();
                break;
             }
          }
 //         enemy collision
          if (intersect(e)) {
-            hitDame(e.getDamage());
+            hitDamage(e.getDamage());
          }
       }
    }
-   public void hitDame(int damage) {
+   public void hitDamage(int damage) {
       health -= damage;
       if(health < 0) health = 0;
       if(health == 0) dead = true;
@@ -286,7 +286,7 @@ public class Player extends MapObject {
          if (bullet > bulletCost) {
             bullet -= bulletCost;
             Bullet bl = new Bullet(tileMap, facingRight);
-            bl.setPosition(x + 10, y - 5);
+            bl.setPosition(x + 4, y - 4);
             bullets.add(bl);
          }
       }

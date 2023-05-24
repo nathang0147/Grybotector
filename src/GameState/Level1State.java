@@ -30,10 +30,10 @@ public class Level1State extends GameState{
     public void init() {
         tileMap = new TileMap(32);
         tileMap.loadTiles("/TileSet/Tilesheet.png");
-        tileMap.loadMap("/Map/Map_level2.txt");
+        tileMap.loadMap("/Map/Map_level1.txt");
         tileMap.setPosition(0,0);
 
-        bg=new Background("/assets/background_level2.png",0.1);
+        bg=new Background("/assets/background_level1.png",0.1);
 
         player = new Player(tileMap);
         player.setPosition(20,210);
@@ -81,8 +81,13 @@ public class Level1State extends GameState{
                     GamePanel.WIDTH / 2 - player.getX(),
                     GamePanel.HEIGHT / 2 - player.getY()
             );
+            player.checkAttack(enemies);
             for (int i = 0; i < enemies.size(); i++) {
                 enemies.get(i).update();
+                if(enemies.get(i).isDead()){
+                    enemies.remove(i);
+                    i--;
+                }
             }
         }
         pauseOverlay.update(currentChoice);
