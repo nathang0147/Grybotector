@@ -82,6 +82,7 @@ public class MenuState extends GameState {
     }
 
     private void select() {
+<<<<<<< Updated upstream
         if (currentChoice == 0) {
             gsm.setState(1);
         }
@@ -91,6 +92,19 @@ public class MenuState extends GameState {
         if (currentChoice == 2) {
             System.exit(0);
         }
+=======
+
+            if (currentChoice == 0) {
+                gsm.setState(3);
+            }
+            if (currentChoice == 1) {
+                //help
+                gsm.setState(3);
+            }
+            if (currentChoice == 2) {
+                System.exit(0);
+            }
+>>>>>>> Stashed changes
     }
 
     public void keyPressed(int k) {
