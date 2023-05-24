@@ -17,6 +17,7 @@ public class Enemy1  extends Enemy {
     private int RUN = 0;
     private int ATK = 1;
 
+
     public Enemy1(TileMap tm) {
         super(tm);
 

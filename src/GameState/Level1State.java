@@ -2,6 +2,7 @@ package GameState;
 
 import Enemies.Enemy1;
 import Enemies.Enemy2;
+import Enemies.Enemy3;
 import TileMap.TileMap;
 import UserInterface.GamePanel;
 import Entity.*;
@@ -42,6 +43,8 @@ public class Level1State extends GameState{
         Enemy2 e5_Ene2 = new Enemy2(tileMap);
         Enemy2 e6_Ene2 = new Enemy2(tileMap);
 
+        Enemy3 enemy3= new Enemy3(tileMap);
+
 
 
         enemies.add(e1_Ene1);
@@ -51,6 +54,11 @@ public class Level1State extends GameState{
         enemies.add(e2_Ene2);
         enemies.add(e5_Ene2);
         enemies.add(e6_Ene2);
+
+
+        enemies.add(enemy3);
+        enemy3.setPosition(192,110
+        );
 
 
 
@@ -74,8 +82,13 @@ public class Level1State extends GameState{
                 GamePanel.WIDTH/2 - player.getX(),
                 GamePanel.HEIGHT/2 - player.getY()
         );
+        player.checkAttack(enemies);
         for (int i = 0; i < enemies.size(); i++) {
             enemies.get(i).update();
+            if(enemies.get(i).isDead()){
+                enemies.remove(i);
+                i--;
+            }
         }
     }
      public void draw(Graphics2D g) {
@@ -86,6 +99,7 @@ public class Level1State extends GameState{
         //Draw player
          //System.out.println(enemies.size());
         player.draw(g);
+
         for (int i = 0; i < enemies.size(); i++) {
              enemies.get(i).draw(g);
          }
