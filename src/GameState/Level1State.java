@@ -111,7 +111,8 @@ public class Level1State extends GameState{
             isPaused=false;
         }
         if (currentChoice == 1) {
-            System.exit(0);
+            gsm.setState(1);
+            isPaused=false;
         }
         if (currentChoice == 2) {
             gsm.setState(0);

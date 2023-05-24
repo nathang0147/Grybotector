@@ -90,7 +90,7 @@ public class MenuState extends GameState {
             if (currentChoice == 1) {
                 //help
                 gsm.setState(3);
-                isStory=true;
+
             }
             if (currentChoice == 2) {
                 System.exit(0);

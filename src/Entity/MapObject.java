@@ -71,7 +71,7 @@ public abstract class MapObject {
     public boolean intersect(MapObject o){
         Rectangle r1 = newRec();
         Rectangle r2 = o.newRec();
-        return r2.intersects(r1);
+        return r1.intersects(r2);
     }
 
     public Rectangle newRec(){
