@@ -69,7 +69,7 @@ public class Player extends MapObject {
       bullet = maxBullet = 2500;
 
       bulletCost = 10;
-      bulletDamage = 5;
+      bulletDamage = 1;
       bullets = new ArrayList<Bullet>();
 
       //load sprites
@@ -177,6 +177,7 @@ public class Player extends MapObject {
                break;
             }
          }
+
 //         enemy collision
          if (intersect(e)) {
             hitDamage(e.getDamage());
