@@ -1,7 +1,9 @@
 package Enemies;
 
 import Entity.Animation;
+import Entity.Bullet;
 import Entity.Enemy;
+import Entity.Player;
 import TileMap.TileMap;
 
 import javax.imageio.ImageIO;
@@ -19,13 +21,13 @@ public class Enemy2 extends Enemy {
 
     private ArrayList<BufferedImage[]> sprites;
     private  int[] numFrames= {4,8};
+
+    private ArrayList<Magicbutt> magicbutts;
+    private int dame, damageCost, buttNum, maxButt;
     public Enemy2(TileMap tm) {
         super(tm);
 
         width = (int) 49.25;
-        height =(int) 44.5;
-        cheight = 30;
-        cwidth = 30;
 
         health = maxHealth = 5;
         damage = 3;
@@ -36,6 +38,12 @@ public class Enemy2 extends Enemy {
 
         health = maxHealth = 5;
         damage = 2;
+
+        buttNum = maxButt = 600;
+        damageCost = 10;
+        dame = 1;
+        magicbutts = new ArrayList<Magicbutt>();
+
 
         try {
             //load sprites
@@ -77,6 +85,25 @@ public class Enemy2 extends Enemy {
     public void update(){
         checkCollision();
         setPosition(xtemp,ytemp);
+
+        buttNum += 1;
+        if (buttNum > maxButt) buttNum = maxButt;
+        if (!notOnScreen()) {
+            if (buttNum > damageCost) {
+                buttNum -= damageCost;
+                Magicbutt bl = new Magicbutt(tileMap, facingRight);
+                bl.setPosition(x +1, y - 1);
+                magicbutts.add(bl);
+            }
+        }
+        for(int i = 0; i < magicbutts.size(); i++){
+            magicbutts.get(i).update();
+            if(magicbutts.get(i).shouldRemove()){
+                magicbutts.remove(i);
+                i--;
+            }
+        }
+
         if (notOnScreen()&& currentAction!=IDLE){
             currentAction = IDLE;
             animation.setFrames(sprites.get(currentAction));
@@ -100,5 +127,18 @@ public class Enemy2 extends Enemy {
     public void draw(Graphics2D g){
         setMapPosition();
         super.draw(g);
+        for(int i  = 0; i < magicbutts.size(); i++){
+            magicbutts.get(i).draw(g);
+        }
+    }
+
+    public void checkAttackEnemy(Player player){
+        for(int i = 0; i < magicbutts.size(); i ++){
+            if(magicbutts.get(i).intersect(player)){
+                player.hitDamage(damage);
+                magicbutts.get(i).setHit();
+                break;
+            }
+        }
     }
 }

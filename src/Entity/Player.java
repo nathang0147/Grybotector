@@ -39,7 +39,7 @@ public class Player extends MapObject {
    private int JUMP = 4;
    private int CROUCH = 0;
    private int FALLING = 2;
-   private int DEAD=1;
+   private int DEAD = 1;
 
 
    public Player(TileMap tm) {
@@ -298,6 +298,12 @@ public class Player extends MapObject {
          }
       }
       //set animation
+      if(dead){
+         currentAct = DEAD;
+         animation.setFrames(sprites.get(DEAD));
+         animation.setDelay(200);
+         width=50;
+      }
 
       if (shooting) {
          if (currentAct != RUN) {

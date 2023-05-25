@@ -86,11 +86,14 @@ public class Level1State extends GameState{
             player.checkAttack(enemies);
             for (int i = 0; i < enemies.size(); i++) {
                 enemies.get(i).update();
+                enemies.get(i).checkAttackEnemy(player);
                 if (enemies.get(i).isDead()) {
                     enemies.remove(i);
                     i--;
                 }
             }
+
+
         }
         pauseOverlay.update(currentChoice);
         if(gate.intersect(player)) gsm.setState(2);
