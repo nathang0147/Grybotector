@@ -69,7 +69,6 @@ public class Player extends MapObject {
       bullet = maxBullet = 2500;
 
       bulletCost = 10;
-      bulletDamage = 5;
       bullets = new ArrayList<Bullet>();
 
       //load sprites
