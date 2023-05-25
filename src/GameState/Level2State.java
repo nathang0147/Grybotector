@@ -76,8 +76,13 @@ public class Level2State extends GameState{
                 GamePanel.WIDTH/2 - player.getX(),
                 GamePanel.HEIGHT/2 - player.getY()
         );
+        player.checkAttack(enemies);
         for (int i = 0; i < enemies.size(); i++) {
             enemies.get(i).update();
+            if(enemies.get(i).isDead()){
+                enemies.remove(i);
+                i--;
+            }
         }
     }
      public void draw(Graphics2D g) {

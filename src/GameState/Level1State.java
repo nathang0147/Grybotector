@@ -26,6 +26,7 @@ public class Level1State extends GameState{
     }
     private PauseOverlay pauseOverlay;
     private  boolean isPaused=false;
+    private Gate gate;
 
     public void init() {
         tileMap = new TileMap(32);
@@ -38,6 +39,8 @@ public class Level1State extends GameState{
         player = new Player(tileMap);
         player.setPosition(20,210);
         enemies = new ArrayList<Enemy>();
+        gate= new Gate(tileMap);
+        gate.setPosition(3360,192);
 
         Enemy1 e1_Ene1 = new Enemy1(tileMap);
         Enemy1 e3_Ene1 = new Enemy1(tileMap);
@@ -72,7 +75,6 @@ public class Level1State extends GameState{
 
         hud = new HUD(player);
         pauseOverlay= new PauseOverlay();
-
     }
     public void update() {
         if(isPaused==false) {
@@ -84,13 +86,15 @@ public class Level1State extends GameState{
             player.checkAttack(enemies);
             for (int i = 0; i < enemies.size(); i++) {
                 enemies.get(i).update();
-                if(enemies.get(i).isDead()){
+                if (enemies.get(i).isDead()) {
                     enemies.remove(i);
                     i--;
                 }
             }
         }
         pauseOverlay.update(currentChoice);
+        if(gate.intersect(player)) gsm.setState(2);
+            gate.update();
 
     }
      public void draw(Graphics2D g) {
@@ -110,6 +114,9 @@ public class Level1State extends GameState{
          if(isPaused==true) {
              pauseOverlay.draw(g);
          }
+
+             gate.draw(g);
+
     }
     private void select() {
         if (currentChoice == 0) {
