@@ -25,14 +25,15 @@ public class Level1State extends GameState{
     public Level1State(GameStateManager gsm) {
         this.gsm = gsm;
         init();
+        bgMusic = new AudioPlayer("/Sound/level1Sound.mp3");
+        bgMusic.play();
     }
     private PauseOverlay pauseOverlay;
     private  boolean isPaused=false;
     private Gate gate;
 
     public void init() {
-        bgMusic = new AudioPlayer("/Sound/levelSong.mp3");
-        bgMusic.play();
+
         tileMap = new TileMap(32);
         tileMap.loadTiles("/TileSet/Tilesheet.png");
         tileMap.loadMap("/Map/Map_level1.txt");

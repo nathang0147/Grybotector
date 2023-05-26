@@ -1,11 +1,12 @@
 package Entity;
 
 import TileMap.*;
-
+import Sound.AudioPlayer;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Player extends MapObject {
 
@@ -40,7 +41,7 @@ public class Player extends MapObject {
    private int CROUCH = 0;
    private int FALLING = 2;
    private int DEAD=1;
-
+   private HashMap<String, AudioPlayer> sfx;
 
    public Player(TileMap tm) {
       super(tm);
@@ -110,6 +111,10 @@ public class Player extends MapObject {
       currentAct = IDLE;
       animation.setFrames(sprites.get(IDLE));
       animation.setDelay(400);
+      sfx = new HashMap<String, AudioPlayer>();
+
+      sfx.put("shooting", new AudioPlayer("/Sound/shootSound.mp3"));
+
    }
 
 
@@ -303,8 +308,9 @@ public class Player extends MapObject {
          if (currentAct != RUN) {
             currentAct = RUN;
             animation.setFrames(sprites.get(RUN));
-            animation.setDelay(100);
+            animation.setDelay(30);
             width = 20;
+            sfx.get("shooting").play();
          }
       }
       else if(down){

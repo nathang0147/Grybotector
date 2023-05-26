@@ -46,7 +46,6 @@ public class MenuState extends GameState {
     }
 
     public void init() {
-
     }
 
     private void loadButtons() {
