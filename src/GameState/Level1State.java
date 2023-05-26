@@ -2,6 +2,7 @@ package GameState;
 
 import Enemies.Enemy1;
 import Enemies.Enemy2;
+import Sound.AudioPlayer;
 import TileMap.TileMap;
 import UI.PauseOverlay;
 import UserInterface.GamePanel;
@@ -10,7 +11,6 @@ import TileMap.*;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class Level1State extends GameState{
@@ -18,17 +18,22 @@ public class Level1State extends GameState{
     private Player player;
     private Background bg;
     private ArrayList<Enemy> enemies;
+    private ArrayList<Explosion> explosions;
     private HUD hud;
+    private AudioPlayer bgMusic;
     public int currentChoice;
     public Level1State(GameStateManager gsm) {
         this.gsm = gsm;
         init();
+        bgMusic = new AudioPlayer("/Sound/level1Sound.mp3");
+        bgMusic.play();
     }
     private PauseOverlay pauseOverlay;
     private  boolean isPaused=false;
     private Gate gate;
 
     public void init() {
+
         tileMap = new TileMap(32);
         tileMap.loadTiles("/TileSet/Tilesheet.png");
         tileMap.loadMap("/Map/Map_level1.txt");
@@ -51,7 +56,6 @@ public class Level1State extends GameState{
         Enemy2 e6_Ene2 = new Enemy2(tileMap);
 
 
-
         enemies.add(e1_Ene1);
         enemies.add(e3_Ene1);
         enemies.add(e4_Ene1);
@@ -72,9 +76,11 @@ public class Level1State extends GameState{
         e5_Ene2.setPosition(2272,142);
         e6_Ene2.setPosition(3264,210);
 
-
+        explosions = new ArrayList<Explosion>();
         hud = new HUD(player);
         pauseOverlay= new PauseOverlay();
+
+
     }
     public void update() {
         if(isPaused==false) {
@@ -83,23 +89,41 @@ public class Level1State extends GameState{
                     GamePanel.WIDTH / 2 - player.getX(),
                     GamePanel.HEIGHT / 2 - player.getY()
             );
+            bg.setPosition(tileMap.getX(), tileMap.getY());
             player.checkAttack(enemies);
+
+            pauseOverlay.update(currentChoice);
+            if(gate.intersect(player)) gsm.setState(2);
+            gate.update();
+
+        }
+
+//            update all enemies
             for (int i = 0; i < enemies.size(); i++) {
-                enemies.get(i).update();
-                enemies.get(i).checkAttackEnemy(player);
-                if (enemies.get(i).isDead()) {
+                Enemy e = enemies.get(i);
+                e.update();
+                if (e.isDead()) {
                     enemies.remove(i);
                     i--;
+                    explosions.add(
+                            new Explosion(e.getX(),e.getY())
+                    );
+                    System.out.println("Enemies is dead");
                 }
             }
 
 
+        // Update explosions
+        for( int i=0; i<explosions.size();i++){
+            explosions.get(i).update();
+            if(explosions.get(i).shouldRemove()){
+                explosions.remove(i);
+                i--;
+            }
         }
-        pauseOverlay.update(currentChoice);
-        if(gate.intersect(player)) gsm.setState(2);
-            gate.update();
-
     }
+
+
      public void draw(Graphics2D g) {
         //bg ( not real bg)
         bg.draw(g);
@@ -110,6 +134,12 @@ public class Level1State extends GameState{
         player.draw(g);
         for (int i = 0; i < enemies.size(); i++) {
              enemies.get(i).draw(g);
+         }
+
+         //         Draw explosion
+         for (Explosion explosion : explosions) {
+             explosion.setMapPosition(tileMap.getX(), tileMap.getY());
+             explosion.draw(g);
          }
 
         //Draw HUD

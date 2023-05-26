@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="jl1.0.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Downloads/Dragon Tale Tutorial P08/Dragon Tale Tutorial P08/Libs/jl1.0.1.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/Dragon Tale Tutorial P08/Dragon Tale Tutorial P08/Libs/mp3spi1.9.5.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/Dragon Tale Tutorial P08/Dragon Tale Tutorial P08/Libs/tritonus_share.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

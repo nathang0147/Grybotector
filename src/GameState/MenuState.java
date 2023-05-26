@@ -1,7 +1,6 @@
 package GameState;
 
-import Image.LoadSave.*;
-import Sound.ThemeSong;
+import Sound.AudioPlayer;
 import TileMap.Background;
 import UserInterface.GamePanel;
 
@@ -13,6 +12,7 @@ import java.awt.image.BufferedImage;
 public class MenuState extends GameState {
 
     private Background bg;
+    private AudioPlayer bgMusic;
     private int currentChoice = 0;
     private BufferedImage holder, title;
 
@@ -27,7 +27,7 @@ public class MenuState extends GameState {
     public Font titleFont;
 
     private Font font;
-    private ThemeSong audioInput;
+//    private AudioPlayer audioInput;
 
 
     public MenuState(GameStateManager gsm) {
@@ -42,8 +42,6 @@ public class MenuState extends GameState {
             e.printStackTrace();
         }
 
-        String filePath = "/Sound/ThemeSong.wav";
-        new ThemeSong(filePath);
         loadButtons();
     }
 
