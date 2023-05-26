@@ -23,8 +23,8 @@ public class Bullet extends MapObject {
 
         width = 8;
         height = 8;
-        cwidth = 30;
-        cheight = 30;
+        cwidth = 5;
+        cheight = 5;
 
 //        load spirtes
         try {
@@ -32,7 +32,7 @@ public class Bullet extends MapObject {
             BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/Bullet/bullet.png"));
             sprites = new BufferedImage[8];
             for (int i = 0; i < sprites.length; i++) {
-                sprites[i] = spritesheet.getSubimage(i * width, 0, width, height);
+                sprites[i] = spritesheet.getSubimage(i * width, 0, width, height * 2);
             }
             hitSprites = new BufferedImage[3];
             for (int i = 0; i < hitSprites.length; i++) {
