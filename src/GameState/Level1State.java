@@ -101,6 +101,7 @@ public class Level1State extends GameState{
 //            update all enemies
             for (int i = 0; i < enemies.size(); i++) {
                 Enemy e = enemies.get(i);
+                e.checkAttackEnemy(player);
                 e.update();
                 if (e.isDead()) {
                     enemies.remove(i);
