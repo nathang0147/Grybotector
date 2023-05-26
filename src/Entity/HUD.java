@@ -45,15 +45,15 @@ public class HUD {
 
    public void draw(Graphics2D g) {
       font = new Font("EightBit", Font.BOLD, 10);
-      g.drawImage(holder, 0, 10, null);
-      g.drawImage(sprites[3], 0, 12, null);
+      g.drawImage(holder, 10, 10-5, null);
+      g.drawImage(sprites[3], 10, 12-5, null);
       g.setFont(font);
       //set color = 0-255-51
       g.setColor(new Color(46, 149, 68));
       g.drawString(
          player.getHealth() + "/" + player.getMaxHealth(),
-         45,
-         25
+         45+10,
+         25-5
       );
    }
    public void update(){
