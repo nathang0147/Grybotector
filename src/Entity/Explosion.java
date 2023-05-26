@@ -6,8 +6,8 @@ import javax.imageio.ImageIO;
 
 public class Explosion {
 
-    private int x;
-    private int y;
+    private double x;
+    private double y;
     private int xmap;
     private int ymap;
 
@@ -19,7 +19,7 @@ public class Explosion {
 
     private boolean remove;
 
-    public Explosion(int x, int y) {
+    public Explosion(double x, double y) {
 
         this.x = x;
         this.y = y;
@@ -73,8 +73,8 @@ public class Explosion {
     public void draw(Graphics2D g) {
         g.drawImage(
                 animation.getImage(),
-                x + xmap - width / 2,
-                y + ymap - height / 2,
+                (int)x + xmap - width / 2,
+                (int)y + ymap - height / 2,
                 null
         );
     }

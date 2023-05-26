@@ -90,38 +90,39 @@ public class Level1State extends GameState{
             );
             bg.setPosition(tileMap.getX(), tileMap.getY());
             player.checkAttack(enemies);
-//            update all enemies
-            for (int i = 0; i < enemies.size(); i++) {
-                enemies.get(i).update();
-                if (enemies.get(i).isDead()) {
-                    enemies.remove(i);
-                    i--;
-                }
-            }
 
-//            Update explosion
-            for (int i = 0; i < explosions.size(); i++) {
-                explosions.get(i).update();
-                if (explosions.get(i).shouldRemove()) {
-                    explosions.remove(i);
-                    i--;
+            pauseOverlay.update(currentChoice);
+            if(gate.intersect(player)) gsm.setState(2);
+            gate.update();
 
-                }
-            }
         }
 
-        pauseOverlay.update(currentChoice);
-        if(gate.intersect(player)) gsm.setState(2);
-            gate.update();
-        for (int i = 0; i < enemies.size(); i++) {
-            enemies.get(i).update();
-            if (enemies.get(i).isDead()) {
-                enemies.remove(i);
+//            update all enemies
+            for (int i = 0; i < enemies.size(); i++) {
+                Enemy e = enemies.get(i);
+                e.update();
+                if (e.isDead()) {
+                    enemies.remove(i);
+                    i--;
+                    explosions.add(
+                            new Explosion(e.getX(),e.getY())
+                    );
+                    System.out.println("Enemies is dead");
+                }
+            }
+
+
+        // Update explosions
+        for( int i=0; i<explosions.size();i++){
+            explosions.get(i).update();
+            if(explosions.get(i).shouldRemove()){
+                explosions.remove(i);
                 i--;
-                explosions.add(new Explosion((int) enemies.get(i).getX(), (int) enemies.get(i).getY()));
             }
         }
     }
+
+
      public void draw(Graphics2D g) {
         //bg ( not real bg)
         bg.draw(g);
@@ -135,9 +136,9 @@ public class Level1State extends GameState{
          }
 
          //         Draw explosion
-         for(int i = 0; i < explosions.size(); i++) {
-            explosions.get(i).setMapPosition((int)tileMap.getX(), (int)tileMap.getY());
-            explosions.get(i).draw(g);
+         for (Explosion explosion : explosions) {
+             explosion.setMapPosition(tileMap.getX(), tileMap.getY());
+             explosion.draw(g);
          }
 
         //Draw HUD
