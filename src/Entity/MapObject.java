@@ -125,7 +125,7 @@ public abstract class MapObject {
         if(dy < 0){
             if (topLeft || topRight) {
                 dy = 0;
-                ytemp = currentRow * tileSize + cheight/2;
+                ytemp = currentRow * tileSize + cheight / 2;
             }
             else {
                 ytemp += dy;

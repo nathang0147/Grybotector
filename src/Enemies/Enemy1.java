@@ -2,7 +2,6 @@ package Enemies;
 
 import Entity.Animation;
 import Entity.Enemy;
-import Entity.Player;
 import TileMap.TileMap;
 
 import javax.imageio.ImageIO;
@@ -17,9 +16,6 @@ public class Enemy1  extends Enemy {
     private int currentAction;
     private int RUN = 0;
     private int ATK = 1;
-
-    private ArrayList<Blades> blades;
-
 
     public Enemy1(TileMap tm) {
         super(tm);
@@ -36,9 +32,6 @@ public class Enemy1  extends Enemy {
 
         health = maxHealth = 4;
         damage=2;
-
-        //Shoot attack by enemy
-        blades = new ArrayList<>();
 
         try {
             //load sprites
@@ -95,14 +88,6 @@ public class Enemy1  extends Enemy {
             dy+=fallSpeed;
         }
     }
-
-    public double getX(){
-        return this.x;
-    }
-    public double getY(){
-        return this.y;
-    }
-
     public void update(){
         getNextPosition();
         checkCollision();
@@ -116,20 +101,19 @@ public class Enemy1  extends Enemy {
         }
 
         if (!notOnScreen()){
-            //attack
             if (currentAction!=ATK){
                 currentAction = ATK;
                 animation.setFrames(sprites.get(currentAction));
                 animation.setDelay(400);
             }
+
         }
         else if (notOnScreen()) {
-            // walk in nest
-            right = true;
-            facingRight = true;
-            currentAction = RUN;
-            animation.setFrames(sprites.get(currentAction));
-            animation.setDelay(300);
+                right = true;
+                facingRight = true;
+                currentAction = RUN;
+                animation.setFrames(sprites.get(currentAction));
+                animation.setDelay(300);
 
         }
         if (flinching) {
@@ -155,10 +139,6 @@ public class Enemy1  extends Enemy {
 //        if(notOnScreen()) return;
         setMapPosition();
         super.draw(g);
-
-    }
-
-    public void checkAttackEnemy(Player player){
 
     }
 }

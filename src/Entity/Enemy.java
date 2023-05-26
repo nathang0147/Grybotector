@@ -1,6 +1,5 @@
 package Entity;
 
-import Entity.MapObject;
 import TileMap.TileMap;
 
 public class Enemy extends MapObject {
