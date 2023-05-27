@@ -45,7 +45,7 @@ public class Level1State extends GameState{
         player.setPosition(20,210);
         enemies = new ArrayList<Enemy>();
         gate= new Gate(tileMap);
-        gate.setPosition(3360,192);
+//        gate.setPosition(3360,192);
 
         Enemy1 e1_Ene1 = new Enemy1(tileMap);
         Enemy1 e3_Ene1 = new Enemy1(tileMap);
@@ -91,14 +91,7 @@ public class Level1State extends GameState{
             );
             bg.setPosition(tileMap.getX(), tileMap.getY());
             player.checkAttack(enemies);
-
-            pauseOverlay.update(currentChoice);
-            if(gate.intersect(player)) gsm.setState(2);
-            gate.update();
-
-        }
-
-//            update all enemies
+          //  update all enemies
             for (int i = 0; i < enemies.size(); i++) {
                 Enemy e = enemies.get(i);
                 e.checkAttackEnemy(player);
@@ -114,14 +107,24 @@ public class Level1State extends GameState{
             }
 
 
-        // Update explosions
-        for( int i=0; i<explosions.size();i++){
-            explosions.get(i).update();
-            if(explosions.get(i).shouldRemove()){
-                explosions.remove(i);
-                i--;
+            // Update explosions
+            for( int i=0; i<explosions.size();i++){
+                explosions.get(i).update();
+                if(explosions.get(i).shouldRemove()){
+                    explosions.remove(i);
+                    i--;
+                }
             }
+            if(enemies.size()==0) {
+                gate.setPosition(3264, 192);
+                if (gate.intersect(player)) gsm.setState(2);
+            }
+            gate.update();
+
         }
+        pauseOverlay.update(currentChoice);
+
+
     }
 
 
@@ -148,8 +151,9 @@ public class Level1State extends GameState{
          if(isPaused==true) {
              pauseOverlay.draw(g);
          }
-
-             gate.draw(g);
+         if(enemies.size()==0) {
+            gate.draw(g);
+         }
 
     }
     private void select() {
