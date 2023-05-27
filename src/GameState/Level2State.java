@@ -74,8 +74,8 @@ public class Level2State extends GameState{
 //        e3_Ene1.setPosition(1216,210);
 //        e4_Ene1.setPosition(1568,210);
 
-        e5_Ene2.setPosition(2272,142);
-        e6_Ene2.setPosition(3264,210);
+        e5_Ene2.setPosition(2272,205);
+        e6_Ene2.setPosition(3264,205);
 
         hud = new HUD(player);
 
