@@ -74,7 +74,7 @@ public class Level1State extends GameState{
         e4_Ene1.setPosition(1568,210);
 
         e5_Ene2.setPosition(2272,142);
-        e6_Ene2.setPosition(3264,210);
+        e6_Ene2.setPosition(3164-32*5,210);
 
         explosions = new ArrayList<Explosion>();
         hud = new HUD(player);
