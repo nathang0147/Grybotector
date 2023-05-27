@@ -19,6 +19,7 @@ public class GameStateManager {
         gameStates.add(new Level1State(this));
         gameStates.add(new Level2State(this));
         gameStates.add(new StoryState(this));
+        gameStates.add(new WinState(this));
 
     }
 
