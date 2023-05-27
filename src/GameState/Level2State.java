@@ -1,8 +1,10 @@
 package GameState;
 
+import Enemies.Boss;
 import Enemies.Enemy1;
 import Enemies.Enemy2;
 import Entity.Enemy;
+import Entity.Explosion;
 import Entity.HUD;
 import Entity.Player;
 import TileMap.Background;
@@ -14,7 +16,10 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 public class Level2State extends GameState{
+    private ArrayList<Explosion> explosions;
+
     private TileMap tileMap;
+
     private Player player;
     private Background bg;
     private ArrayList<Enemy> enemies;
@@ -33,8 +38,9 @@ public class Level2State extends GameState{
         bg=new Background("/assets/background_level2.png",0.1);
 
         player = new Player(tileMap);
-        player.setPosition(20,210);
+        player.setPosition(2220,110);
         enemies = new ArrayList<Enemy>();
+        explosions = new ArrayList<Explosion>();
 
         Enemy1 e1_Ene1 = new Enemy1(tileMap);
         //Enemy1 e3_Ene1 = new Enemy1(tileMap);
@@ -44,7 +50,11 @@ public class Level2State extends GameState{
         Enemy2 e5_Ene2 = new Enemy2(tileMap);
         Enemy2 e6_Ene2 = new Enemy2(tileMap);
 
+        //add Boss
+        Boss boss=new Boss(tileMap);
 
+        //set boss position
+        boss.setPosition(2200,145);
 
         enemies.add(e1_Ene1);
 //        enemies.add(e3_Ene1);
@@ -54,7 +64,7 @@ public class Level2State extends GameState{
         enemies.add(e5_Ene2);
         enemies.add(e6_Ene2);
 
-
+        enemies.add(boss);
 
         //e1_Ene1.setPosition(2080,210);
 
@@ -77,10 +87,31 @@ public class Level2State extends GameState{
                 GamePanel.HEIGHT/2 - player.getY()
         );
         player.checkAttack(enemies);
+
+        //            update all enemies
         for (int i = 0; i < enemies.size(); i++) {
-            enemies.get(i).update();
-            if(enemies.get(i).isDead()){
+            Enemy e = enemies.get(i);
+            e.checkAttackEnemy(player);
+            e.update();
+            if (e.isDead()) {
+                if(i!=enemies.size()-1){
                 enemies.remove(i);
+                i--;}
+                else{
+                    continue;
+                }
+                explosions.add(
+                        new Explosion(e.getX(),e.getY())
+                );
+
+            }
+        }
+
+        // Update explosions
+        for( int i=0; i<explosions.size();i++){
+            explosions.get(i).update();
+            if(explosions.get(i).shouldRemove()){
+                explosions.remove(i);
                 i--;
             }
         }
@@ -99,6 +130,12 @@ public class Level2State extends GameState{
 
         //Draw HUD
         hud.draw(g);
+
+         //         Draw explosion
+         for (Explosion explosion : explosions) {
+             explosion.setMapPosition(tileMap.getX(), tileMap.getY());
+             explosion.draw(g);
+         }
     }
 
 //

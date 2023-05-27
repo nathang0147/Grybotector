@@ -111,6 +111,8 @@ public class Player extends MapObject {
       currentAct = IDLE;
       animation.setFrames(sprites.get(IDLE));
       animation.setDelay(400);
+
+      //add sound
       sfx = new HashMap<String, AudioPlayer>();
 
       sfx.put("shooting", new AudioPlayer("/Sound/shootSound.mp3"));
@@ -274,9 +276,9 @@ public class Player extends MapObject {
 
    public void update(){
       //update position
-      setPosition(xtemp,ytemp);
       getNextPosition();
       checkCollision();
+      setPosition(xtemp,ytemp);
 
       //      check attack has stopped
       if (currentAct == RUN) {
@@ -308,14 +310,13 @@ public class Player extends MapObject {
          if (currentAct != RUN) {
             currentAct = RUN;
             animation.setFrames(sprites.get(RUN));
-            animation.setDelay(30);
+            animation.setDelay(-1);
             width = 20;
             sfx.get("shooting").play();
          }
       }
       else if(down){
          if(currentAct!=CROUCH){
-            //System.out.println("Crouch is " +"working**************************************************");
             currentAct=CROUCH;
             animation.setFrames(sprites.get(CROUCH));
             animation.setDelay(400);
