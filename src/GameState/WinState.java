@@ -36,7 +36,7 @@ public class WinState extends  GameState{
     @Override
     public void draw(Graphics2D g) {
         bg.draw(g);
-        g.drawImage(gameWin, GamePanel.WIDTH/2-50,GamePanel.HEIGHT/2,null);
+        g.drawImage(gameWin, 75+30,77,null);
 
     }
 
