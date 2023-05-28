@@ -42,7 +42,7 @@ public class Boss extends Enemy {
         cwidth=70;
 
         //Health
-        health= maxHealth =100;
+        health= maxHealth =30;
 
         //hit
         damage=3;

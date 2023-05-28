@@ -48,7 +48,7 @@ public class Level2State extends GameState{
         bg=new Background("/assets/background_level2.png",0.1);
 
         player = new Player(tileMap);
-        player.setPosition(2200,145);
+        player.setPosition(32,105);
         enemies = new ArrayList<Enemy>();
         explosions = new ArrayList<Explosion>();
 

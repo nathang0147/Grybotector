@@ -316,7 +316,7 @@ public class Player extends MapObject {
          if (currentAct != RUN) {
             currentAct = RUN;
             animation.setFrames(sprites.get(RUN));
-            animation.setDelay(-1);
+            animation.setDelay(10);
             width = 20;
             sfx.get("shooting").play();
          }
