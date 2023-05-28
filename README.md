@@ -42,7 +42,7 @@ If you have any feedback, please reach out to us at feedback.thevortexsquad@gmai
 
 ## Screenshots
 
-[Game screenshot](https://github.com/nathang0147)
+[Game screenshot](https://imgur.com/gallery/etuSTgX)
 
 ## Tech Stack
 
