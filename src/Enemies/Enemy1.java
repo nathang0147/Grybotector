@@ -36,8 +36,8 @@ public class Enemy1  extends Enemy {
         cheight=20;
         cwidth=20;
 
-        health = maxHealth = 4;
-        damage=2;
+        health = maxHealth = 8;
+        damage=1;
         buttNum = maxButt = 600;
         damageCost = 10;
         dame = 1;
