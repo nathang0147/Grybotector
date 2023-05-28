@@ -22,7 +22,7 @@ public class PauseOverlay {
             bgH=155;
             bgX= GamePanel.WIDTH/2- bgW/2;
             bgY= GamePanel.HEIGHT/2-bgH/2-20;
-            backgroundImg= background.getSubimage(0,0,100,155);
+            backgroundImg= background.getSubimage(0,0,103,155);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

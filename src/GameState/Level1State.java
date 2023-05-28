@@ -4,7 +4,9 @@ import Enemies.Enemy1;
 import Enemies.Enemy2;
 import Sound.AudioPlayer;
 import TileMap.TileMap;
+import UI.GameOver;
 import UI.PauseOverlay;
+import UI.WinOverlay;
 import UserInterface.GamePanel;
 import Entity.*;
 import TileMap.*;
@@ -22,6 +24,7 @@ public class Level1State extends GameState{
     private HUD hud;
     private AudioPlayer bgMusic;
     public int currentChoice;
+    private GameOver gameOver;
     public Level1State(GameStateManager gsm) {
         this.gsm = gsm;
         init();
@@ -31,6 +34,9 @@ public class Level1State extends GameState{
     private PauseOverlay pauseOverlay;
     private  boolean isPaused=false;
     private Gate gate;
+    public static boolean isWin=false;
+    public WinOverlay winOverlay;
+    public static boolean isDead=false;
 
     public void init() {
 
@@ -45,6 +51,7 @@ public class Level1State extends GameState{
         player.setPosition(20,210);
         enemies = new ArrayList<Enemy>();
         gate= new Gate(tileMap);
+        gameOver= new GameOver();
 //        gate.setPosition(3360,192);
 
         Enemy1 e1_Ene1 = new Enemy1(tileMap);
@@ -79,11 +86,12 @@ public class Level1State extends GameState{
         explosions = new ArrayList<Explosion>();
         hud = new HUD(player);
         pauseOverlay= new PauseOverlay();
+        winOverlay= new WinOverlay();
 
 
     }
     public void update() {
-        if(isPaused==false) {
+        if(isPaused==false && isWin==false && isDead==false) {
             player.update();
             tileMap.setPosition(
                     GamePanel.WIDTH / 2 - player.getX(),
@@ -105,8 +113,6 @@ public class Level1State extends GameState{
                     System.out.println("Enemies is dead");
                 }
             }
-
-
             // Update explosions
             for( int i=0; i<explosions.size();i++){
                 explosions.get(i).update();
@@ -117,13 +123,17 @@ public class Level1State extends GameState{
             }
             if(enemies.size()==0) {
                 gate.setPosition(3264, 192);
-                if (gate.intersect(player)) gsm.setState(4);
+                if (gate.intersect(player)){
+                    isWin=true;
+                }
             }
             gate.update();
+            if(player.getHealth()==0){
+                isDead=true;
+            }
 
         }
         pauseOverlay.update(currentChoice);
-
 
     }
 
@@ -154,6 +164,13 @@ public class Level1State extends GameState{
          if(enemies.size()==0) {
             gate.draw(g);
          }
+         if(isWin==true){
+             winOverlay.draw(g);
+         }
+         if(isDead==true){
+             System.out.println("Game is false");
+             gameOver.draw(g);
+         }
 
     }
     private void select() {
@@ -172,14 +189,14 @@ public class Level1State extends GameState{
 
 //
     public void keyPressed(int k) {
-        if(isPaused==false) {
+        if(isPaused==false && isWin==false && isDead==false) {
             if (k == KeyEvent.VK_LEFT) player.setLeft(true);
             if (k == KeyEvent.VK_RIGHT) player.setRight(true);
             if (k == KeyEvent.VK_UP) player.setJumping(true);
             if (k == KeyEvent.VK_DOWN) player.setDown(true);
             if (k == KeyEvent.VK_K) player.setShooting();
             if (k==KeyEvent.VK_ESCAPE) isPaused=true;
-        }else {
+        }else if(isPaused==true) {
             if (k == KeyEvent.VK_ENTER) {
                 select();
             }
@@ -196,6 +213,19 @@ public class Level1State extends GameState{
                         currentChoice = 0;
                     }
                     System.out.println("on the left");
+            }
+        }
+        else if(isWin==true){
+            if(k==KeyEvent.VK_ESCAPE){
+                isWin=false;
+                gsm.setState(0);
+                System.out.println("game win");
+            }
+        } else if (isDead==true) {
+            if(k==KeyEvent.VK_ESCAPE){
+                isDead=false;
+                gsm.setState(0);
+                System.out.println("false");
             }
 
         }
