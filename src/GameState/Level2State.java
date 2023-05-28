@@ -119,7 +119,7 @@ public class Level2State extends GameState{
                 }
             }
             if(enemies.size()==0) {
-                gate.setPosition(3264, 192);
+                gate.setPosition(3232, 192);
                 if (gate.intersect(player)){
                     isWin=true;
                 }
