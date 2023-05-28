@@ -141,7 +141,7 @@ public class Boss extends Enemy {
             }
         }
 
-        if(System.nanoTime() % 2000 == 0){
+        if(System.nanoTime() % 20000 == 0){
             isAttack = true;
         }else {
             isAttack = false;
@@ -154,7 +154,7 @@ public class Boss extends Enemy {
                 if(currentAct != ATTACK){
                     currentAct = ATTACK;
                     animation.setFrames(sprites.get(ATTACK));
-                    animation.setDelay(1);
+                    animation.setDelay(70);
                 }
             }
 //            if(dx!=0) {
