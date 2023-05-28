@@ -1,11 +1,12 @@
 package Entity;
 
 import TileMap.*;
-
+import Sound.AudioPlayer;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Player extends MapObject {
 
@@ -13,12 +14,17 @@ public class Player extends MapObject {
    private int health;
    private int maxHealth;
    private int bullet;
-   private int bulletDamage;
+
    private boolean dead;
    private boolean falling;
    private boolean crouch;
 
-
+   // bullet
+   private boolean shooting;
+   private int bulletCost;
+   private int bulletDamage;
+   private int maxBullet;
+   private ArrayList<Bullet> bullets;
 
    // animations
    private ArrayList<BufferedImage[]> sprites;
@@ -35,7 +41,8 @@ public class Player extends MapObject {
    private int CROUCH = 0;
    private int FALLING = 2;
    private int DEAD=1;
-
+   private HashMap<String, AudioPlayer> sfx;
+   private boolean isDamage;
 
    public Player(TileMap tm) {
       super(tm);
@@ -61,6 +68,10 @@ public class Player extends MapObject {
       bullet = 3;
 
       bulletDamage = 1;
+      bullet = maxBullet = 2500;
+
+      bulletCost = 10;
+      bullets = new ArrayList<Bullet>();
 
       //load sprites
       try {
@@ -83,12 +94,12 @@ public class Player extends MapObject {
                   );
                }
                else {
-               bi[j] = spritesheet.getSubimage(
-                       j * width,
-                       i * height,
-                       width,
-                       height
-               );}
+                  bi[j] = spritesheet.getSubimage(
+                          j * width,
+                          i * height,
+                          width,
+                          height
+                  );}
             }
             sprites.add(bi);
          }
@@ -101,10 +112,17 @@ public class Player extends MapObject {
       currentAct = IDLE;
       animation.setFrames(sprites.get(IDLE));
       animation.setDelay(400);
+
+      //add sound
+      sfx = new HashMap<String, AudioPlayer>();
+
+      sfx.put("shooting", new AudioPlayer("/Sound/shootSound.mp3"));
+
    }
 
-
-
+   public void setDamage(boolean damage) {
+      isDamage = damage;
+   }
 
    public int getHealth() {
       return health;
@@ -113,6 +131,10 @@ public class Player extends MapObject {
 
       setMapPosition();
 
+      //      draw bullet
+      for (int i = 0; i < bullets.size(); i++) {
+         bullets.get(i).draw(g);
+      }
       // draw player
 
       if(facingRight) {
@@ -147,15 +169,39 @@ public class Player extends MapObject {
    public void setGliding(boolean b){
       falling =b;
    }
-   //
-//       public boolean isShooting() {
-//          return shooting;
-//       }
-//
-//       public boolean isMelee() {
-//          return melee;
-//       }
-//
+   public void setShooting() {
+      shooting = true;
+   }
+
+   public void checkAttack(ArrayList<Enemy> enemies) {
+      for (int i = 0; i < enemies.size(); i++) {
+         Enemy e = enemies.get(i);
+
+//         shoot enemies
+         for (int j = 0; j < bullets.size(); j++) {
+            if (bullets.get(j).intersect(e)) {
+               e.hitDamage(bulletDamage);
+               bullets.get(j).setHit();
+               break;
+            }
+         }
+//         enemy collision
+         if (intersect(e)) {
+            hitDamage(e.getDamage());
+            isDamage=true;
+         }
+      }
+   }
+   public void hitDamage(int damage) {
+
+         health -=  damage;
+         System.out.println(health);
+         if (health < 0) health = 0;
+         if (health == 0) dead = true;
+         isDamage=false;
+
+   }
+
    public void getNextPosition() {
 //          int doublejump = 0;
       //move normal
@@ -209,7 +255,7 @@ public class Player extends MapObject {
          dy=jumpStart;
          falling=true;
       }
-      System.out.println("Falling in Player: "+falling);
+      //System.out.println("Falling in Player: "+falling);
 //   System.out.println("dy="+dy);
       //falling
       if(falling){
@@ -236,23 +282,47 @@ public class Player extends MapObject {
 
    public void update(){
       //update position
-      setPosition(xtemp,ytemp);
       getNextPosition();
       checkCollision();
-      System.out.println("tl: "+topLeft);
-      System.out.println("tr: "+topRight);
-      System.out.println("bl: "+botLeft);
-      System.out.println("br: "+botRight);
-      System.out.println("Right: " +right);
-      System.out.println("Left: "+left);
-      System.out.println("Dx= "+dx);
-      System.out.println("Dy= "+dy);
-      System.out.println();
+      setPosition(xtemp,ytemp);
 
+      //      check attack has stopped
+      if (currentAct == RUN) {
+         if (animation.hasPlayedOnece()) shooting = false;
+      }
+
+//      shooting
+      bullet += 1;
+      if (bullet > maxBullet) bullet = maxBullet;
+      if (shooting && currentAct != RUN) {
+         if (bullet > bulletCost) {
+            bullet -= bulletCost;
+            Bullet bl = new Bullet(tileMap, facingRight);
+            bl.setPosition(x + 4, y - 4);
+            bullets.add(bl);
+         }
+      }
+      // update bullet
+      for(int i = 0; i < bullets.size(); i++) {
+         bullets.get(i).update();
+         if(bullets.get(i).shouldRemove()) {
+            bullets.remove(i);
+            i--;
+         }
+      }
       //set animation
-      if(down){
+
+      if (shooting) {
+         if (currentAct != RUN) {
+            currentAct = RUN;
+            animation.setFrames(sprites.get(RUN));
+            animation.setDelay(-1);
+            width = 20;
+            sfx.get("shooting").play();
+         }
+      }
+      else if(down){
          if(currentAct!=CROUCH){
-            System.out.println("Crouch is working**************************************************");
             currentAct=CROUCH;
             animation.setFrames(sprites.get(CROUCH));
             animation.setDelay(400);
@@ -297,7 +367,8 @@ public class Player extends MapObject {
          if(left) facingRight=false;
       }
 
-      System.out.println("Current Act: " + currentAct);
-      System.out.println();
+      //System.out.println("Current Act: " + currentAct);
+      //System.out.println();
+
    }
 }

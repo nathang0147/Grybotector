@@ -15,7 +15,8 @@ GameMain {
         JFrame window = new JFrame ("Grybotector");
         BufferedImage img= ImageIO.read(new File("Resources/Icon/fire.png"));
         window.setIconImage(img);
-        window.setContentPane(new GamePanel());
+        GamePanel gp= GamePanel.getPanel();
+        window.setContentPane(gp);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
         window.pack();

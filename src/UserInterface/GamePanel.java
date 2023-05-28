@@ -7,8 +7,9 @@ import java.awt.image.BufferedImage;
 import java.awt.Graphics2D;
 
 import GameState.GameStateManager;
+import GameState.MenuState;
 
-public class GamePanel extends JPanel implements Runnable, KeyListener, MouseListener {
+public class GamePanel extends JPanel implements Runnable, KeyListener, MouseListener,MouseMotionListener {
     //Dimension
     public static final int WIDTH = 320;
     public static final int HEIGHT = 240;
@@ -26,14 +27,19 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 
     //game state manager
     private GameStateManager gsm;
-    public GamePanel() {
+    
+    private static GamePanel gp;
+    private GamePanel() {
         super();
         setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
         setFocusable(true);
         requestFocus();
-//        timer=new Timer(100, (ActionListener) this);
-//        timer.start();
-
+    }
+    public static GamePanel getPanel(){
+        if(gp==null){
+            gp= new GamePanel();
+        }
+        return  gp;
     }
 
     public void addNotify() {
@@ -42,6 +48,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
             thread = new Thread(this);
             addKeyListener(this);
             addMouseListener(this);
+            addMouseMotionListener(this);
             thread.start();
         }
     }
@@ -106,7 +113,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 
     }
     public void mousePressed(MouseEvent e) {
-
     }
     public void mouseReleased(MouseEvent e) {
 
@@ -115,6 +121,16 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 
     }
     public void mouseExited(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+
     }
 }
 

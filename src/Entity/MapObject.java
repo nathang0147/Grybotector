@@ -71,7 +71,7 @@ public abstract class MapObject {
     public boolean intersect(MapObject o){
         Rectangle r1 = newRec();
         Rectangle r2 = o.newRec();
-        return r2.intersects(r1);
+        return r1.intersects(r2);
     }
 
     public Rectangle newRec(){
@@ -125,7 +125,7 @@ public abstract class MapObject {
         if(dy < 0){
             if (topLeft || topRight) {
                 dy = 0;
-                ytemp = currentRow * tileSize + cheight/2;
+                ytemp = currentRow * tileSize + cheight / 2;
             }
             else {
                 ytemp += dy;
@@ -223,6 +223,26 @@ public abstract class MapObject {
                 x + xmap - width > GamePanel.WIDTH||
                 y + height + ymap < 0||
                 y + ymap - height > GamePanel.HEIGHT;
+    }
+    public  void draw(Graphics2D g){
+        if(facingRight) {
+            g.drawImage(
+                    animation.getImage(),
+                    (int)(x + xmap - width / 2),
+                    (int)(y + ymap - height / 2),
+                    null
+            );
+        }
+        else {
+            g.drawImage(
+                    animation.getImage(),
+                    (int)(x + xmap - width / 2 + width),
+                    (int)(y + ymap - height / 2),
+                    -width,
+                    height,
+                    null
+            );
+        }
     }
 
 }
