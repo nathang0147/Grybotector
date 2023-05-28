@@ -125,7 +125,7 @@ public class Level1State extends GameState{
             if(enemies.size()==0) {
                 gate.setPosition(3264, 192);
                 if (gate.intersect(player)){
-                    isWin=true;
+                    gsm.setState(2);
                 }
             }
             gate.update();

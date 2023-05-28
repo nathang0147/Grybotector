@@ -194,7 +194,7 @@ public class Player extends MapObject {
    }
    public void hitDamage(int damage) {
       if (isDamage) {
-         health -= 0.000000000001* damage;
+         health -=  damage;
          System.out.println(health);
          if (health < 0) health = 0;
          if (health == 0) dead = true;
