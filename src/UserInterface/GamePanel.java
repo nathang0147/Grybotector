@@ -27,15 +27,13 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 
     //game state manager
     private GameStateManager gsm;
+    
     private static GamePanel gp;
     private GamePanel() {
         super();
         setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
         setFocusable(true);
         requestFocus();
-//        timer=new Timer(100, (ActionListener) this);
-//        timer.start();
-
     }
     public static GamePanel getPanel(){
         if(gp==null){
