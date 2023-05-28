@@ -86,7 +86,7 @@ public class MenuState extends GameState {
     private void select() {
 
             if (currentChoice == 0) {
-                gsm.setState(1);
+                gsm.setState(2);
                 Level1State.isWin=false;
                 Level1State.isDead=false;
                 Level2State.isDead=false;
