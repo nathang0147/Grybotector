@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 public class Boss extends Enemy {
 
+    private boolean isAttack;
     //LOAD sprites
     private ArrayList<BufferedImage[]> sprites;
     private final int[] numFrames={
@@ -38,10 +39,10 @@ public class Boss extends Enemy {
 
         //Real Size of boss
         cheight=40;
-        cwidth=50;
+        cwidth=70;
 
         //Health
-        health= maxHealth = 2;
+        health= maxHealth =100;
 
         //hit
         damage=3;
@@ -106,6 +107,24 @@ public class Boss extends Enemy {
         if(falling){
             dy+=fallSpeed;
         }
+
+        if(isAttack){
+            dx = 0;
+//        }else {
+//            if (right && dx == 0  ) {
+//            System.out.println("Turn left");
+//            right = false;
+//            left = true;
+//            facingRight = false;
+//
+//        } else if (left && dx == 0) {
+//            right = true;
+//            left = false;
+//            facingRight = true;
+//
+//        }
+        }
+
     }
 
     public void update(Player player){
@@ -122,31 +141,37 @@ public class Boss extends Enemy {
             }
         }
 
+        if(System.nanoTime() % 20000 == 0){
+            isAttack = true;
+        }else {
+            isAttack = false;
+        }
+
 
         //update action
         if (!notOnScreen()){
-            if(dx!=0) {
-                if (currentAct != WALK) {
-                    currentAct = WALK;
-                    animation.setFrames(sprites.get(WALK));
-                    animation.setDelay(100);
+            if(isAttack){
+                if(currentAct != ATTACK){
+                    currentAct = ATTACK;
+                    animation.setFrames(sprites.get(ATTACK));
+                    animation.setDelay(70);
                 }
             }
-            if(dx==0&&health>0){
-                if(currentAct!=IDLE){
-                    currentAct=IDLE;
-                    animation.setFrames(sprites.get(IDLE));
-                    animation.setDelay(400);
-                }
-            }
-            if (health==0) {
-                System.out.println("die");
-                if(currentAct!=DIE){
-                    currentAct=DIE;
-                    animation.setFrames(sprites.get(DIE));
-                    animation.setDelay(100);
-                }
-            }
+//            if(dx!=0) {
+//                if (currentAct != WALK) {
+//                    currentAct = WALK;
+//                    animation.setFrames(sprites.get(WALK));
+//                    animation.setDelay(100);
+//                }
+//            }
+//            else if (health==0) {
+//                System.out.println("die");
+//                if(currentAct!=DIE){
+//                    currentAct=DIE;
+//                    animation.setFrames(sprites.get(DIE));
+//                    animation.setDelay(100);
+//                }
+//          }
         }
         else if (notOnScreen()) {
             right = true;
@@ -169,6 +194,8 @@ public class Boss extends Enemy {
             facingRight = true;
 
         }
+
+
         animation.update();
     }
 
@@ -197,4 +224,5 @@ public class Boss extends Enemy {
             );
         }
     }
+
 }
