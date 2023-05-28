@@ -23,29 +23,26 @@ Overall, Grybotector is an exciting and challenging shooting game that showcases
 
 
 
-## Demo game play
+## Screenshots
 
-Insert gif or link to demo
+[Game screenshot](https://imgur.com/gallery/etuSTgX)
 
+## Game play video demo
 
-## Badges
+[Game play video](https://drive.google.com/file/d/1MWpVR_fzvmGCtFiXtDoADbl_2_ocBkGx/view?usp=sharing)
 
-[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
-[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
-[![AGPL License](https://img.shields.io/badge/license-AGPL-blue.svg)](http://www.gnu.org/licenses/agpl-3.0)
+## Tech Stack
 
+Java
 
 ## Feedback
 
 If you have any feedback, please reach out to us at feedback.thevortexsquad@gmail.com
 
 
-## Screenshots
-
-[Game screenshot](https://imgur.com/gallery/etuSTgX)
-
-## Tech Stack
-
-Java
-
 ![Logo](https://github.com/nathang0147/Grybotector/blob/main/Resources/Icon/fire.png?raw=true)
+## Badges
+
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
+[![AGPL License](https://img.shields.io/badge/license-AGPL-blue.svg)](http://www.gnu.org/licenses/agpl-3.0)
