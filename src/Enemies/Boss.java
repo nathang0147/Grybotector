@@ -2,6 +2,7 @@ package Enemies;
 
 import Entity.Animation;
 import Entity.Enemy;
+import Entity.Player;
 import TileMap.TileMap;
 
 import javax.imageio.ImageIO;
@@ -107,7 +108,7 @@ public class Boss extends Enemy {
         }
     }
 
-    public void update(){
+    public void update(Player player){
         //update position
         getNextPosition();
         checkCollision();
@@ -132,30 +133,13 @@ public class Boss extends Enemy {
                 }
             }
             if(dx==0&&health>0){
-                System.out.println("idle");
-                long elapse = (System.nanoTime()-flinchedTime) / 1000000;
-                System.out.println("elapse:" +elapse);
-                if (elapse>4000){
-                    if(currentAct!=IDLE){
-                        currentAct=IDLE;
-                        animation.setFrames(sprites.get(IDLE));
-                        animation.setDelay(400);
-                    }
-                }
-                else {
-                    if (currentAct != WALK) {
-                        currentAct = WALK;
-                        animation.setFrames(sprites.get(WALK));
-                        animation.setDelay(100);
-                    }
-                }
                 if(currentAct!=IDLE){
                     currentAct=IDLE;
                     animation.setFrames(sprites.get(IDLE));
                     animation.setDelay(400);
                 }
             }
-            if (health==0&&isDead()) {
+            if (health==0) {
                 System.out.println("die");
                 if(currentAct!=DIE){
                     currentAct=DIE;
@@ -173,7 +157,7 @@ public class Boss extends Enemy {
         }
 
 
-        if (right && dx == 0 && !isDead() ) {
+        if (right && dx == 0  ) {
             System.out.println("Turn left");
             right = false;
             left = true;
