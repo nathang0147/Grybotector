@@ -47,3 +47,5 @@ If you have any feedback, please reach out to us at feedback.thevortexsquad@gmai
 ## Tech Stack
 
 Java
+
+![Logo](https://github.com/nathang0147/Grybotector/blob/main/Resources/Icon/fire.png?raw=true)
