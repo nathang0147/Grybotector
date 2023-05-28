@@ -140,7 +140,7 @@ public class Level2State extends GameState{
          //Draw
          tileMap.draw(g);
          //Draw player
-         //System.out.println(enemies.size());
+
          player.draw(g);
          for (int i = 0; i < enemies.size(); i++) {
              enemies.get(i).draw(g);

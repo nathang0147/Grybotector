@@ -244,22 +244,16 @@ public class Player extends MapObject {
       if((dx>0&&!botRight)||(dx<0&&!botLeft)){
          falling=true;
       }
-//   System.out.println("dx= "+dx);
 
-      //can move when act
-//   if ( !(jumping || falling)) {
-//      dx = 0;
-//   }
 //    jumping
       if(jumping && !falling){
          dy=jumpStart;
          falling=true;
       }
-      //System.out.println("Falling in Player: "+falling);
-//   System.out.println("dy="+dy);
+
       //falling
       if(falling){
-//      System.out.println("dy="+dy);
+
          if(dy>0){
             dy+=fallSpeed*2;}
          else dy+=fallSpeed;
@@ -366,9 +360,5 @@ public class Player extends MapObject {
          if(right) facingRight=true;
          if(left) facingRight=false;
       }
-
-      //System.out.println("Current Act: " + currentAct);
-      //System.out.println();
-
    }
 }

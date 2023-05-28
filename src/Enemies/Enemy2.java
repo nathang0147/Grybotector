@@ -86,35 +86,18 @@ public class Enemy2 extends Enemy {
         checkCollision();
         setPosition(xtemp,ytemp);
 
-//        buttNum += 1;
-//        if (buttNum > maxButt) buttNum = maxButt;
-//        if (!notOnScreen()) {
-//            if (buttNum > damageCost) {
-//                buttNum -= damageCost;
-//                Magicbutt bl = new Magicbutt(tileMap, facingRight);
-//                bl.setPosition(x +1, y - 1);
-//                magicbutts.add(bl);
-//            }
-//        }
-//        for(int i = 0; i < magicbutts.size(); i++){
-//            magicbutts.get(i).update();
-//            if(magicbutts.get(i).shouldRemove()){
-//                magicbutts.remove(i);
-//                i--;
-//            }
-//        }
 
         if (notOnScreen()&& currentAction!=IDLE){
             currentAction = IDLE;
             animation.setFrames(sprites.get(currentAction));
             animation.setDelay(400);
-            //System.out.println("IDLEEEEEEE" + currentAction);
+
         }
         else if (!notOnScreen()&& currentAction!=ATK){
             currentAction = ATK;
             animation.setFrames(sprites.get(currentAction));
             animation.setDelay(400);
-            //System.out.println("ATKKKKKK" + currentAction);
+
         }
         if(flinching){
             long elapse=(System.nanoTime()-flinchedTime)/1000000;

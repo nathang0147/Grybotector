@@ -110,19 +110,7 @@ public class Boss extends Enemy {
 
         if(isAttack){
             dx = 0;
-//        }else {
-//            if (right && dx == 0  ) {
-//            System.out.println("Turn left");
-//            right = false;
-//            left = true;
-//            facingRight = false;
-//
-//        } else if (left && dx == 0) {
-//            right = true;
-//            left = false;
-//            facingRight = true;
-//
-//        }
+
         }
 
     }
@@ -157,21 +145,7 @@ public class Boss extends Enemy {
                     animation.setDelay(70);
                 }
             }
-//            if(dx!=0) {
-//                if (currentAct != WALK) {
-//                    currentAct = WALK;
-//                    animation.setFrames(sprites.get(WALK));
-//                    animation.setDelay(100);
-//                }
-//            }
-//            else if (health==0) {
-//                System.out.println("die");
-//                if(currentAct!=DIE){
-//                    currentAct=DIE;
-//                    animation.setFrames(sprites.get(DIE));
-//                    animation.setDelay(100);
-//                }
-//          }
+
         }
         else if (notOnScreen()) {
             right = true;

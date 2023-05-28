@@ -18,7 +18,7 @@ public class Enemy3 extends Enemy {
         moveSpeed = 0.3;
         maxSpeed = 0.3;
         fallSpeed = 0.2;
-//        maxFallSpeed = 10.0;
+
 
         width = 30;
         height = 30;
@@ -121,7 +121,6 @@ public class Enemy3 extends Enemy {
 
     public void draw(Graphics2D g) {
 
-        //if(notOnScreen()) return;
 
         setMapPosition();
 

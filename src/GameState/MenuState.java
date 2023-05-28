@@ -68,16 +68,6 @@ public class MenuState extends GameState {
 
         //draw title
 
-        //g.drawString("GRYBOTECTOR", 80, 70);
-//        g.setFont(font);
-//        for (int i = 0; i < options.length; i++) {
-//            if (i == currentChoice) {
-//                g.setColor(Color.YELLOW);
-//            } else {
-//                g.setColor(Color.RED);
-//            }
-//            g.drawString(options[i], 145, 140 + i * 30);
-//        }
 
         for (MenuButton mb : buttons)
             mb.draw(g);
