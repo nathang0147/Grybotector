@@ -37,7 +37,7 @@ public class Enemy2 extends Enemy {
         cwidth = 10;
 
         health = maxHealth = 5;
-        damage = 2;
+        damage = (int) 1;
 
         buttNum = maxButt = 600;
         damageCost = 10;

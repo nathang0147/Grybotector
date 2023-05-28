@@ -42,6 +42,7 @@ public class Player extends MapObject {
    private int FALLING = 2;
    private int DEAD=1;
    private HashMap<String, AudioPlayer> sfx;
+   private boolean isDamage;
 
    public Player(TileMap tm) {
       super(tm);
@@ -119,8 +120,9 @@ public class Player extends MapObject {
 
    }
 
-
-
+   public void setDamage(boolean damage) {
+      isDamage = damage;
+   }
 
    public int getHealth() {
       return health;
@@ -186,13 +188,18 @@ public class Player extends MapObject {
 //         enemy collision
          if (intersect(e)) {
             hitDamage(e.getDamage());
+            isDamage=true;
          }
       }
    }
    public void hitDamage(int damage) {
-      health -= damage;
-      if(health < 0) health = 0;
-      if(health == 0) dead = true;
+      if (isDamage) {
+         health -= 0.000000000001* damage;
+         System.out.println(health);
+         if (health < 0) health = 0;
+         if (health == 0) dead = true;
+         isDamage=false;
+      }
 
    }
 
@@ -363,5 +370,6 @@ public class Player extends MapObject {
 
       //System.out.println("Current Act: " + currentAct);
       //System.out.println();
+
    }
 }

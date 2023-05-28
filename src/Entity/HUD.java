@@ -18,6 +18,7 @@ public class HUD {
    private int height;
    private int width;
 
+
    public HUD(Player p) {
       player = p;
       width = 48;
@@ -44,17 +45,33 @@ public class HUD {
    }
 
    public void draw(Graphics2D g) {
-      font = new Font("EightBit", Font.BOLD, 10);
-      g.drawImage(holder, 10, 10-5, null);
-      g.drawImage(sprites[3], 10, 12-5, null);
-      g.setFont(font);
-      //set color = 0-255-51
-      g.setColor(new Color(46, 149, 68));
-      g.drawString(
-         player.getHealth() + "/" + player.getMaxHealth(),
-         45+10,
-         25-5
-      );
+      if(player.getHealth()>0) {
+         font = new Font("EightBit", Font.BOLD, 10);
+         g.drawImage(holder, 10, 10 - 5, null);
+         g.drawImage(sprites[player.getHealth()-1], 10, 12 - 5, null);
+         g.setFont(font);
+         //set color = 0-255-51
+         g.setColor(new Color(46, 149, 68));
+         g.drawString(
+                 player.getHealth() + "/" + player.getMaxHealth(),
+                 45 + 10,
+                 25 - 5
+         );
+      }
+      else {
+         font = new Font("EightBit", Font.BOLD, 10);
+         g.drawImage(holder, 10, 10 - 5, null);
+         g.drawImage(sprites[0], 10, 12 - 5, null);
+         g.setFont(font);
+         //set color = 0-255-51
+         g.setColor(new Color(46, 149, 68));
+         g.drawString(
+                 player.getHealth() + "/" + player.getMaxHealth(),
+                 45 + 10,
+                 25 - 5
+         );
+
+      }
    }
    public void update(){
 
