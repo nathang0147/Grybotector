@@ -2,6 +2,7 @@ package Enemies;
 
 import Entity.Animation;
 import Entity.Enemy;
+import Entity.Player;
 import TileMap.TileMap;
 
 import javax.imageio.ImageIO;
@@ -107,7 +108,7 @@ public class Boss extends Enemy {
         }
     }
 
-    public void update(){
+    public void update(Player player){
         //update position
         getNextPosition();
         checkCollision();

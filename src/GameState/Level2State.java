@@ -38,13 +38,11 @@ public class Level2State extends GameState{
         bg=new Background("/assets/background_level2.png",0.1);
 
         player = new Player(tileMap);
-        player.setPosition(2220,110);
+        player.setPosition(20,110);
         enemies = new ArrayList<Enemy>();
         explosions = new ArrayList<Explosion>();
 
         Enemy1 e1_Ene1 = new Enemy1(tileMap);
-        //Enemy1 e3_Ene1 = new Enemy1(tileMap);
-        //Enemy1 e4_Ene1 = new Enemy1(tileMap);
 
         Enemy2 e2_Ene2 = new Enemy2(tileMap);
         Enemy2 e5_Ene2 = new Enemy2(tileMap);
@@ -54,26 +52,19 @@ public class Level2State extends GameState{
         Boss boss=new Boss(tileMap);
 
         //set boss position
-        boss.setPosition(2200,145);
+        boss.setPosition(2304,145);
 
         enemies.add(e1_Ene1);
-//        enemies.add(e3_Ene1);
-//        enemies.add(e4_Ene1);
-
         enemies.add(e2_Ene2);
         enemies.add(e5_Ene2);
         enemies.add(e6_Ene2);
 
         enemies.add(boss);
 
-        //e1_Ene1.setPosition(2080,210);
+        e1_Ene1.setPosition(2236,205);
 
         //updated for map level 2
         e2_Ene2.setPosition(160,205);
-
-//        e3_Ene1.setPosition(1216,210);
-//        e4_Ene1.setPosition(1568,210);
-
         e5_Ene2.setPosition(2272,205);
         e6_Ene2.setPosition(3264,205);
 
