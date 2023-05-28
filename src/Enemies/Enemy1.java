@@ -2,6 +2,7 @@ package Enemies;
 
 import Entity.Animation;
 import Entity.Enemy;
+import Entity.Player;
 import TileMap.TileMap;
 
 import javax.imageio.ImageIO;
@@ -16,6 +17,11 @@ public class Enemy1  extends Enemy {
     private int currentAction;
     private int RUN = 0;
     private int ATK = 1;
+
+    private boolean isAttack = true;
+
+    private ArrayList<Magicbutt> magicbutts;
+    private int dame, damageCost, buttNum, maxButt;
 
     public Enemy1(TileMap tm) {
         super(tm);
@@ -32,6 +38,13 @@ public class Enemy1  extends Enemy {
 
         health = maxHealth = 4;
         damage=2;
+        buttNum = maxButt = 600;
+        damageCost = 10;
+        dame = 1;
+
+        magicbutts = new ArrayList<Magicbutt>();
+
+
 
         try {
             //load sprites
@@ -88,10 +101,35 @@ public class Enemy1  extends Enemy {
             dy+=fallSpeed;
         }
     }
-    public void update(){
+    public void update(Player player){
         getNextPosition();
         checkCollision();
         setPosition(xtemp, ytemp);
+        if(System.nanoTime()%20000 ==0){
+            isAttack= true;
+        }else {
+            isAttack= false;
+        }
+
+            buttNum += 1;
+
+            if (buttNum > maxButt) buttNum = maxButt;
+            if (!notOnScreen() && isAttack) {
+                if (buttNum > damageCost) {
+                    buttNum -= damageCost;
+                    Magicbutt bl = new Magicbutt(tileMap, facingRight);
+                    bl.setPosition(x + 1, y - 1);
+                    magicbutts.add(bl);
+                }
+            }
+            for (int i = 0; i < magicbutts.size(); i++) {
+                magicbutts.get(i).update(player);
+                if (magicbutts.get(i).shouldRemove()) {
+                    magicbutts.remove(i);
+                    i--;
+                }
+            }
+
 
         if(flinching) {
             long elapse = (System.nanoTime()-flinchedTime) / 1000000;
@@ -139,6 +177,17 @@ public class Enemy1  extends Enemy {
 //        if(notOnScreen()) return;
         setMapPosition();
         super.draw(g);
-
+        for(int i  = 0; i < magicbutts.size(); i++){
+            magicbutts.get(i).draw(g);
+        }
+    }
+    public void checkAttackEnemy(Player player){
+        for(int i = 0; i < magicbutts.size(); i ++){
+            if(magicbutts.get(i).intersect(player)){
+                player.hitDamage(damage);
+                magicbutts.get(i).setHit();
+                break;
+            }
+        }
     }
 }

@@ -2,6 +2,7 @@ package Enemies;
 
 import Entity.Animation;
 import Entity.MapObject;
+import Entity.Player;
 import TileMap.TileMap;
 
 import javax.imageio.ImageIO;
@@ -9,9 +10,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Magicbutt extends MapObject {
-    public Magicbutt(TileMap tm) {
-        super(tm);
-    }
+
+    private TileMap tm;
     private boolean hit;
     private boolean remove;
     private BufferedImage[] sprites;
@@ -24,22 +24,22 @@ public class Magicbutt extends MapObject {
         if (right) dx = moveSpeed;
         else dx = -moveSpeed;
 
-        width = 8;
-        height = 8;
+        width = 60;
+        height = 38;
         cwidth = 10;
         cheight = 10;
 
 //        load spirtes
         try {
 
-            BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/Bullet/Bullet_green.png"));
-            sprites = new BufferedImage[5];
+            BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/Bullet/stone_bullet.png"));
+            sprites = new BufferedImage[3];
             for (int i = 0; i < sprites.length; i++) {
                 sprites[i] = spritesheet.getSubimage(i * width, 0, width, height);
             }
             hitSprites = new BufferedImage[2];
             for (int i = 0; i < hitSprites.length; i++) {
-                hitSprites[i] = spritesheet.getSubimage(i * width, height, width, height);
+                hitSprites[i] = spritesheet.getSubimage(i * width,0*height, width, height);
             }
             animation = new Animation();
             animation.setFrames(sprites);
@@ -58,28 +58,33 @@ public class Magicbutt extends MapObject {
         animation.setFrames(hitSprites);
         animation.setDelay(70);
         dx = 0;
+
+
     }
     public boolean shouldRemove() {
         return remove;
     }
 
-    public void update() {
+    public void update(Player player) {
         if (!notOnScreen()) {
-            checkCollision();
-            setPosition(xtemp, ytemp);
+                checkCollision();
+                setPosition(xtemp, ytemp);
 
 
-            if (dx == 0 && !hit) {
-                setHit();
-            }
-            animation.update();
-            if (hit && animation.hasPlayedOnece()) {
-                remove = true;
-            }
+                if (this.intersect(player) || !hit && dx == 0) {
+                    setHit();
+                }
+                animation.update();
+                if (hit && animation.hasPlayedOnece() ) {
+                    remove = true;
+                }
+
+
         }
     }
     public void draw (Graphics2D g) {
         setMapPosition();
         super.draw(g);
     }
+
 }

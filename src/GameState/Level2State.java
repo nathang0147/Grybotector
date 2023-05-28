@@ -92,7 +92,7 @@ public class Level2State extends GameState{
         for (int i = 0; i < enemies.size(); i++) {
             Enemy e = enemies.get(i);
             e.checkAttackEnemy(player);
-            e.update();
+            e.update(player);
             if (e.isDead()) {
                 enemies.remove(i);
                 i--;}

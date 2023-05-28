@@ -37,7 +37,7 @@ public class Enemy2 extends Enemy {
         cwidth = 10;
 
         health = maxHealth = 5;
-        damage = (int) 1;
+        damage = 2;
 
         buttNum = maxButt = 600;
         damageCost = 10;
@@ -82,7 +82,7 @@ public class Enemy2 extends Enemy {
         animation.setDelay(300);
 
     }
-    public void update(){
+    public void update(Player player){
         checkCollision();
         setPosition(xtemp,ytemp);
 
