@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
-public class Magicbutt extends MapObject {
+public class MagicBullet extends MapObject {
 
   private TileMap tm;
   private boolean hit;
@@ -16,7 +16,7 @@ public class Magicbutt extends MapObject {
   private BufferedImage[] sprites;
   private BufferedImage[] hitSprites;
 
-  public Magicbutt(TileMap tm, boolean right) {
+  public MagicBullet(TileMap tm, boolean right) {
     super(tm);
 
     moveSpeed = 2;
