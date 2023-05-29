@@ -42,7 +42,7 @@ public class Boss extends Enemy {
         cwidth=70;
 
         //Health
-        health= maxHealth =100;
+        health= maxHealth =30;
 
         //hit
         damage=3;
@@ -157,7 +157,6 @@ public class Boss extends Enemy {
 
 
         if (right && dx == 0  ) {
-            System.out.println("Turn left");
             right = false;
             left = true;
             facingRight = false;

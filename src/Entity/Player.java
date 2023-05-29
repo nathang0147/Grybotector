@@ -195,7 +195,6 @@ public class Player extends MapObject {
    public void hitDamage(int damage) {
 
          health -=  damage;
-         System.out.println(health);
          if (health < 0) health = 0;
          if (health == 0) dead = true;
          isDamage=false;
@@ -266,7 +265,6 @@ public class Player extends MapObject {
          if(dy>=maxFall) {
             dy=maxFall;
             falling=false;
-//         jumping=false;
          }
          if(botRight&&botRight){
             falling=false;
@@ -292,7 +290,7 @@ public class Player extends MapObject {
          if (bullet > bulletCost) {
             bullet -= bulletCost;
             Bullet bl = new Bullet(tileMap, facingRight);
-            bl.setPosition(x + 4, y - 4);
+            bl.setPosition(x + 6, y - 4);
             bullets.add(bl);
          }
       }

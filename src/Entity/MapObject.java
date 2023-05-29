@@ -150,7 +150,7 @@ public abstract class MapObject {
                 xtemp += dx;
             }
         }
-//        System.out.println("Falling in map object: "+falling);
+
         if (!falling){
             calculateConner(x,ynext+1);
             if(!botLeft && !botRight){

@@ -81,7 +81,7 @@ public class Level1State extends GameState{
         e4_Ene1.setPosition(1568,210);
 
         e5_Ene2.setPosition(2272,142);
-        e6_Ene2.setPosition(3164-32*5,210);
+        e6_Ene2.setPosition(3164-32*5,203);
 
         explosions = new ArrayList<Explosion>();
         hud = new HUD(player);
@@ -91,7 +91,7 @@ public class Level1State extends GameState{
 
     }
     public void update() {
-        if(!isPaused&& !isWin&& !isDead) {
+        if(isPaused==false && isWin==false && isDead==false) {
             player.update();
             tileMap.setPosition(
                     GamePanel.WIDTH / 2 - player.getX(),
@@ -111,7 +111,7 @@ public class Level1State extends GameState{
                     explosions.add(
                             new Explosion(e.getX(),e.getY())
                     );
-                    System.out.println("Enemies is dead");
+
                 }
             }
             // Update explosions
@@ -145,7 +145,7 @@ public class Level1State extends GameState{
         //Draw
         tileMap.draw(g);
         //Draw player
-         //System.out.println(enemies.size());
+
         player.draw(g);
         for (int i = 0; i < enemies.size(); i++) {
              enemies.get(i).draw(g);
@@ -159,17 +159,16 @@ public class Level1State extends GameState{
 
         //Draw HUD
         hud.draw(g);
-         if(isPaused) {
+         if(isPaused==true) {
              pauseOverlay.draw(g);
          }
          if(enemies.size()==0) {
             gate.draw(g);
          }
-         if(isWin){
+         if(isWin==true){
              winOverlay.draw(g);
          }
-         if(isDead){
-             System.out.println("Game is false");
+         if(isDead==true){
              gameOver.draw(g);
          }
 
@@ -190,14 +189,14 @@ public class Level1State extends GameState{
 
 //
     public void keyPressed(int k) {
-        if(!isPaused&& !isWin&& !isDead) {
+        if(isPaused==false && isWin==false && isDead==false) {
             if (k == KeyEvent.VK_LEFT) player.setLeft(true);
             if (k == KeyEvent.VK_RIGHT) player.setRight(true);
             if (k == KeyEvent.VK_UP) player.setJumping(true);
             if (k == KeyEvent.VK_DOWN) player.setDown(true);
             if (k == KeyEvent.VK_K) player.setShooting();
             if (k==KeyEvent.VK_ESCAPE) isPaused=true;
-        }else if(isPaused) {
+        }else if(isPaused==true) {
             if (k == KeyEvent.VK_ENTER) {
                 select();
             }
@@ -206,27 +205,27 @@ public class Level1State extends GameState{
                     if (currentChoice == -1) {
                         currentChoice = 3 - 1;
                     }
-                    System.out.println("On the right");
+
             }
             if (k == KeyEvent.VK_LEFT) {
                     currentChoice++;
                     if (currentChoice == 3) {
                         currentChoice = 0;
                     }
-                    System.out.println("on the left");
+
             }
         }
-        else if(isWin){
+        else if(isWin==true){
             if(k==KeyEvent.VK_ESCAPE){
                 isWin=false;
                 gsm.setState(0);
-                System.out.println("game win");
+
             }
-        } else if (isDead) {
+        } else if (isDead==true) {
             if(k==KeyEvent.VK_ESCAPE){
                 isDead=false;
                 gsm.setState(0);
-                System.out.println("false");
+
             }
 
         }

@@ -34,7 +34,6 @@ public class HUD {
       try {
          BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/HUD/Health.png"));
          int spriteCount = spritesheet.getWidth()/48;
-         //System.out.println(spriteCount);
             for(int j = 0; j < spriteCount; j++) {
                sprites[j] = spritesheet.getSubimage(j * width, 0, width, height);
             }
