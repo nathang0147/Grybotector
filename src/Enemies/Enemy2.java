@@ -35,7 +35,7 @@ public class Enemy2 extends Enemy {
     cwidth = 10;
 
     health = maxHealth = 5;
-    damage = 2;
+    damage = 1;
 
     buttNum = maxButt = 600;
     damageCost = 10;
@@ -102,7 +102,7 @@ public class Enemy2 extends Enemy {
   public void checkAttackEnemy(Player player) {
     for (int i = 0; i < magicbutts.size(); i++) {
       if (magicbutts.get(i).intersect(player)) {
-        player.hitDamage(damage);
+        player.hitDamage(1);
         magicbutts.get(i).setHit();
         break;
       }

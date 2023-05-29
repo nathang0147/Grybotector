@@ -14,7 +14,8 @@ public class Player extends MapObject {
   private int health;
   private int maxHealth;
   private int bullet;
-
+  private boolean flinching;
+  private long flinchTimer;
   private boolean dead;
   private boolean falling;
   private boolean crouch;
@@ -123,6 +124,15 @@ public class Player extends MapObject {
     for (int i = 0; i < bullets.size(); i++) {
       bullets.get(i).draw(g);
     }
+
+    // draw player
+    if(flinching) {
+      long elapsed =
+              (System.nanoTime() - flinchTimer) / 1000000;
+      if(elapsed / 100 % 2 == 0) {
+        return;
+      }
+    }
     // draw player
 
     if (facingRight) {
@@ -172,11 +182,13 @@ public class Player extends MapObject {
   }
 
   public void hitDamage(int damage) {
-
+    if (flinching) return;
     health -= damage;
     if (health < 0) health = 0;
     if (health == 0) dead = true;
-    isDamage = false;
+//    isDamage = false;
+    flinching = true;
+    flinchTimer = System.nanoTime();
   }
 
   public void getNextPosition() {
@@ -274,6 +286,14 @@ public class Player extends MapObject {
       if (bullets.get(i).shouldRemove()) {
         bullets.remove(i);
         i--;
+      }
+    }
+    // check done flinching
+    if(flinching) {
+      long elapsed =
+              (System.nanoTime() - flinchTimer) / 1000000;
+      if(elapsed > 1000) {
+        flinching = false;
       }
     }
     // set animation
