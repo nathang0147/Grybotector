@@ -1,82 +1,76 @@
 package GameState;
 
-import UserInterface.GamePanel;
-
-import javax.imageio.ImageIO;
+import Image.LoadSave;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import Image.LoadSave;
 
 public class MenuButton {
-    private int xPos, yPos, index,rowIndex;
-    private int xOffsetCenter = 50 / 2;
-    private BufferedImage[] imgs;
-    
+  private int xPos, yPos, index, rowIndex;
+  private int xOffsetCenter = 50 / 2;
+  private BufferedImage[] imgs;
+  private BufferedImage holder;
 
-    private int B_WIDTH = 210/3;
-    private int B_HEIGHT = 84/3;
-    private boolean keyOver, keyPressed;
-    private Rectangle bounds;
-    public MenuButton(int xPos, int yPos, int rowIndex) {
-        this.xPos = xPos;
-        this.yPos = yPos;
-        this.rowIndex = rowIndex;
-        loadImgs();
-        initBounds();
+  private int B_WIDTH = 210 / 3;
+  private int B_HEIGHT = 84 / 3;
+  private boolean keyOver, keyPressed;
+  private Rectangle bounds;
+
+  public MenuButton(int xPos, int yPos, int rowIndex) {
+    this.xPos = xPos;
+    this.yPos = yPos;
+    this.rowIndex = rowIndex;
+    loadImgs();
+    initBounds();
+  }
+
+  private void initBounds() {
+    bounds = new Rectangle(xPos - xOffsetCenter, yPos, 50, 30);
+  }
+
+  public void loadImgs() {
+    imgs = new BufferedImage[3];
+    BufferedImage temp = LoadSave.GetSpriteAtlas(LoadSave.MENU_BUTTONS);
+    for (int i = 0; i < 3; i++) {
+      imgs[i] = temp.getSubimage(i * B_WIDTH, rowIndex * B_HEIGHT, B_WIDTH, B_HEIGHT);
     }
-    private void initBounds() {
-        bounds = new Rectangle(xPos - xOffsetCenter, yPos, 50,30);
+  }
 
-    }
+  // Lúc đưa key vào xong nhấn thì sẽ có hoạt hoạ
+  public void update(int currentChoice) {
+    if (currentChoice == rowIndex) {
+      if (keyPressed) {
+        index = 2;
+      } else index = 1;
+    } else index = 0;
+  }
 
-    public void loadImgs(){
-            imgs = new BufferedImage[3];
-            BufferedImage temp = LoadSave.GetSpriteAtlas(LoadSave.MENU_BUTTONS);
-            for(int i = 0; i< 3; i++){
-                imgs[i] = temp.getSubimage(i*B_WIDTH, rowIndex*B_HEIGHT, B_WIDTH,B_HEIGHT);
-            }
-    }
+  public void draw(Graphics2D g) {
+    g.drawImage(imgs[index], xPos - xOffsetCenter, yPos, B_WIDTH, B_HEIGHT, null);
+  }
 
-    //Lúc đưa key vào xong nhấn thì sẽ có hoạt hoạ
-    public void update(int currentChoice) {
-        if(currentChoice == rowIndex){
-            if(keyPressed){
-                index = 2;
-            }
-            else index = 1;
-        }
-        else index = 0;
-    }
+  public boolean isKeyOver() {
+    return keyOver;
+  }
 
+  public void setKeyOver(boolean keyOver) {
+    this.keyOver = keyOver;
+  }
 
-    public void draw(Graphics2D g){
-        g.drawImage(imgs[index], xPos - xOffsetCenter, yPos, B_WIDTH, B_HEIGHT, null);
-    }
+  public boolean isKeyPressed() {
+    return keyPressed;
+  }
 
-    public boolean isKeyOver() {
-        return keyOver;
-    }
+  public void setKeyPressed(boolean keyPressed) {
+    this.keyPressed = keyPressed;
+  }
 
-    public void setKeyOver(boolean keyOver) {
-        this.keyOver = keyOver;
-    }
+  public Rectangle getBounds() {
+    return bounds;
+  }
 
-    public boolean isKeyPressed() {
-        return keyPressed;
-    }
-
-    public void setKeyPressed(boolean keyPressed) {
-        this.keyPressed = keyPressed;
-    }
-
-    public Rectangle getBounds() {
-        return bounds;
-    }
-
-    //reset hoạt hoạ
-    public void resetBools() {
-        keyOver = false;
-        keyPressed = false;
-    }
-
+  // reset hoạt hoạ
+  public void resetBools() {
+    keyOver = false;
+    keyPressed = false;
+  }
 }
