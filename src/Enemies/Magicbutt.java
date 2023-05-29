@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
 
 public class Magicbutt extends MapObject {
 
-    private TileMap tm;
+    
     private boolean hit;
     private boolean remove;
     private BufferedImage[] sprites;

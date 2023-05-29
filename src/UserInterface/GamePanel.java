@@ -20,7 +20,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     private boolean running;
     private int FPS = 60;
     private long targetTime = 1000 / FPS;
-    private Timer timer;
+    
     //image
     private BufferedImage image;
     private Graphics2D g;

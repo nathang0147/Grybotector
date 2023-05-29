@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 
 public class Gate extends  MapObject{
 
-    private boolean isFish=false;
+    
     private BufferedImage[]  sprite;
     private   boolean isNext=false;
     public Gate(TileMap tm) {

@@ -23,8 +23,8 @@ public class Boss extends Enemy {
     private static final int IDLE=0;
     private static final int WALK=1;
     private static final int ATTACK=2;
-    private static final int HIITED=3;
-    private static final int DIE=4;
+    
+    
     public Boss(TileMap tm) {
         super(tm);
 

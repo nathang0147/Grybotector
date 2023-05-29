@@ -11,7 +11,7 @@ public class MenuButton {
     private int xPos, yPos, index,rowIndex;
     private int xOffsetCenter = 50 / 2;
     private BufferedImage[] imgs;
-    private BufferedImage holder;
+    
 
     private int B_WIDTH = 210/3;
     private int B_HEIGHT = 84/3;
