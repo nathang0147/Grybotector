@@ -17,7 +17,7 @@ GameMain {
         window.setIconImage(img);
         GamePanel gp= GamePanel.getPanel();
         window.setContentPane(gp);
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setResizable(false);
         window.pack();
         window.setVisible(true);
