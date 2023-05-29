@@ -17,7 +17,7 @@ public class Player extends MapObject {
 
    private boolean dead;
    private boolean falling;
-   private boolean crouch;
+   
 
    // bullet
    private boolean shooting;
@@ -40,7 +40,7 @@ public class Player extends MapObject {
    private int JUMP = 4;
    private int CROUCH = 0;
    private int FALLING = 2;
-   private int DEAD=1;
+   
    private HashMap<String, AudioPlayer> sfx;
    private boolean isDamage;
 

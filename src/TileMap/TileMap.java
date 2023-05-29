@@ -18,7 +18,7 @@ public class TileMap {
     private  int xmax;
     private  int ymin;
     private int ymax;
-    private double tween = 0.02;
+    
     // map
     private int[][] map;
     private  int tilesize;

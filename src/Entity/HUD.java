@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class HUD {
    private BufferedImage[] sprites;
    private Player player;
-   private BufferedImage image;
+   
    private Font font;
    BufferedImage holder = new BufferedImage(128,48,BufferedImage.TYPE_INT_ARGB);
 
