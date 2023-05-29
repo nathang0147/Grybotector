@@ -91,7 +91,7 @@ public class Level1State extends GameState{
 
     }
     public void update() {
-        if(isPaused==false && isWin==false && isDead==false) {
+        if(!isPaused&& !isWin&& !isDead) {
             player.update();
             tileMap.setPosition(
                     GamePanel.WIDTH / 2 - player.getX(),
@@ -159,16 +159,16 @@ public class Level1State extends GameState{
 
         //Draw HUD
         hud.draw(g);
-         if(isPaused==true) {
+         if(isPaused) {
              pauseOverlay.draw(g);
          }
          if(enemies.size()==0) {
             gate.draw(g);
          }
-         if(isWin==true){
+         if(isWin){
              winOverlay.draw(g);
          }
-         if(isDead==true){
+         if(isDead){
              System.out.println("Game is false");
              gameOver.draw(g);
          }
@@ -190,14 +190,14 @@ public class Level1State extends GameState{
 
 //
     public void keyPressed(int k) {
-        if(isPaused==false && isWin==false && isDead==false) {
+        if(!isPaused&& !isWin&& !isDead) {
             if (k == KeyEvent.VK_LEFT) player.setLeft(true);
             if (k == KeyEvent.VK_RIGHT) player.setRight(true);
             if (k == KeyEvent.VK_UP) player.setJumping(true);
             if (k == KeyEvent.VK_DOWN) player.setDown(true);
             if (k == KeyEvent.VK_K) player.setShooting();
             if (k==KeyEvent.VK_ESCAPE) isPaused=true;
-        }else if(isPaused==true) {
+        }else if(isPaused) {
             if (k == KeyEvent.VK_ENTER) {
                 select();
             }
@@ -216,13 +216,13 @@ public class Level1State extends GameState{
                     System.out.println("on the left");
             }
         }
-        else if(isWin==true){
+        else if(isWin){
             if(k==KeyEvent.VK_ESCAPE){
                 isWin=false;
                 gsm.setState(0);
                 System.out.println("game win");
             }
-        } else if (isDead==true) {
+        } else if (isDead) {
             if(k==KeyEvent.VK_ESCAPE){
                 isDead=false;
                 gsm.setState(0);
