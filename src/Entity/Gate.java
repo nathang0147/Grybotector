@@ -1,52 +1,53 @@
 package Entity;
 
 import TileMap.TileMap;
-
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
 
-public class Gate extends  MapObject{
+public class Gate extends MapObject {
 
-    
-    private BufferedImage[]  sprite;
-    private   boolean isNext=false;
-    public Gate(TileMap tm) {
-        super(tm);
-        width= 100;
-        height=100;
-        cheight=30;
-        cwidth=30;
+  private BufferedImage[] sprite;
+  private boolean isNext = false;
 
-        //load sprite
-        try{
-            BufferedImage spritesheet= ImageIO.read(getClass().getResourceAsStream("/assets/transition.png"));
-            sprite= new BufferedImage[8];
-            for (int i = 0; i < 8; i++) {
-                sprite[i]= spritesheet.getSubimage(i*width,0,width,height);
-            }
+  public Gate(TileMap tm) {
+    super(tm);
+    width = 100;
+    height = 100;
+    cheight = 30;
+    cwidth = 30;
 
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        animation= new Animation();
-        animation.setFrames(sprite);
-        animation.setDelay(70);
+    // load sprite
+    try {
+      BufferedImage spritesheet =
+          ImageIO.read(getClass().getResourceAsStream("/assets/transition.png"));
+      sprite = new BufferedImage[8];
+      for (int i = 0; i < 8; i++) {
+        sprite[i] = spritesheet.getSubimage(i * width, 0, width, height);
+      }
+
+    } catch (Exception e) {
+      e.printStackTrace();
     }
-    public  void draw(Graphics2D g){
-        setMapPosition();
-        super.draw(g);
-    }
-    public  void update(){
-        checkCollision();
-        setPosition(xtemp,ytemp);
-        animation.update();
+    animation = new Animation();
+    animation.setFrames(sprite);
+    animation.setDelay(70);
+  }
 
-    }
-    public void checkState(Player player){
-        if(this.intersect(player)){
-            this.isNext=true;
-        }
-    }
+  public void draw(Graphics2D g) {
+    setMapPosition();
+    super.draw(g);
+  }
 
+  public void update() {
+    checkCollision();
+    setPosition(xtemp, ytemp);
+    animation.update();
+  }
+
+  public void checkState(Player player) {
+    if (this.intersect(player)) {
+      this.isNext = true;
+    }
+  }
 }
