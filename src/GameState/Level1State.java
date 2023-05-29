@@ -81,7 +81,7 @@ public class Level1State extends GameState{
         e4_Ene1.setPosition(1568,210);
 
         e5_Ene2.setPosition(2272,142);
-        e6_Ene2.setPosition(3164-32*5,210);
+        e6_Ene2.setPosition(3164-32*5,203);
 
         explosions = new ArrayList<Explosion>();
         hud = new HUD(player);
@@ -111,7 +111,7 @@ public class Level1State extends GameState{
                     explosions.add(
                             new Explosion(e.getX(),e.getY())
                     );
-                    System.out.println("Enemies is dead");
+
                 }
             }
             // Update explosions
@@ -145,7 +145,7 @@ public class Level1State extends GameState{
         //Draw
         tileMap.draw(g);
         //Draw player
-         //System.out.println(enemies.size());
+
         player.draw(g);
         for (int i = 0; i < enemies.size(); i++) {
              enemies.get(i).draw(g);
@@ -169,7 +169,6 @@ public class Level1State extends GameState{
              winOverlay.draw(g);
          }
          if(isDead==true){
-             System.out.println("Game is false");
              gameOver.draw(g);
          }
 
@@ -206,27 +205,27 @@ public class Level1State extends GameState{
                     if (currentChoice == -1) {
                         currentChoice = 3 - 1;
                     }
-                    System.out.println("On the right");
+
             }
             if (k == KeyEvent.VK_LEFT) {
                     currentChoice++;
                     if (currentChoice == 3) {
                         currentChoice = 0;
                     }
-                    System.out.println("on the left");
+
             }
         }
         else if(isWin==true){
             if(k==KeyEvent.VK_ESCAPE){
                 isWin=false;
                 gsm.setState(0);
-                System.out.println("game win");
+
             }
         } else if (isDead==true) {
             if(k==KeyEvent.VK_ESCAPE){
                 isDead=false;
                 gsm.setState(0);
-                System.out.println("false");
+
             }
 
         }

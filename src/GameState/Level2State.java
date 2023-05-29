@@ -48,7 +48,7 @@ public class Level2State extends GameState{
         bg=new Background("/assets/background_level2.png",0.1);
 
         player = new Player(tileMap);
-        player.setPosition(2200,145);
+        player.setPosition(10,113);
         enemies = new ArrayList<Enemy>();
         explosions = new ArrayList<Explosion>();
 
@@ -67,10 +67,10 @@ public class Level2State extends GameState{
         //set boss position
         boss.setPosition(2304,145);
 
-        enemies.add(e1_Ene1);
+//        enemies.add(e1_Ene1);
         enemies.add(e2_Ene2);
-        enemies.add(e5_Ene2);
-        enemies.add(e6_Ene2);
+//        enemies.add(e5_Ene2);
+//        enemies.add(e6_Ene2);
 
         enemies.add(boss);
 
@@ -107,7 +107,6 @@ public class Level2State extends GameState{
                     explosions.add(
                             new Explosion(e.getX(),e.getY())
                     );
-                    System.out.println("Enemies is dead");
                 }
             }
             // Update explosions
@@ -180,7 +179,7 @@ public class Level2State extends GameState{
             isPaused=false;
         }
     }
-//
+
     public void keyPressed(int k) {
         if(isPaused==false && isWin==false && isDead==false) {
             if (k == KeyEvent.VK_LEFT) player.setLeft(true);
@@ -198,27 +197,27 @@ public class Level2State extends GameState{
                 if (currentchoice == -1) {
                     currentchoice = 3 - 1;
                 }
-                System.out.println("On the right");
+
             }
             if (k == KeyEvent.VK_LEFT) {
                 currentchoice++;
                 if (currentchoice == 3) {
                     currentchoice = 0;
                 }
-                System.out.println("on the left");
+
             }
         }
         else if(isWin==true){
             if(k==KeyEvent.VK_ESCAPE){
                 isWin=false;
                 gsm.setState(0);
-                System.out.println("game win");
+
             }
         } else if (isDead==true) {
             if(k==KeyEvent.VK_ESCAPE){
                 isDead=false;
                 gsm.setState(0);
-                System.out.println("false");
+
             }
 
         }

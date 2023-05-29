@@ -54,7 +54,6 @@ public class Magicbutt extends MapObject {
     public void setHit() {
         if (hit) return;
         hit = true;
-        System.out.println("HIT!!!!!!!!!!!!!!");
         animation.setFrames(hitSprites);
         animation.setDelay(70);
         dx = 0;

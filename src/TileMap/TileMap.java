@@ -62,7 +62,6 @@ public class TileMap {
                     }
                 }
             }
-            System.out.println(tiles.length);
         }catch (Exception e){
             e.printStackTrace();
         }
