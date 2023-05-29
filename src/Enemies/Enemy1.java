@@ -19,7 +19,7 @@ public class Enemy1 extends Enemy {
 
   private boolean isAttack = true;
 
-  private ArrayList<Magicbutt> magicbutts;
+  private ArrayList<MagicBullet> magicBullets;
   private int dame, damageCost, buttNum, maxButt;
 
   public Enemy1(TileMap tm) {
@@ -41,7 +41,7 @@ public class Enemy1 extends Enemy {
     damageCost = 10;
     dame = 1;
 
-    magicbutts = new ArrayList<Magicbutt>();
+    magicBullets = new ArrayList<MagicBullet>();
 
     try {
       // load sprites
@@ -103,15 +103,15 @@ public class Enemy1 extends Enemy {
     if (!notOnScreen() && isAttack) {
       if (buttNum > damageCost) {
         buttNum -= damageCost;
-        Magicbutt bl = new Magicbutt(tileMap, facingRight);
+        MagicBullet bl = new MagicBullet(tileMap, facingRight);
         bl.setPosition(x + 1, y - 1);
-        magicbutts.add(bl);
+        magicBullets.add(bl);
       }
     }
-    for (int i = 0; i < magicbutts.size(); i++) {
-      magicbutts.get(i).update(player);
-      if (magicbutts.get(i).shouldRemove()) {
-        magicbutts.remove(i);
+    for (int i = 0; i < magicBullets.size(); i++) {
+      magicBullets.get(i).update(player);
+      if (magicBullets.get(i).shouldRemove()) {
+        magicBullets.remove(i);
         i--;
       }
     }
@@ -160,16 +160,16 @@ public class Enemy1 extends Enemy {
     //        if(notOnScreen()) return;
     setMapPosition();
     super.draw(g);
-    for (int i = 0; i < magicbutts.size(); i++) {
-      magicbutts.get(i).draw(g);
+    for (int i = 0; i < magicBullets.size(); i++) {
+      magicBullets.get(i).draw(g);
     }
   }
 
   public void checkAttackEnemy(Player player) {
-    for (int i = 0; i < magicbutts.size(); i++) {
-      if (magicbutts.get(i).intersect(player)) {
-        player.hitDamage(damage);
-        magicbutts.get(i).setHit();
+    for (int i = 0; i < magicBullets.size(); i++) {
+      if (magicBullets.get(i).intersect(player)) {
+        player.hitDamage(1);
+        magicBullets.get(i).setHit();
         break;
       }
     }

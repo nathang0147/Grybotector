@@ -19,7 +19,7 @@ public class Enemy2 extends Enemy {
   private ArrayList<BufferedImage[]> sprites;
   private int[] numFrames = {4, 8};
 
-  private ArrayList<Magicbutt> magicbutts;
+  private ArrayList<MagicBullet> magicBullets;
   private int dame, damageCost, buttNum, maxButt;
 
   public Enemy2(TileMap tm) {
@@ -35,12 +35,12 @@ public class Enemy2 extends Enemy {
     cwidth = 10;
 
     health = maxHealth = 5;
-    damage = 2;
+    damage = 1;
 
     buttNum = maxButt = 600;
     damageCost = 10;
     dame = 1;
-    magicbutts = new ArrayList<Magicbutt>();
+    magicBullets = new ArrayList<MagicBullet>();
 
     try {
       // load sprites
@@ -94,16 +94,16 @@ public class Enemy2 extends Enemy {
   public void draw(Graphics2D g) {
     setMapPosition();
     super.draw(g);
-    for (int i = 0; i < magicbutts.size(); i++) {
-      magicbutts.get(i).draw(g);
+    for (int i = 0; i < magicBullets.size(); i++) {
+      magicBullets.get(i).draw(g);
     }
   }
 
   public void checkAttackEnemy(Player player) {
-    for (int i = 0; i < magicbutts.size(); i++) {
-      if (magicbutts.get(i).intersect(player)) {
-        player.hitDamage(damage);
-        magicbutts.get(i).setHit();
+    for (int i = 0; i < magicBullets.size(); i++) {
+      if (magicBullets.get(i).intersect(player)) {
+        player.hitDamage(1);
+        magicBullets.get(i).setHit();
         break;
       }
     }

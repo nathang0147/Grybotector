@@ -16,10 +16,6 @@ public class Enemy extends MapObject {
   }
 
   public boolean isDead() {
-    //        if(health==0){
-    //            dead=true;
-    //            dx=0;
-    //        }
     return dead;
   }
 
