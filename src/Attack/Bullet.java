@@ -8,8 +8,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Bullet extends MapObject {
-    private BufferedImage[] hitBullet;
-    private BufferedImage[] pathBullet;
+    
+    
 
     private boolean hit;
     private boolean remove;

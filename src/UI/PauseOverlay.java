@@ -11,7 +11,7 @@ import java.io.IOException;
 public class PauseOverlay {
     public BufferedImage backgroundImg;
     private  int bgX, bgY,bgW,bgH;
-    private  UrmButton urmButton;
+    
     private UrmButton menuB,replayB,unpauseB;
     public PauseOverlay(){
         //load sprite

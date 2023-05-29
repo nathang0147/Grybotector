@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage;
 public class MenuState extends GameState {
 
     private Background bg;
-    private AudioPlayer bgMusic;
+    
     private int currentChoice = 0;
     private BufferedImage holder, title;
 
@@ -23,10 +23,10 @@ public class MenuState extends GameState {
             "Quit"
     };
 
-    private Color titleColor;
+    
     public Font titleFont;
 
-    private Font font;
+    
 //    private AudioPlayer audioInput;
 
 
