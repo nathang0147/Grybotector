@@ -100,7 +100,7 @@ public class Level1State extends GameState{
             bg.setPosition(tileMap.getX(), tileMap.getY());
             player.checkAttack(enemies);
 
-          //  update all enemies
+            //  update all enemies
             for (int i = 0; i < enemies.size(); i++) {
                 Enemy e = enemies.get(i);
                 e.checkAttackEnemy(player);
