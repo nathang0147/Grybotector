@@ -7,7 +7,7 @@ import javax.imageio.ImageIO;
 
 public class HUD {
   private BufferedImage[] sprites;
-  private Player player;
+  private PlayableEntity player;
   private BufferedImage image;
   private Font font;
   BufferedImage holder = new BufferedImage(128, 48, BufferedImage.TYPE_INT_ARGB);
@@ -16,7 +16,7 @@ public class HUD {
   private int height;
   private int width;
 
-  public HUD(Player p) {
+  public HUD(PlayableEntity p) {
     player = p;
     width = 48;
     height = 17;
