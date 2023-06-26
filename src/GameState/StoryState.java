@@ -4,7 +4,7 @@ import TileMap.Background;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-public class StoryState extends GameState {
+public class StoryState extends GameState implements GameInitializer{
   private Background bg;
 
   public StoryState(GameStateManager gameStateManager) {
@@ -16,9 +16,6 @@ public class StoryState extends GameState {
   public void init() {
     bg = new Background("/Icon/game_story.png", 0.0);
   }
-
-  @Override
-  public void update() {}
 
   @Override
   public void draw(Graphics2D g) {

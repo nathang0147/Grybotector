@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import javax.imageio.ImageIO;
 
-public class Player extends MapObject {
+public class Player extends MapObject implements PlayableEntity{
 
   // player stuff
   private int health;
