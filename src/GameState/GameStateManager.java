@@ -23,12 +23,15 @@ public class GameStateManager {
 
   public void setState(int state) {
     currentState = state;
-    gameStates.get(currentState).init();
+    if(gameStates instanceof GameInitializer){
+          ((GameInitializer) gameStates.get(currentState)).init();
+    }
   }
 
   public void update() {
-    gameStates.get(currentState).update();
-  }
+    if(gameStates instanceof GameInitializer){
+      ((GameInitializer) gameStates.get(currentState)).init();
+}  }
 
   public void draw(Graphics2D g) {
     gameStates.get(currentState).draw(g);

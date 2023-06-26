@@ -8,7 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
-public class MenuState extends GameState {
+public class MenuState extends GameState implements GameUpdater{
 
   private Background bg;
   private AudioPlayer bgMusic;
@@ -38,8 +38,6 @@ public class MenuState extends GameState {
 
     loadButtons();
   }
-
-  public void init() {}
 
   private void loadButtons() {
     buttons[0] = new MenuButton(GamePanel.WIDTH / 2 - 9, 130 + 0 * 30, 0);

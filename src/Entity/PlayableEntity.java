@@ -10,5 +10,6 @@ import javax.imageio.ImageIO;
 
 public interface PlayableEntity {
     int getHealth();
+    int getMaxHealth();
     // Agregar codigo necesario para una entidad jugable
 }
